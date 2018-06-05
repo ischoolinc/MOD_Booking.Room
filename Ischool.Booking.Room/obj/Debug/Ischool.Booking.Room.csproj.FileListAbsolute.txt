@@ -1,0 +1,6 @@
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.dll
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.pdb
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
+C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
