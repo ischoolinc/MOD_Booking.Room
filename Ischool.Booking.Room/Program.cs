@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using FISCA;
 using FISCA.UDT;
 using K12.Data.Configuration;
+using FISCA.Presentation;
+using FISCA.Permission;
+//using Ischool.Booking.Room.Ribbon;
 
 namespace Ischool.Booking.Room
 {
@@ -44,7 +47,26 @@ namespace Ischool.Booking.Room
                 cd[name] = "true";
                 cd.Save();
             }
-            
+
+            #endregion
+
+            MotherForm.AddPanel(BookingRoomAdmin.Instance);
+
+            RibbonBarItem settingItem = FISCA.Presentation.MotherForm.RibbonBarItems["會議室預約", "基本設定"];
+            settingItem["管理"]["管理場地"].Enable = Permissions.管理場地權限;
+            settingItem["管理"]["管理場地"].Click += delegate
+            {
+                 MeetingRoomManagement form = new MeetingRoomManagement();
+                form.ShowDialog();
+            };
+
+
+
+            #region 權限管理
+            Catalog detail = new Catalog();
+            detail = RoleAclSource.Instance["會議室預約"]["功能按鈕"];
+            detail.Add(new RibbonFeature(Permissions.管理場地, "管理場地"));
+
             #endregion
         }
     }

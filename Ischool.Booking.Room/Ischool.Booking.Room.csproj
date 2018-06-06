@@ -31,6 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\DevComponents.DotNetBar2.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="FISCA, Version=2.5.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\FISCA.dll</HintPath>
@@ -108,13 +113,34 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingRoomAdmin.cs" />
+    <Compile Include="Ribbon\管理場地\EditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\管理場地\EditForm.Designer.cs">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\管理場地\EquipmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\管理場地\EquipmentForm.Designer.cs">
+      <DependentUpon>EquipmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\管理場地\MeetingRoomManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\管理場地\MeetingRoomManagement.Designer.cs">
+      <DependentUpon>MeetingRoomManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Permissions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UDT\MeetingRoom.cs" />
@@ -126,6 +152,7 @@
     <Compile Include="UDT\MeetingRoomUnitAdmin.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Library\DevComponents.DotNetBar2.dll" />
     <Content Include="Library\FISCA.Authentication.dll" />
     <Content Include="Library\FISCA.Authentication.pdb" />
     <Content Include="Library\FISCA.Authentication.xml" />
@@ -174,6 +201,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\FISCA.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ribbon\管理場地\EditForm.resx">
+      <DependentUpon>EditForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\管理場地\EquipmentForm.resx">
+      <DependentUpon>EquipmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\管理場地\MeetingRoomManagement.resx">
+      <DependentUpon>MeetingRoomManagement.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

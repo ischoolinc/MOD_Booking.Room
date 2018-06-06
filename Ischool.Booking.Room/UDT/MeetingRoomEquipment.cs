@@ -9,7 +9,7 @@ namespace Ischool.Booking.Room.UDT
     /// <summary>
     /// 會議室設備
     /// </summary>
-    [TableName("meetingroom_equipment")]
+    [TableName("ischool.booking.meetingroom_equipment")]
     class MeetingRoomEquipment : ActiveRecord
     {
         /// <summary>
@@ -17,6 +17,12 @@ namespace Ischool.Booking.Room.UDT
         /// </summary>
         [Field(Field = "name", Indexed = false)]
         public string Name { get; set; }
+
+        /// <summary>
+        /// 會議室系統編號
+        /// </summary>
+        [Field(Field = "ref_meetingroom_id", Indexed = false)]
+        public int RefMeetingroomID { get; set; }
 
         /// <summary>
         /// 設備數量

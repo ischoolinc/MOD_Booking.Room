@@ -9,7 +9,7 @@ namespace Ischool.Booking.Room.UDT
     /// <summary>
     /// 會議室管理單位
     /// </summary>
-    [TableName("meetingroom_unit")]
+    [TableName("ischool.booking.meetingroom_unit")]
     class MeetingRoomUnit : ActiveRecord
     {
         /// <summary>

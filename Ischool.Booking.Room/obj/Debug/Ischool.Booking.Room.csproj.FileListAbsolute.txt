@@ -4,3 +4,13 @@ C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\bin\Debug\Ischo
 C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.pdb
 C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
 C:\Users\User\source\repos\Loader(dev.sh_d)\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.dll
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.pdb
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.MeetingRoomManagement.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EquipmentForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EditForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache

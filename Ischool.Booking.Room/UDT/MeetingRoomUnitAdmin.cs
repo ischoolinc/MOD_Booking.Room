@@ -9,9 +9,15 @@ namespace Ischool.Booking.Room.UDT
     /// <summary>
     /// 單位管理員
     /// </summary>
-    [TableName("meetingroom_unit_admin")]
+    [TableName("ischool.booking.meetingroom_unit_admin")]
     class MeetingRoomUnitAdmin : ActiveRecord
     {
+        /// <summary>
+        /// 登入帳號
+        /// </summary>
+        [Field(Field = "account", Indexed = false)]
+        public string Account { get; set; }
+
         /// <summary>
         /// 管理單位編號
         /// </summary>

@@ -6,7 +6,7 @@ using FISCA.UDT;
 
 namespace Ischool.Booking.Room.UDT
 {
-    [TableName("meetingroom_application_detail")]
+    [TableName("ischool.booking.meetingroom_application_detail")]
     class MeetingRoomApplicationDetail : ActiveRecord
     {
         /// <summary>
