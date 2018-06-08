@@ -47,5 +47,6 @@ namespace Ischool.Booking.Room.UDT
         /// </summary>
         [Field(Field = "created_by", Indexed = false)]
         public string CreatedBy { get; set; }
+
     }
 }

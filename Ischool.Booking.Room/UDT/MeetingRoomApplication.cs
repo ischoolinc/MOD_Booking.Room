@@ -13,16 +13,34 @@ namespace Ischool.Booking.Room.UDT
     class MeetingRoomApplication : ActiveRecord
     {
         /// <summary>
-        /// 申請者教師編號
+        /// 會議主持人姓名
+        /// </summary>
+        [Field(Field = "teacher_name", Indexed = false)]
+        public string TeacherName { get; set; }
+
+        /// <summary>
+        /// 會議主持人教師編號
         /// </summary>
         [Field(Field = "ref_teacher_id", Indexed = false)]
         public int RefTeacherID { get; set; }
 
         /// <summary>
+        /// 申請者姓名
+        /// </summary>
+        [Field(Field = "applicant_name", Indexed = false)]
+        public string ApplicantName { get; set; }
+
+        /// <summary>
+        /// 申請者教師編號
+        /// </summary>
+        [Field(Field = "apply_by", Indexed = false)]
+        public int ApplyBy { get; set; }
+
+        /// <summary>
         /// 會議室編號
         /// </summary>
         [Field(Field = "ref_meetingroom_id", Indexed = false)]
-        public int RefMeetingroomID { get; set; }
+        public int RefMeetingRoomID { get; set; }
 
         /// <summary>
         /// 申請時間
@@ -39,7 +57,7 @@ namespace Ischool.Booking.Room.UDT
         /// <summary>
         /// 開始日期
         /// </summary>
-        [Field(Field = "apply_star_date", Indexed = false)]
+        [Field(Field = "apply_start_date", Indexed = false)]
         public DateTime ApplyStarDate { get; set; }
 
         /// <summary>
@@ -59,6 +77,18 @@ namespace Ischool.Booking.Room.UDT
         /// </summary>
         [Field(Field = "canceled_time", Indexed = false)]
         public DateTime CanceledTime { get; set; }
+
+        /// <summary>
+        /// 取消者帳號
+        /// </summary>
+        [Field(Field = "canceled_by", Indexed = false)]
+        public string CanceledBy { get; set; }
+
+        /// <summary>
+        /// 取消原因
+        /// </summary>
+        [Field(Field = "cancel_reason", Indexed = false)]
+        public string CancelReason { get; set; }
 
         /// <summary>
         /// 是否核准
@@ -83,12 +113,6 @@ namespace Ischool.Booking.Room.UDT
         /// </summary>
         [Field(Field = "reviewed_date", Indexed = false)]
         public DateTime ReviewedDate { get; set; }
-
-        /// <summary>
-        /// 建立日期
-        /// </summary>
-        [Field(Field = "create_time", Indexed = false)]
-        public DateTime CreateTime { get; set; }
 
     }
 }

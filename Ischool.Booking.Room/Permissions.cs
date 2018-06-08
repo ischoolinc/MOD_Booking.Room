@@ -15,5 +15,13 @@ namespace Ischool.Booking.Room
                 return FISCA.Permission.UserAcl.Current[管理場地].Executable;
             }
         }
+        public static string 審核作業 { get { return "AB164E2A-516E-4427-ADB0-79D27F1685CA"; } }
+        public static bool 審核作業權限
+        {
+            get
+            {
+                return FISCA.Permission.UserAcl.Current[審核作業].Executable;
+            }
+        }
     }
 }

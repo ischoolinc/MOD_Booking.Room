@@ -121,7 +121,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor.cs" />
+    <Compile Include="BookingRecord.cs" />
     <Compile Include="BookingRoomAdmin.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationCancelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationCancelForm.Designer.cs">
+      <DependentUpon>ApplicationCancelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationDetailForm.Designer.cs">
+      <DependentUpon>ApplicationDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationManageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationManageForm.Designer.cs">
+      <DependentUpon>ApplicationManageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationReviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\申請紀錄管理\ApplicationReviewForm.Designer.cs">
+      <DependentUpon>ApplicationReviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ribbon\管理場地\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,11 +229,48 @@
     <Content Include="Library\K12.Data.dll" />
     <Content Include="Library\K12.Data.pdb" />
     <Content Include="Library\K12.Data.xml" />
+    <Content Include="Resources\admissions_ok_64.png" />
+    <Content Include="Resources\architecture_zoom_64.png" />
+    <Content Include="Resources\barchart_64.png" />
+    <Content Include="Resources\brand_write_64.png" />
+    <Content Include="Resources\Export.Image.png" />
+    <Content Include="Resources\group_help_64.png" />
+    <Content Include="Resources\group_up_64.png" />
+    <Content Include="Resources\health_and_leisure_add_64.png" />
+    <Content Include="Resources\health_and_leisure_remove_64.png" />
+    <Content Include="Resources\Import.Image.png" />
+    <Content Include="Resources\layers_64.png" />
+    <Content Include="Resources\loading.gif" />
+    <Content Include="Resources\marker_fav_64.png" />
+    <Content Include="Resources\meeting_64.png" />
+    <Content Include="Resources\network_lock_64.png" />
+    <Content Include="Resources\presentation_a_config_64.png" />
+    <Content Include="Resources\Report.png" />
+    <Content Include="Resources\rotate_64.png" />
+    <Content Include="Resources\sandglass_unlock_64.png" />
+    <Content Include="Resources\searchHistory.png" />
+    <Content Include="Resources\time_frame_refresh_128.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\FISCA.dll.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationCancelForm.resx">
+      <DependentUpon>ApplicationCancelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationDetailForm.resx">
+      <DependentUpon>ApplicationDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationManageForm.resx">
+      <DependentUpon>ApplicationManageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationReviewForm.resx">
+      <DependentUpon>ApplicationReviewForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\管理場地\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>

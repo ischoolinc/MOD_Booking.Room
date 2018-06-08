@@ -14,3 +14,8 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\I
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EquipmentForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EditForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ReviewForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ApplicationDetailForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ApplicationReviewForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ApplicationCancelForm.resources
