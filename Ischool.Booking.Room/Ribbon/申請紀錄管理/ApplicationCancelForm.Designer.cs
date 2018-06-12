@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX5 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX4 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX3 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.RepeatEndTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.hostTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.applyStartTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.roomNameTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.applicantTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.cancelDateLb = new DevComponents.DotNetBar.LabelX();
             this.leaveBtn = new DevComponents.DotNetBar.ButtonX();
             this.saveBtn = new DevComponents.DotNetBar.ButtonX();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
-            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.checkBoxX2 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.trueCbx = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.falseCbx = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX6 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.cancelReasonTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
@@ -65,11 +65,11 @@
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanel1.Controls.Add(this.dataGridViewX1);
             this.groupPanel1.Controls.Add(this.labelX6);
-            this.groupPanel1.Controls.Add(this.textBoxX5);
-            this.groupPanel1.Controls.Add(this.textBoxX4);
-            this.groupPanel1.Controls.Add(this.textBoxX3);
-            this.groupPanel1.Controls.Add(this.textBoxX2);
-            this.groupPanel1.Controls.Add(this.textBoxX1);
+            this.groupPanel1.Controls.Add(this.RepeatEndTbx);
+            this.groupPanel1.Controls.Add(this.hostTbx);
+            this.groupPanel1.Controls.Add(this.applyStartTbx);
+            this.groupPanel1.Controls.Add(this.roomNameTbx);
+            this.groupPanel1.Controls.Add(this.applicantTbx);
             this.groupPanel1.Controls.Add(this.labelX5);
             this.groupPanel1.Controls.Add(this.labelX4);
             this.groupPanel1.Controls.Add(this.labelX3);
@@ -119,14 +119,14 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(3, 113);
             this.dataGridViewX1.Name = "dataGridViewX1";
@@ -162,65 +162,65 @@
             this.labelX6.TabIndex = 10;
             this.labelX6.Text = "場地預約申請時段明細";
             // 
-            // textBoxX5
+            // RepeatEndTbx
             // 
             // 
             // 
             // 
-            this.textBoxX5.Border.Class = "TextBoxBorder";
-            this.textBoxX5.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX5.Location = new System.Drawing.Point(428, 51);
-            this.textBoxX5.Name = "textBoxX5";
-            this.textBoxX5.Size = new System.Drawing.Size(100, 25);
-            this.textBoxX5.TabIndex = 9;
+            this.RepeatEndTbx.Border.Class = "TextBoxBorder";
+            this.RepeatEndTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.RepeatEndTbx.Location = new System.Drawing.Point(428, 51);
+            this.RepeatEndTbx.Name = "RepeatEndTbx";
+            this.RepeatEndTbx.Size = new System.Drawing.Size(100, 25);
+            this.RepeatEndTbx.TabIndex = 9;
             // 
-            // textBoxX4
-            // 
-            // 
-            // 
-            // 
-            this.textBoxX4.Border.Class = "TextBoxBorder";
-            this.textBoxX4.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX4.Location = new System.Drawing.Point(284, 12);
-            this.textBoxX4.Name = "textBoxX4";
-            this.textBoxX4.Size = new System.Drawing.Size(100, 25);
-            this.textBoxX4.TabIndex = 8;
-            // 
-            // textBoxX3
+            // hostTbx
             // 
             // 
             // 
             // 
-            this.textBoxX3.Border.Class = "TextBoxBorder";
-            this.textBoxX3.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX3.Location = new System.Drawing.Point(284, 52);
-            this.textBoxX3.Name = "textBoxX3";
-            this.textBoxX3.Size = new System.Drawing.Size(100, 25);
-            this.textBoxX3.TabIndex = 7;
+            this.hostTbx.Border.Class = "TextBoxBorder";
+            this.hostTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.hostTbx.Location = new System.Drawing.Point(284, 12);
+            this.hostTbx.Name = "hostTbx";
+            this.hostTbx.Size = new System.Drawing.Size(100, 25);
+            this.hostTbx.TabIndex = 8;
             // 
-            // textBoxX2
-            // 
-            // 
-            // 
-            // 
-            this.textBoxX2.Border.Class = "TextBoxBorder";
-            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX2.Location = new System.Drawing.Point(59, 53);
-            this.textBoxX2.Name = "textBoxX2";
-            this.textBoxX2.Size = new System.Drawing.Size(100, 25);
-            this.textBoxX2.TabIndex = 6;
-            // 
-            // textBoxX1
+            // applyStartTbx
             // 
             // 
             // 
             // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.Location = new System.Drawing.Point(59, 14);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.Size = new System.Drawing.Size(100, 25);
-            this.textBoxX1.TabIndex = 5;
+            this.applyStartTbx.Border.Class = "TextBoxBorder";
+            this.applyStartTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.applyStartTbx.Location = new System.Drawing.Point(284, 52);
+            this.applyStartTbx.Name = "applyStartTbx";
+            this.applyStartTbx.Size = new System.Drawing.Size(100, 25);
+            this.applyStartTbx.TabIndex = 7;
+            // 
+            // roomNameTbx
+            // 
+            // 
+            // 
+            // 
+            this.roomNameTbx.Border.Class = "TextBoxBorder";
+            this.roomNameTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.roomNameTbx.Location = new System.Drawing.Point(59, 53);
+            this.roomNameTbx.Name = "roomNameTbx";
+            this.roomNameTbx.Size = new System.Drawing.Size(100, 25);
+            this.roomNameTbx.TabIndex = 6;
+            // 
+            // applicantTbx
+            // 
+            // 
+            // 
+            // 
+            this.applicantTbx.Border.Class = "TextBoxBorder";
+            this.applicantTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.applicantTbx.Location = new System.Drawing.Point(59, 14);
+            this.applicantTbx.Name = "applicantTbx";
+            this.applicantTbx.Size = new System.Drawing.Size(100, 25);
+            this.applicantTbx.TabIndex = 5;
             // 
             // labelX5
             // 
@@ -301,19 +301,19 @@
             this.labelX7.TabIndex = 1;
             this.labelX7.Text = "日期";
             // 
-            // labelX8
+            // cancelDateLb
             // 
-            this.labelX8.BackColor = System.Drawing.Color.Transparent;
+            this.cancelDateLb.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.labelX8.BackgroundStyle.Class = "";
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(64, 12);
-            this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(75, 23);
-            this.labelX8.TabIndex = 2;
-            this.labelX8.Text = "xxxx/xx/xx";
+            this.cancelDateLb.BackgroundStyle.Class = "";
+            this.cancelDateLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cancelDateLb.Location = new System.Drawing.Point(64, 12);
+            this.cancelDateLb.Name = "cancelDateLb";
+            this.cancelDateLb.Size = new System.Drawing.Size(75, 23);
+            this.cancelDateLb.TabIndex = 2;
+            this.cancelDateLb.Text = "xxxx/xx/xx";
             // 
             // leaveBtn
             // 
@@ -326,6 +326,7 @@
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.leaveBtn.TabIndex = 4;
             this.leaveBtn.Text = "離開";
+            this.leaveBtn.Click += new System.EventHandler(this.leaveBtn_Click);
             // 
             // saveBtn
             // 
@@ -338,6 +339,7 @@
             this.saveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.saveBtn.TabIndex = 5;
             this.saveBtn.Text = "儲存";
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // labelX9
             // 
@@ -354,37 +356,39 @@
             this.labelX9.TabIndex = 6;
             this.labelX9.Text = "是否取消";
             // 
-            // checkBoxX1
+            // trueCbx
             // 
-            this.checkBoxX1.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.checkBoxX1.BackgroundStyle.Class = "";
-            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX1.Font = new System.Drawing.Font("微軟正黑體", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBoxX1.Location = new System.Drawing.Point(433, 12);
-            this.checkBoxX1.Name = "checkBoxX1";
-            this.checkBoxX1.Size = new System.Drawing.Size(54, 23);
-            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX1.TabIndex = 7;
-            this.checkBoxX1.Text = "是";
-            // 
-            // checkBoxX2
-            // 
-            this.checkBoxX2.BackColor = System.Drawing.Color.Transparent;
+            this.trueCbx.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.checkBoxX2.BackgroundStyle.Class = "";
-            this.checkBoxX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX2.Font = new System.Drawing.Font("微軟正黑體", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBoxX2.Location = new System.Drawing.Point(495, 12);
-            this.checkBoxX2.Name = "checkBoxX2";
-            this.checkBoxX2.Size = new System.Drawing.Size(54, 23);
-            this.checkBoxX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX2.TabIndex = 8;
-            this.checkBoxX2.Text = "否";
+            this.trueCbx.BackgroundStyle.Class = "";
+            this.trueCbx.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.trueCbx.Font = new System.Drawing.Font("微軟正黑體", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.trueCbx.Location = new System.Drawing.Point(433, 12);
+            this.trueCbx.Name = "trueCbx";
+            this.trueCbx.Size = new System.Drawing.Size(54, 23);
+            this.trueCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.trueCbx.TabIndex = 7;
+            this.trueCbx.Text = "是";
+            this.trueCbx.CheckedChanged += new System.EventHandler(this.trueCbx_CheckedChanged);
+            // 
+            // falseCbx
+            // 
+            this.falseCbx.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.falseCbx.BackgroundStyle.Class = "";
+            this.falseCbx.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.falseCbx.Font = new System.Drawing.Font("微軟正黑體", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.falseCbx.Location = new System.Drawing.Point(495, 12);
+            this.falseCbx.Name = "falseCbx";
+            this.falseCbx.Size = new System.Drawing.Size(54, 23);
+            this.falseCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.falseCbx.TabIndex = 8;
+            this.falseCbx.Text = "否";
+            this.falseCbx.CheckedChanged += new System.EventHandler(this.falseCbx_CheckedChanged);
             // 
             // labelX10
             // 
@@ -400,32 +404,32 @@
             this.labelX10.TabIndex = 9;
             this.labelX10.Text = "取消原因";
             // 
-            // textBoxX6
+            // cancelReasonTbx
             // 
             // 
             // 
             // 
-            this.textBoxX6.Border.Class = "TextBoxBorder";
-            this.textBoxX6.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX6.Location = new System.Drawing.Point(99, 43);
-            this.textBoxX6.Multiline = true;
-            this.textBoxX6.Name = "textBoxX6";
-            this.textBoxX6.Size = new System.Drawing.Size(444, 59);
-            this.textBoxX6.TabIndex = 10;
+            this.cancelReasonTbx.Border.Class = "TextBoxBorder";
+            this.cancelReasonTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.cancelReasonTbx.Location = new System.Drawing.Point(99, 43);
+            this.cancelReasonTbx.Multiline = true;
+            this.cancelReasonTbx.Name = "cancelReasonTbx";
+            this.cancelReasonTbx.Size = new System.Drawing.Size(444, 59);
+            this.cancelReasonTbx.TabIndex = 10;
             // 
             // ApplicationCancelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 443);
-            this.Controls.Add(this.textBoxX6);
+            this.Controls.Add(this.cancelReasonTbx);
             this.Controls.Add(this.labelX10);
-            this.Controls.Add(this.checkBoxX2);
-            this.Controls.Add(this.checkBoxX1);
+            this.Controls.Add(this.falseCbx);
+            this.Controls.Add(this.trueCbx);
             this.Controls.Add(this.labelX9);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.leaveBtn);
-            this.Controls.Add(this.labelX8);
+            this.Controls.Add(this.cancelDateLb);
             this.Controls.Add(this.labelX7);
             this.Controls.Add(this.groupPanel1);
             this.DoubleBuffered = true;
@@ -440,11 +444,11 @@
         #endregion
 
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanel1;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX5;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX4;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX3;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX RepeatEndTbx;
+        private DevComponents.DotNetBar.Controls.TextBoxX hostTbx;
+        private DevComponents.DotNetBar.Controls.TextBoxX applyStartTbx;
+        private DevComponents.DotNetBar.Controls.TextBoxX roomNameTbx;
+        private DevComponents.DotNetBar.Controls.TextBoxX applicantTbx;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.LabelX labelX3;
@@ -456,13 +460,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private DevComponents.DotNetBar.LabelX labelX7;
-        private DevComponents.DotNetBar.LabelX labelX8;
+        private DevComponents.DotNetBar.LabelX cancelDateLb;
         private DevComponents.DotNetBar.ButtonX leaveBtn;
         private DevComponents.DotNetBar.ButtonX saveBtn;
         private DevComponents.DotNetBar.LabelX labelX9;
-        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
-        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX2;
+        private DevComponents.DotNetBar.Controls.CheckBoxX trueCbx;
+        private DevComponents.DotNetBar.Controls.CheckBoxX falseCbx;
         private DevComponents.DotNetBar.LabelX labelX10;
-        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX6;
+        private DevComponents.DotNetBar.Controls.TextBoxX cancelReasonTbx;
     }
 }

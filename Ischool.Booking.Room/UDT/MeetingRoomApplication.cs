@@ -79,10 +79,16 @@ namespace Ischool.Booking.Room.UDT
         public DateTime CanceledTime { get; set; }
 
         /// <summary>
-        /// 取消者帳號
+        /// 取消者姓名
+        /// </summary>
+        [Field(Field = "canceled_name", Indexed = false)]
+        public string CanceledName { get; set; }
+
+        /// <summary>
+        /// 取消者教師編號
         /// </summary>
         [Field(Field = "canceled_by", Indexed = false)]
-        public string CanceledBy { get; set; }
+        public int CanceledBy { get; set; }
 
         /// <summary>
         /// 取消原因
@@ -103,7 +109,13 @@ namespace Ischool.Booking.Room.UDT
         public string RejectReason { get; set; }
 
         /// <summary>
-        /// 審查者系統編號
+        /// 審查者教師姓名
+        /// </summary>
+        [Field(Field = "admin_name", Indexed = false)]
+        public string RefAdminName { get; set; }
+
+        /// <summary>
+        /// 審查者教師編號
         /// </summary>
         [Field(Field = "ref_admin_id", Indexed = false)]
         public int RefAdminID { get; set; }

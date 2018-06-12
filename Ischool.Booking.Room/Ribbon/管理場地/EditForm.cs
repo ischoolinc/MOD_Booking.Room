@@ -42,6 +42,23 @@ namespace Ischool.Booking.Room
                 capacityTbx.Text = "" + roomList[0].Capacity;
                 isSpecialCbx.Checked = roomList[0].IsSpecial;
                 _unitID = "" + roomList[0].RefUnitID;
+                pictureBox1.ImageLocation = "" + roomList[0].Picture;
+                if (("" + roomList[0].Picture) != "")
+                {
+                    try
+                    {
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
+                        pictureBox1.Load();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    
+                }
+                
+                pictureURLTbx.Text = "" + roomList[0].Picture;
 
                 foreach (UDT.MeetingRoomEquipment equipment in equipmentList)
                 {
@@ -66,9 +83,32 @@ namespace Ischool.Booking.Room
         private void saveBtn_Click(object sender, EventArgs e)
         {
             #region 資料驗證
-            if (errorText.Visible || roomNameTbx.Text == "" || buildingTbx.Text == "" || capacityTbx.Text == "")
+            if (picError != "")
+            {
+                DialogResult result = MessageBox.Show("場地照片URL錯誤，使否繼續儲存作業?","提醒",MessageBoxButtons.YesNo);
+                if (result == DialogResult.No) 
+                {
+                    return;
+                }
+            }
+            if (errorText.Visible)
             {
                 MessageBox.Show(errorText.Text);
+                return;
+            }
+            if (roomNameTbx.Text == "" )
+            {
+                MessageBox.Show("場地名稱欄位空白!");
+                return;
+            }
+            if (buildingTbx.Text == "")
+            {
+                MessageBox.Show("所屬大樓欄位空白!");
+                return;
+            }
+            if (capacityTbx.Text == "")
+            {
+                MessageBox.Show("容納人數欄位空白!");
                 return;
             }
             string error = "";
@@ -96,12 +136,13 @@ namespace Ischool.Booking.Room
                 string roomData = string.Format(@"
 SELECT
     '{0}'::TEXT AS name
-    ,'{1}' ::TEXT AS building
+    ,'{1}'::TEXT AS building
     ,{2} ::INTEGER AS capacity
     ,{3} ::BIGINT AS ref_unit_id 
-    ,'{4}' ::BOOLEAN AS is_special
-    ,'{5}' ::TIMESTAMP AS create_time
-                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString());
+    ,'{4}'::BOOLEAN AS is_special
+    ,'{5}'::TIMESTAMP AS create_time
+    ,'{6}'::TEXT AS picture
+                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text);
 
 
                 List<string> equipmentDataList = new List<string>();
@@ -120,13 +161,14 @@ SELECT
                         equipmentDataList.Add(equipmentData);
                     }
                 }
-
-                string equipmentDataRow = string.Join(" UNION ALL ", equipmentDataList);
-
                 #endregion
 
                 #region SQL
-                sql = string.Format(@"
+                if (equipmentDataList.Count != 0)
+                {
+                    string equipmentDataRow = string.Join(" UNION ALL ", equipmentDataList);
+
+                    sql = string.Format(@"
 WITH meetingroom_data AS(
     {0}
 ) ,equipment_data AS(
@@ -139,6 +181,7 @@ WITH meetingroom_data AS(
         , ref_unit_id
         , is_special
         , create_time
+        , picture
     )
     SELECT
         *
@@ -161,6 +204,29 @@ FROM
     equipment_data
 
                 ", roomData, equipmentDataRow);
+                }
+
+                else
+                {
+                    sql = string.Format(@"
+WITH meetingroom_data AS(
+    {0}
+)
+INSERT INTO $ischool.booking.meetingroom(
+    name
+    , building
+    , capacity
+    , ref_unit_id
+    , is_special
+    , create_time
+    , picture
+)
+SELECT
+    *
+FROM
+    meetingroom_data
+                ", roomData);
+                }
                 #endregion
             }
 
@@ -171,12 +237,13 @@ FROM
 SELECT
     {0}::BIGINT AS uid
     ,'{1}'::TEXT AS name
-    ,'{2}' ::TEXT AS building
+    ,'{2}'::TEXT AS building
     ,{3} ::INTEGER AS capacity
     ,{4} ::BIGINT AS ref_unit_id 
-    ,'{5}' ::BOOLEAN AS is_special
-    ,'{6}' ::TIMESTAMP AS create_time
-                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString());
+    ,'{5}'::BOOLEAN AS is_special
+    ,'{6}'::TIMESTAMP AS create_time
+    ,'{7}'::TEXT AS picture
+                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text);
 
                 List<string> equipmentDataList = new List<string>();
 
@@ -190,18 +257,22 @@ SELECT
     ,'{1}'::TEXT AS name
     ,{2} ::INTEGER AS count
     ,'{3}' ::TEXT AS status
-                    ",row.Tag ,row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value);
+    ,{4}::BIGINT AS ref_meetingroom_id
+                    ",("" + row.Tag ) == "" ? "null" : row.Tag ,row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value, _roomID);
 
                         equipmentDataList.Add(equipmentData);
                     }
                 }
 
-                string equipmentDataRow = string.Join(" UNION ALL ", equipmentDataList);
-
                 #endregion
 
                 #region SQL
-                sql = string.Format(@"
+                // 有設備資料
+                if (equipmentDataList.Count != 0)
+                {
+                    string equipmentDataRow = string.Join(" UNION ALL ", equipmentDataList);
+
+                    sql = string.Format(@"
 WITH meetingroom_data AS(
     {0}
 ) ,equipment_data AS(
@@ -211,28 +282,100 @@ WITH meetingroom_data AS(
         $ischool.booking.meetingroom
     SET
        name = meetingroom_data.name
+        , building = meetingroom_data.building
+        , capacity = meetingroom_data.capacity
+        , ref_unit_id = meetingroom_data.ref_unit_id
+        , is_special = meetingroom_data.is_special
+        , create_time = meetingroom_data.create_time
+        , picture = meetingroom_data.picture
+    FROM
+        meetingroom_data
+    WHERE
+         $ischool.booking.meetingroom.uid = meetingroom_data.uid
+) ,update_equipment_data AS(
+    UPDATE 
+        $ischool.booking.meetingroom_equipment
+    SET
+        name = equipment_data.name
+        ,count = equipment_data.count
+        ,status = equipment_data.status
+    FROM
+        equipment_data
+    WHERE
+        $ischool.booking.meetingroom_equipment.uid = equipment_data.uid
+) ,insert_equipment_data AS(
+    INSERT INTO $ischool.booking.meetingroom_equipment(
+        name
+        , count
+        , status
+        , ref_meetingroom_id
+    )
+    SELECT
+        name
+        , count
+        , status
+        , ref_meetingroom_id
+    FROM
+        equipment_data
+    WHERE
+        equipment_data.uid IS NULL
+) ,delete_equipment_data AS(
+    SELECT
+        equipment.uid
+    FROM(
+        SELECT
+            equipment.*
+        FROM
+            meetingroom_data
+            LEFT OUTER JOIN $ischool.booking.meetingroom_equipment AS equipment
+                ON meetingroom_data.uid = equipment.ref_meetingroom_id
+    ) equipment        
+        LEFT OUTER JOIN equipment_data
+            ON equipment.uid = equipment_data.uid
+    WHERE
+        equipment_data.uid IS NULL
+)   
+    DELETE FROM $ischool.booking.meetingroom_equipment WHERE uid IN(SELECT * FROM delete_equipment_data)
+                    ", roomData, equipmentDataRow);
+                }
+                // 沒有設備資料
+                else
+                {
+                    sql = string.Format(@"
+WITH meetingroom_data AS(
+    {0}
+) , update_meetingroom_data AS(
+    UPDATE
+        $ischool.booking.meetingroom
+    SET
+        name = meetingroom_data.name
         ,building = meetingroom_data.building
         ,capacity = meetingroom_data.capacity
         ,ref_unit_id = meetingroom_data.ref_unit_id
         ,is_special = meetingroom_data.is_special
         ,create_time = meetingroom_data.create_time
+        ,picture = meetingroom_data.pictrue
     FROM
         meetingroom_data
     WHERE
-         $ischool.booking.meetingroom.uid = meetingroom_data.uid
-) 
-UPDATE 
-    $ischool.booking.meetingroom_equipment
-SET
-    name = equipment_data.name
-    ,count = equipment_data.count
-    ,status = equipment_data.status
-FROM
-    equipment_data
-WHERE
-    $ischool.booking.meetingroom_equipment.uid = equipment_data.uid
-                    
-                    ", roomData, equipmentDataRow);
+        $ischool.booking.meetingroom.uid = meetingroom_data.uid 
+) , delete_equipment_data AS(
+    SELECT
+        equipment.uid
+    FROM
+        meetingroom_data
+        LEFT OUTER JOIN $ischool.booking.meetingroom_equipment AS equipment
+            ON meetingroom_data.uid = equipment.ref_meetingroom_id
+)
+DELETE 
+FROM 
+    $ischool.booking.meetingroom_equipment 
+WHERE 
+    uid IN(
+        SELECT * FROM delete_equipment_data
+    )
+                    ", roomData);
+                }
                 #endregion
             }
 
@@ -339,6 +482,25 @@ WHERE
                     }
                 }
             }
+        }
+
+        string picError = "";
+        private void pictureURLTbx_TextChanged(object sender, EventArgs e)
+        {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls; 
+            try
+            {
+                //pictureBox1.ImageLocation = ;
+                pictureBox1.Load(pictureURLTbx.Text);
+                picError = "";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                picError = ex.Message;
+            }
+            
         }
     }
 }

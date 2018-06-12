@@ -94,7 +94,7 @@ namespace Ischool.Booking.Room
             string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
             string roomID = meetingroomDic[roomName];
 
-            ReloadDataGridView(unitID,roomID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
+            ReloadDataGridView(unitID,roomID);
 
         }
 
@@ -105,7 +105,7 @@ namespace Ischool.Booking.Room
         /// <param 場地編號="roomID"></param>
         /// <param 查詢開始時間="starTime"></param>
         /// <param 查詢結束時間="endTime"></param>
-        public void ReloadDataGridView(string unitID,string roomID,string starTime,string endTime)
+        public void ReloadDataGridView(string unitID,string roomID)
         {
             dataGridViewX1.Rows.Clear();
 
@@ -113,7 +113,7 @@ namespace Ischool.Booking.Room
 
             #region SQL
             string sql;
-            if (roomID == "全部")
+            if (roomID == "全部" && !conditionCbx.Checked)
             {
                 sql = string.Format(@"
 SELECT
@@ -130,7 +130,26 @@ WHERE
     unit.uid = {0}
 	AND app.apply_start_date >= '{1}'
 	AND app.apply_start_date <= '{2}'
-                ", unitID, starTime, endTime);
+                ", unitID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
+            }
+            else if (roomID == "全部" && conditionCbx.Checked)
+            {
+                sql = string.Format(@"
+SELECT
+    app.*
+	,room.name AS room_name
+    ,room.is_special
+FROM	
+	$ischool.booking.meetingroom_application AS app
+	LEFT OUTER JOIN $ischool.booking.meetingroom AS room
+		ON app.ref_meetingroom_id = room.uid
+    LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+        ON room.ref_unit_id = unit.uid
+WHERE
+    unit.uid = {0}
+	AND app.reviewed_date IS NULL
+    AND room.is_special = true
+                ", unitID);
             }
             else
             {
@@ -150,7 +169,7 @@ WHERE
 	AND app.ref_meetingroom_id = '{1}'
 	AND app.apply_start_date >= '{2}'
 	AND app.apply_start_date <= '{3}'
-                ", unitID, roomID, starTime, endTime);
+                ", unitID, roomID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
             }
             #endregion
 
@@ -180,7 +199,7 @@ WHERE
                     }
                     else
                     {
-                        datarow.Cells[index++].Value = "已審核";
+                        datarow.Cells[index].Value = "已審核";
                         datarow.Cells[index].Style.BackColor = Color.LightGray;
                         datarow.Cells[index++].ReadOnly = true;
                     }
@@ -193,16 +212,19 @@ WHERE
 
                 }
 
-                // 申請狀態: 申請核准、申請未核准
-                if (bool.Parse(("" + row["is_approved"]) == "" ? "false" : ("" + row["is_approved"])) || !bool.Parse("" + row["is_special"]))
+                // 申請狀態: 申請核准、申請未核准、""
+                if (("" + row["is_approved"]) == "true" && bool.Parse("" + row["is_special"]))
                 {
                     datarow.Cells[index++].Value = "申請核准";
                 }
-                else
+                else if (("" + row["is_approved"]) == "false" && bool.Parse("" + row["is_special"]))
                 {
                     datarow.Cells[index++].Value = "申請未核准";
                 }
-
+                else
+                {
+                    datarow.Cells[index++].Value = "";
+                }
                 // 申請結果: 成立、取消
                 if (bool.Parse(("" + row["is_canceled"]) == "" ? "false" : ("" + row["is_canceled"])))
                 {
@@ -226,23 +248,24 @@ WHERE
 
         private void roomCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
-            string roomID ;
-            if (roomName == "--全部--")
+            if (initFinish)
             {
-                roomID = "全部";
-            }
-            else
-            {
-                roomID = meetingroomDic[roomName];
-            }
+                string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
+                string roomID;
+                if (roomName == "--全部--")
+                {
+                    roomID = "全部";
+                }
+                else
+                {
+                    roomID = meetingroomDic[roomName];
+                }
 
-            string _startTime = starTime.Value.ToShortDateString();
-            string _endTime = endTime.Value.ToShortDateString();
-            string _unitName = "" + unitCbx.Items[unitCbx.SelectedIndex];
-            _unitID = unitDic[_unitName];
+                string _unitName = "" + unitCbx.Items[unitCbx.SelectedIndex];
+                _unitID = unitDic[_unitName];
 
-            ReloadDataGridView(_unitID,roomID, _startTime, _endTime);
+                ReloadDataGridView(_unitID, roomID);
+            }
         }
 
         private void unitCbx_SelectedIndexChanged(object sender, EventArgs e)
@@ -286,7 +309,7 @@ WHERE
                 else
                 {
                     errorLb.Visible = false;
-                    ReloadDataGridView(_unitID, roomID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
+                    ReloadDataGridView(_unitID, roomID);
                 }
             }
         }
@@ -305,9 +328,22 @@ WHERE
         {
             if (e.ColumnIndex == 5)
             {
-                string applicationID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
-                ApplicationReviewForm form = new ApplicationReviewForm(applicationID);
-                form.ShowDialog();
+                if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == "待審核")
+                {
+                    string applicationID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
+                    ApplicationReviewForm form = new ApplicationReviewForm(applicationID);
+                    form.FormClosed += delegate 
+                    {
+                        string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
+                        string roomID = meetingroomDic[roomName];
+                        ReloadDataGridView(_unitID, roomID);
+                    };
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("此申請紀錄無須審核!");
+                }
             }
         }
 
@@ -322,9 +358,44 @@ WHERE
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            string application = "" + dataGridViewX1.SelectedRows[0].Tag;
-            ApplicationCancelForm form = new ApplicationCancelForm(application);
-            form.ShowDialog();
+            if ("" + dataGridViewX1.SelectedCells[7].Value == "成立")
+            {
+                string application = "" + dataGridViewX1.SelectedRows[0].Tag;
+                ApplicationCancelForm form = new ApplicationCancelForm(application);
+                form.FormClosed += delegate 
+                {
+                    string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
+                    string roomID = meetingroomDic[roomName];
+                    ReloadDataGridView(_unitID, roomID);
+                };
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("此申請紀錄未成立或已取消!");
+            }
+        }
+
+        private void conditionCbx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (initFinish)
+            {
+                if (conditionCbx.Checked)
+                {
+                    starTime.Enabled = false;
+                    endTime.Enabled = false;
+                }
+                else
+                {
+                    starTime.Enabled = true;
+                    endTime.Enabled = true;
+                }
+
+                string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
+                string roomID = meetingroomDic[roomName];
+
+                ReloadDataGridView(_unitID, roomID);
+            }
         }
     }
 }

@@ -12,13 +12,13 @@ namespace Ischool.Booking.Room.UDT
         /// <summary>
         /// 申請紀錄系統編號
         /// </summary>
-        [Field(Field = "ref_meetingroom_application_id", Indexed = false)]
+        [Field(Field = "ref_application_id", Indexed = false)]
         public int RefMeetingroomApplicationID { get; set; }
 
         /// <summary>
         /// 預約開始時間
         /// </summary>
-        [Field(Field = "star_time", Indexed = false)]
+        [Field(Field = "start_time", Indexed = false)]
         public DateTime StarTime { get; set; }
 
         /// <summary>

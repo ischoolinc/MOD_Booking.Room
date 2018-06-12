@@ -36,7 +36,7 @@ namespace Ischool.Booking.Room
             //檢查是否為布林
             bool.TryParse(cd[name], out checkUDT);
 
-            if (!checkUDT) 
+            if (true) //!checkUDT
             {
                 AccessHelper access = new AccessHelper();
                 access.Select<UDT.MeetingRoom>("UID = '00000'");

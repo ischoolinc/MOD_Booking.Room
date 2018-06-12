@@ -58,21 +58,34 @@ namespace Ischool.Booking.Room
         public void ReloadDataGridView()
         {
             dataGridViewX1.Rows.Clear();
-            List<UDT.MeetingRoom> roomList = _access.Select<UDT.MeetingRoom>("ref_unit_id = " + _unitID);
 
-            foreach (UDT.MeetingRoom room in roomList)
+            Dictionary<string, MeetingRoomRecord> dataDic = BookingRecord.SelectMeetingRoomByUnitID(_unitID);
+            int rowIndex = 0;
+            foreach (string roomID in dataDic.Keys)
             {
                 DataGridViewRow datarow = new DataGridViewRow();
                 datarow.CreateCells(dataGridViewX1);
-                int index = 0;
-                datarow.Cells[index++].Value = room.Name;
-                datarow.Cells[index++].Value = room.Building;
-                datarow.Cells[index++].Value = room.Capacity;
-                datarow.Cells[index++].Value = room.IsSpecial == true ? "是" : "否";
-                datarow.Cells[index++].Value = "設備";
-                datarow.Tag = room.UID;
 
+                int index = 0;
+
+                datarow.Cells[index++].Value = dataDic[roomID].Name;
+                datarow.Cells[index++].Value = dataDic[roomID].Building;
+                datarow.Cells[index++].Value = dataDic[roomID].Capacity;
+                datarow.Cells[index++].Value = dataDic[roomID].IsSpecial == "true" ? "是" : "否";
+                List<string> equipment = new List<string>();
+                int height = 15;
+                foreach (MeetingRoomEqipmentRecord ep in dataDic[roomID].EquipmentList)
+                {
+                    string data = string.Format("名稱: {0}， 數量: {1}， 狀態: {2}",ep.Name,ep.Count,ep.Status);
+                    equipment.Add(data);
+                    height += 15;
+                }
+                datarow.Cells[index++].Value = string.Join(Environment.NewLine, equipment);
+                datarow.Tag = dataDic[roomID].UID;
                 dataGridViewX1.Rows.Add(datarow);
+                //dataGridViewX1.AutoResizeRow(rowIndex);
+                dataGridViewX1.Rows[rowIndex].Height = height;
+                rowIndex++;
             }
         }
 
@@ -87,7 +100,7 @@ namespace Ischool.Booking.Room
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            int row = dataGridViewX1.SelectedRows[0].Index;
+            int row = dataGridViewX1.SelectedCells[0].RowIndex;
             string roomID = "" + dataGridViewX1.Rows[row].Tag;
             EditForm form = new EditForm("修改", roomID);
             form.FormClosed += delegate {
@@ -141,5 +154,5 @@ namespace Ischool.Booking.Room
             _unitID = unitDic["" + unitCbx.Items[unitCbx.SelectedIndex]];
             ReloadDataGridView();
         }
-    }
+    }    
 }

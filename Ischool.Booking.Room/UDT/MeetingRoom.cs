@@ -13,6 +13,12 @@ namespace Ischool.Booking.Room.UDT
     class MeetingRoom : ActiveRecord
     {
         /// <summary>
+        /// 照片URL
+        /// </summary>
+        [Field(Field = "picture", Indexed = false)]
+        public string Picture { get; set; }
+
+        /// <summary>
         /// 會議室名稱
         /// </summary>
         [Field(Field = "name", Indexed = false)]
