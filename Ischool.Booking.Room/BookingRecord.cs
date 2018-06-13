@@ -23,7 +23,7 @@ SELECT
 FROM
 	$ischool.booking.meetingroom_unit_admin AS unit_admin
 	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
-		ON unit_admin.ref_uint_id = unit.uid 
+		ON unit_admin.ref_unit_id = unit.uid 
 WHERE
 	unit_admin.account = '{0}'
                 ", account);
@@ -42,6 +42,7 @@ WHERE
                 ur.CreateTime = DateTime.Parse("" + row["create_time"]);
             }
 
+            // 正常情境單位管理員只會對應到一個管理單位
             return ur;
         }
 

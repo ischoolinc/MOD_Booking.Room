@@ -112,7 +112,7 @@ namespace Ischool.Booking.Room
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            int row = dataGridViewX1.SelectedRows[0].Index;
+            int row = dataGridViewX1.SelectedCells[0].RowIndex;
             string roomID = "" + dataGridViewX1.Rows[row].Tag;
 
             string sql = string.Format("DELETE FROM $ischool.booking.meetingroom WHERE uid = {0}",roomID);

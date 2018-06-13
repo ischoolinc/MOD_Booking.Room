@@ -36,7 +36,7 @@ namespace Ischool.Booking.Room
             //檢查是否為布林
             bool.TryParse(cd[name], out checkUDT);
 
-            if (true) //!checkUDT
+            if (!checkUDT) 
             {
                 AccessHelper access = new AccessHelper();
                 access.Select<UDT.MeetingRoom>("UID = '00000'");
@@ -60,8 +60,13 @@ namespace Ischool.Booking.Room
             MotherForm.AddPanel(BookingRoomAdmin.Instance);
 
             RibbonBarItem settingItem = FISCA.Presentation.MotherForm.RibbonBarItems["會議室預約", "基本設定"];
+
+            #region 管理
+
             settingItem["管理"].Size = RibbonBarButton.MenuButtonSize.Large;
             settingItem["管理"].Image = Properties.Resources.network_lock_64;
+
+            #region 管理場地
 
             settingItem["管理"]["管理場地"].Enable = Permissions.管理場地權限;
             settingItem["管理"]["管理場地"].Click += delegate
@@ -77,11 +82,86 @@ namespace Ischool.Booking.Room
                 }
             };
 
-            RibbonBarItem assignment = MotherForm.RibbonBarItems["會議室預約","場地預約"];
+            #endregion
+
+            #endregion
+
+            #region 設定
+
+            settingItem["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
+            settingItem["設定"].Image = Properties.Resources.sandglass_unlock_64;
+
+            #region 設定系統管理員
+
+            settingItem["設定"]["系統管理員"].Enable = Permissions.設定系統管理員權限;
+            settingItem["設定"]["系統管理員"].Click += delegate
+            {
+                if (identity == "系統管理員")
+                {
+                    SetSystemAdminForm form = new SetSystemAdminForm();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("此帳號沒有設定系統管理員權限!");
+                }
+            };
+
+            #endregion
+
+            #region 設定場地管理單位
+
+            settingItem["設定"]["場地管理單位"].Enable = Permissions.設定場地管理單位權限;
+            settingItem["設定"]["場地管理單位"].Click += delegate
+            {
+                if (identity == "系統管理員")
+                {
+                    ManageUnitForm form = new ManageUnitForm();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("此帳號沒有設定場地管理單位權限");
+                }
+
+            };
+
+            #endregion
+
+            #region 設定單位管理員
+
+            settingItem["設定"]["單位管理員"].Enable = Permissions.設定單位管理員權限;
+            settingItem["設定"]["單位管理員"].Click += delegate
+            {
+                if (identity == "系統管理員")
+                {
+                    ManageUnitAdminForm form = new ManageUnitAdminForm();
+                    form.ShowDialog();
+                }
+                else if (identity == "單位主管" )
+                {
+                    ManageUnitAdminForm form = new ManageUnitAdminForm();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("此帳號沒有設定單位管理員權限");
+                }
+            };
+
+            #endregion
+
+
+
+            #endregion
+
+            #region 審核作業
+
+            RibbonBarItem assignment = MotherForm.RibbonBarItems["會議室預約", "場地預約"];
             assignment["審核作業"].Size = RibbonBarButton.MenuButtonSize.Large;
             assignment["審核作業"].Image = Properties.Resources.architecture_zoom_64;
             assignment["審核作業"].Enable = Permissions.審核作業權限;
-            assignment["審核作業"].Click += delegate 
+            assignment["審核作業"].Click += delegate
             {
                 if (identity == "系統管理員" || identity == "單位管理員" || identity == "單位主管")
                 {
@@ -93,12 +173,16 @@ namespace Ischool.Booking.Room
                     MessageBox.Show("此帳號沒有場地預約管理權限!");
                 }
             };
-            
+
+            #endregion
+
             #region 權限管理
             Catalog detail = new Catalog();
             detail = RoleAclSource.Instance["會議室預約"]["功能按鈕"];
+            detail.Add(new RibbonFeature(Permissions.場地管理單位, "場地管理單位"));
             detail.Add(new RibbonFeature(Permissions.管理場地, "管理場地"));
-
+            detail.Add(new RibbonFeature(Permissions.系統管理員,"系統管理員"));
+            detail.Add(new RibbonFeature(Permissions.單位管理員, "系統管理員"));
             detail.Add(new RibbonFeature(Permissions.審核作業,"審核作業"));
 
             #endregion
