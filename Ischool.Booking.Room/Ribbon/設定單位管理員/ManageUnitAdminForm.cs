@@ -114,10 +114,10 @@ WHERE
 
             if (identity == "單位主管")
             {
-                MessageBox.Show("無法刪除單位主管!");
+                MsgBox.Show("無法刪除單位主管!");
                 return;
             }
-            DialogResult result = MessageBox.Show("確認是否要將' " + name + " '單位管理員身分刪除?", "警告", MessageBoxButtons.YesNo);
+            DialogResult result = MsgBox.Show("確認是否要將' " + name + " '單位管理員身分刪除?", "警告", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 string sql = string.Format(@"
@@ -134,13 +134,13 @@ WHERE
                 {
                     up.Execute(sql);
 
-                    MessageBox.Show("刪除成功!");
+                    MsgBox.Show("刪除成功!");
 
                     ReloadDataGridview(unitID);
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MsgBox.Show(ex.Message);
                 }
             }
         }

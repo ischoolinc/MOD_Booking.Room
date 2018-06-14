@@ -105,7 +105,7 @@ WHERE
                 string name = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
                 string text = string.Format("確認是否將' {0} '設定為系統管理員?", name);
 
-                DialogResult result = MessageBox.Show(text, "確認",MessageBoxButtons.YesNo);
+                DialogResult result = MsgBox.Show(text, "確認",MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
                 {
@@ -137,13 +137,13 @@ INSERT INTO
                     try
                     {
                         up.Execute(sql);
-                        MessageBox.Show("儲存成功!");
+                        MsgBox.Show("儲存成功!");
 
                         this.Close();
                     }
                     catch(Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MsgBox.Show(ex.Message);
                     }
                     
                 }

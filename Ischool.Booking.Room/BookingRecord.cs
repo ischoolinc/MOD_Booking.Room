@@ -62,10 +62,13 @@ SELECT
 	, equipment.name  AS equipment_name
 	, equipment.count AS equipment_count
 	, equipment.status AS equipment_status
+    , teacher.teacher_name AS  created_name
 FROM
 	$ischool.booking.meetingroom AS room
 	LEFT OUTER JOIN $ischool.booking.meetingroom_equipment AS equipment
 		ON room.uid = equipment.ref_meetingroom_id
+    LEFT OUTER JOIN teacher
+        ON room.created_by = teacher.st_login_name
 WHERE
 	room.ref_unit_id = {0}
                 ",unitID);
@@ -87,7 +90,7 @@ WHERE
                     mr.IsSpecial = "" + row["is_special"];
                     mr.CreateTime = "" + row["create_time"];
                     mr.CreatedBy = "" + row["created_by"];
-
+                    mr.CreatedName = "" + row["created_name"];
                     mr.EquipmentList = new List<MeetingRoomEqipmentRecord>();
                     MeetingRoomEqipmentRecord mEpR = new MeetingRoomEqipmentRecord();
                     mEpR.UID = "" + row["equipment_id"];
@@ -147,6 +150,8 @@ WHERE
         public string CreateTime { get; set; }
 
         public string CreatedBy { get; set; }
+
+        public string CreatedName { get; set; }
 
         public List<MeetingRoomEqipmentRecord> EquipmentList {get;set;}
     }

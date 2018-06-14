@@ -12,6 +12,7 @@ using FISCA.Permission;
 using FISCA.Data;
 using K12.Data;
 using System.Windows.Forms;
+using FISCA.Presentation.Controls;
 
 namespace Ischool.Booking.Room
 {
@@ -78,7 +79,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MessageBox.Show("此帳號沒有場地預約管理權限!");
+                    MsgBox.Show("此帳號沒有場地預約管理權限!");
                 }
             };
 
@@ -103,7 +104,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MessageBox.Show("此帳號沒有設定系統管理員權限!");
+                    MsgBox.Show("此帳號沒有設定系統管理員權限!");
                 }
             };
 
@@ -121,7 +122,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MessageBox.Show("此帳號沒有設定場地管理單位權限");
+                    MsgBox.Show("此帳號沒有設定場地管理單位權限");
                 }
 
             };
@@ -145,13 +146,51 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MessageBox.Show("此帳號沒有設定單位管理員權限");
+                    MsgBox.Show("此帳號沒有設定單位管理員權限");
                 }
             };
 
             #endregion
 
+            #endregion
 
+            #region 資料統計
+
+            RibbonBarItem dataItem = FISCA.Presentation.MotherForm.RibbonBarItems["會議室預約", "資料統計"];
+
+            dataItem["匯出"].Size = RibbonBarButton.MenuButtonSize.Large;
+            dataItem["匯出"].Image = Properties.Resources.Export_Image;
+
+            #region 匯出場地清單
+
+            dataItem["匯出"]["場地清單"].Enable = true;
+            dataItem["匯出"]["場地清單"].Click += delegate
+            {
+                ExportMeetingRoomForm form = new ExportMeetingRoomForm();
+                form.ShowDialog();
+            };
+
+            #endregion
+
+            dataItem["匯入"].Size = RibbonBarButton.MenuButtonSize.Large;
+            dataItem["匯入"].Image = Properties.Resources.Import_Image;
+
+            #region 匯入場地清單
+
+            dataItem["匯入"]["場地清單"].Enable = true;
+            dataItem["匯入"]["場地清單"].Click += delegate { };
+
+            #endregion
+
+            dataItem["報表"].Size = RibbonBarButton.MenuButtonSize.Large;
+            dataItem["報表"].Image = Properties.Resources.Report;
+
+            #region 統計場地使用狀況
+
+            dataItem["報表"]["統計場地使用狀況"].Enable = true;
+            dataItem["報表"]["統計場地使用狀況"].Click += delegate { };
+
+            #endregion
 
             #endregion
 
@@ -170,7 +209,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MessageBox.Show("此帳號沒有場地預約管理權限!");
+                    MsgBox.Show("此帳號沒有場地預約管理權限!");
                 }
             };
 

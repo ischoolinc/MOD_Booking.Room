@@ -6,11 +6,12 @@ using FISCA.Presentation;
 
 namespace Ischool.Booking.Room
 {
-    public class BookingRoomAdmin : NLDPanel
+    public class BookingRoomAdmin : BlankPanel
     {
         public BookingRoomAdmin()
         {
             Group = "會議室預約";
+            
         }
 
         private static BookingRoomAdmin _BookingRoomAdmin;

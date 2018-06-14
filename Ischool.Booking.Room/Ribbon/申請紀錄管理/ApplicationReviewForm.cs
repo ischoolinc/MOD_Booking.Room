@@ -41,6 +41,7 @@ namespace Ischool.Booking.Room
             roomNameTbx.Text = roomList[0].Name;
             applyStartTbx.Text = applyList[0].ApplyStarDate.ToShortDateString();
             RepeatEndTbx.Text = applyList[0].RepeatEndDate.ToShortDateString();
+            applyReasonTbx.Text = applyList[0].ApplyReason;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in applyDetailList)
             {
@@ -67,22 +68,22 @@ namespace Ischool.Booking.Room
         {
             if (falseCbx.Checked && "" + rejectReasonTbx.Text == "")
             {
-                MessageBox.Show("請填寫未核准原因!");
+                MsgBox.Show("請填寫未核准原因!");
                 return;
             }
             else if (trueCbx.Checked && rejectReasonTbx.Text != "")
             {
-                MessageBox.Show("不須填寫未核准原因!");
+                MsgBox.Show("不須填寫未核准原因!");
                 return;
             }
             else if (!trueCbx.Checked && !falseCbx.Checked)
             {
-                MessageBox.Show("請勾選是否核准此申請紀錄!");
+                MsgBox.Show("請勾選是否核准此申請紀錄!");
                 return;
             }
             else
             {
-                DialogResult result = MessageBox.Show("確定儲存此次審核紀錄?", "提醒", MessageBoxButtons.YesNo);
+                DialogResult result = MsgBox.Show("確定儲存此次審核紀錄?", "提醒", MessageBoxButtons.YesNo);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     string sql = string.Format(@"
@@ -98,7 +99,7 @@ WHERE
     uid = {5}
                     ", trueCbx.Checked, DateTime.Parse(reviewDateLb.Text).ToShortDateString(), rejectReasonTbx.Text, Actor.RefTeacherID, teacherR.Name, _applicationID);
 
-                    MessageBox.Show("儲存成功!");
+                    MsgBox.Show("儲存成功!");
                     this.Close();
                 }
             }

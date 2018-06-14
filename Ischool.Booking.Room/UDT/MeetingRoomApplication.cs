@@ -49,6 +49,12 @@ namespace Ischool.Booking.Room.UDT
         public DateTime ApplyDate { get; set; }
 
         /// <summary>
+        /// 申請事由
+        /// </summary>
+        [Field(Field = "apply_reason", Indexed = false)]
+        public string ApplyReason { get; set; }
+
+        /// <summary>
         /// 重複類型
         /// </summary>
         [Field(Field = "repeat_type", Indexed = false)]

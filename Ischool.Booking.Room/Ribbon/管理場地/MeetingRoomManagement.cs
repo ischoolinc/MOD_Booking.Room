@@ -60,6 +60,7 @@ namespace Ischool.Booking.Room
             dataGridViewX1.Rows.Clear();
 
             Dictionary<string, MeetingRoomRecord> dataDic = BookingRecord.SelectMeetingRoomByUnitID(_unitID);
+
             int rowIndex = 0;
             foreach (string roomID in dataDic.Keys)
             {
@@ -72,6 +73,7 @@ namespace Ischool.Booking.Room
                 datarow.Cells[index++].Value = dataDic[roomID].Building;
                 datarow.Cells[index++].Value = dataDic[roomID].Capacity;
                 datarow.Cells[index++].Value = dataDic[roomID].IsSpecial == "true" ? "是" : "否";
+                datarow.Cells[index++].Value = dataDic[roomID].CreatedName;
                 List<string> equipment = new List<string>();
                 int height = 15;
                 foreach (MeetingRoomEqipmentRecord ep in dataDic[roomID].EquipmentList)
@@ -123,11 +125,11 @@ namespace Ischool.Booking.Room
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MsgBox.Show(ex.Message);
                 return;
             }
 
-            MessageBox.Show("資料刪除成功!");
+            MsgBox.Show("資料刪除成功!");
             ReloadDataGridView();
         }
 

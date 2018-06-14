@@ -53,7 +53,7 @@ namespace Ischool.Booking.Room
                     }
                     catch(Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
+                        MsgBox.Show(ex.Message);
                     }
                     
                 }
@@ -85,7 +85,7 @@ namespace Ischool.Booking.Room
             #region 資料驗證
             if (picError != "")
             {
-                DialogResult result = MessageBox.Show("場地照片URL錯誤，使否繼續儲存作業?","提醒",MessageBoxButtons.YesNo);
+                DialogResult result = MsgBox.Show("場地照片URL錯誤，使否繼續儲存作業?","提醒",MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) 
                 {
                     return;
@@ -93,22 +93,22 @@ namespace Ischool.Booking.Room
             }
             if (errorText.Visible)
             {
-                MessageBox.Show(errorText.Text);
+                MsgBox.Show(errorText.Text);
                 return;
             }
             if (roomNameTbx.Text == "" )
             {
-                MessageBox.Show("場地名稱欄位空白!");
+                MsgBox.Show("場地名稱欄位空白!");
                 return;
             }
             if (buildingTbx.Text == "")
             {
-                MessageBox.Show("所屬大樓欄位空白!");
+                MsgBox.Show("所屬大樓欄位空白!");
                 return;
             }
             if (capacityTbx.Text == "")
             {
-                MessageBox.Show("容納人數欄位空白!");
+                MsgBox.Show("容納人數欄位空白!");
                 return;
             }
             string error = "";
@@ -124,7 +124,7 @@ namespace Ischool.Booking.Room
             }
             if (error != "")
             {
-                MessageBox.Show(error);
+                MsgBox.Show(error);
                 return;
             }
             #endregion
@@ -142,7 +142,8 @@ SELECT
     ,'{4}'::BOOLEAN AS is_special
     ,'{5}'::TIMESTAMP AS create_time
     ,'{6}'::TEXT AS picture
-                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text);
+    ,'{7}'::TEXT AS created_by
+                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
 
 
                 List<string> equipmentDataList = new List<string>();
@@ -182,6 +183,7 @@ WITH meetingroom_data AS(
         , is_special
         , create_time
         , picture
+        , created_by
     )
     SELECT
         *
@@ -220,6 +222,7 @@ INSERT INTO $ischool.booking.meetingroom(
     , is_special
     , create_time
     , picture
+    , created_by
 )
 SELECT
     *
@@ -243,7 +246,8 @@ SELECT
     ,'{5}'::BOOLEAN AS is_special
     ,'{6}'::TIMESTAMP AS create_time
     ,'{7}'::TEXT AS picture
-                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text);
+    ,'{8}'::TEXT AS created_by
+                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
 
                 List<string> equipmentDataList = new List<string>();
 
@@ -288,6 +292,7 @@ WITH meetingroom_data AS(
         , is_special = meetingroom_data.is_special
         , create_time = meetingroom_data.create_time
         , picture = meetingroom_data.picture
+        , created_by = meetingroom_data.created_by
     FROM
         meetingroom_data
     WHERE
@@ -349,12 +354,13 @@ WITH meetingroom_data AS(
         $ischool.booking.meetingroom
     SET
         name = meetingroom_data.name
-        ,building = meetingroom_data.building
-        ,capacity = meetingroom_data.capacity
-        ,ref_unit_id = meetingroom_data.ref_unit_id
-        ,is_special = meetingroom_data.is_special
-        ,create_time = meetingroom_data.create_time
-        ,picture = meetingroom_data.pictrue
+        , building = meetingroom_data.building
+        , capacity = meetingroom_data.capacity
+        , ref_unit_id = meetingroom_data.ref_unit_id
+        , is_special = meetingroom_data.is_special
+        , create_time = meetingroom_data.create_time
+        , picture = meetingroom_data.pictrue
+        , created_by = meetingroom_data.created_by
     FROM
         meetingroom_data
     WHERE
@@ -387,10 +393,10 @@ WHERE
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MsgBox.Show(ex.Message);
                 return;
             }
-            MessageBox.Show("儲存成功!");
+            MsgBox.Show("儲存成功!");
             this.Close();
         }
 
@@ -497,7 +503,7 @@ WHERE
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MsgBox.Show(ex.Message);
                 picError = ex.Message;
             }
             

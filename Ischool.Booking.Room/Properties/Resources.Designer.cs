@@ -73,6 +73,26 @@ namespace Ischool.Booking.Room.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap Export_Image {
+            get {
+                object obj = ResourceManager.GetObject("Export_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap Import_Image {
+            get {
+                object obj = ResourceManager.GetObject("Import_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap marker_fav_64 {
             get {
                 object obj = ResourceManager.GetObject("marker_fav_64", resourceCulture);
@@ -93,6 +113,16 @@ namespace Ischool.Booking.Room.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap Report {
+            get {
+                object obj = ResourceManager.GetObject("Report", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap sandglass_unlock_64 {
             get {
                 object obj = ResourceManager.GetObject("sandglass_unlock_64", resourceCulture);
@@ -106,6 +136,16 @@ namespace Ischool.Booking.Room.Properties {
         internal static System.Drawing.Bitmap searchHistory {
             get {
                 object obj = ResourceManager.GetObject("searchHistory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap wizard1_BackgroundImage {
+            get {
+                object obj = ResourceManager.GetObject("wizard1_BackgroundImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

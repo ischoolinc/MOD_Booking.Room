@@ -257,12 +257,12 @@ FROM
             try
             {
                 up.Execute(sql);
-                MessageBox.Show("儲存成功!");
+                MsgBox.Show("儲存成功!");
                 this.Close();
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MsgBox.Show(ex.Message);
                 return;
             }
             

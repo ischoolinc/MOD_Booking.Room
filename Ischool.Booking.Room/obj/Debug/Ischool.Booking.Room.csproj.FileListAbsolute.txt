@@ -13,7 +13,6 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\I
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.GenerateResource.Cache
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EquipmentForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EditForm.resources
-C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ReviewForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ApplicationDetailForm.resources
@@ -25,3 +24,5 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\I
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.EditUnitForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ManageUnitAdminForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.AddUnitAdminForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ExportMeetingRoomForm.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache

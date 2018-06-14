@@ -57,6 +57,7 @@ FROM(
                     appR.RefMeetingRoomName = "" + row["name"];
                     appR.IsSpecial = bool.Parse("" + row["is_special"]);
                     appR.ApplyDate = "" + row["apply_date"];
+                    appR.ApplyReason = "" + row["apply_reason"];
                     appR.ApplyStartDate = "" + row["apply_start_date"];
                     appR.RepeatEndDate = "" + row["repeat_end_date"];
                     appR.RefAdminID = "" + row["ref_admin_id"];
@@ -118,6 +119,7 @@ FROM(
             roomNameTbx.Text = appR.RefMeetingRoomName;
             applyStartTbx.Text = DateTime.Parse(appR.ApplyStartDate).ToShortDateString();
             repeatEndTbx.Text = DateTime.Parse(appR.RepeatEndDate).ToShortDateString();
+            applyReasonTbx.Text = appR.ApplyReason;
             adminTbx.Text = appR.AdminName;
             reviewDateTbx.Text = appR.ReviewedDate;
             isApproveTbx.Text = appR.IsApproved;
@@ -208,6 +210,11 @@ FROM(
         /// 申請時間
         /// </summary>
         public string ApplyDate { get; set; }
+
+        /// <summary>
+        /// 申請事由
+        /// </summary>
+        public string ApplyReason { get; set; }
 
         public string RepeatType { get; set; }
 

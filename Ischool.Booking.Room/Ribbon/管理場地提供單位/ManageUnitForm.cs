@@ -100,7 +100,7 @@ FROM
             string unitName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
             string unitID = "" + dataGridViewX1.Rows[row].Tag;
 
-            DialogResult result = MessageBox.Show("確定是否將' "+ unitName + " '管理單位刪除?","提醒",MessageBoxButtons.YesNo);
+            DialogResult result = MsgBox.Show("確定是否將' "+ unitName + " '管理單位刪除?","提醒",MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -116,12 +116,12 @@ WHERE
                 try
                 {
                     up.Execute(sql);
-                    MessageBox.Show("刪除成功!");
+                    MsgBox.Show("刪除成功!");
                     ReloadDataGridView();
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MsgBox.Show(ex.Message);
                 }
                 
             }

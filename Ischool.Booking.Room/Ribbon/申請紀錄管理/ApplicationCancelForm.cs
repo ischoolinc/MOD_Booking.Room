@@ -41,6 +41,7 @@ namespace Ischool.Booking.Room
             roomNameTbx.Text = roomList[0].Name;
             applyStartTbx.Text = applyList[0].ApplyStarDate.ToShortDateString();
             RepeatEndTbx.Text = applyList[0].RepeatEndDate.ToShortDateString();
+            applyReasonTbx.Text = applyList[0].ApplyReason;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in applyDetailList)
             {
@@ -67,22 +68,22 @@ namespace Ischool.Booking.Room
         {
             if (trueCbx.Checked && cancelReasonTbx.Text == "")
             {
-                MessageBox.Show("請填寫取消原因!");
+                MsgBox.Show("請填寫取消原因!");
                 return;
             }
             else if (falseCbx.Checked && cancelReasonTbx.Text != "")
             {
-                MessageBox.Show("不須填寫取消原因!");
+                MsgBox.Show("不須填寫取消原因!");
                 return;
             }
             else if (!trueCbx.Checked && !falseCbx.Checked)
             {
-                MessageBox.Show("請勾選是否取消此申請紀錄!");
+                MsgBox.Show("請勾選是否取消此申請紀錄!");
                 return;
             }
             else
             {
-                DialogResult result = MessageBox.Show("確定儲存此次審核紀錄?", "提醒", MessageBoxButtons.YesNo);
+                DialogResult result = MsgBox.Show("確定儲存此次審核紀錄?", "提醒", MessageBoxButtons.YesNo);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
                     string sql = string.Format(@"
@@ -101,7 +102,7 @@ WHERE
                     UpdateHelper up = new UpdateHelper();
                     up.Execute(sql);
 
-                    MessageBox.Show("儲存成功!");
+                    MsgBox.Show("儲存成功!");
                     this.Close();
                 }
             }

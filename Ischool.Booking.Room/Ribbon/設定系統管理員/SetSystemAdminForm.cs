@@ -82,10 +82,10 @@ FROM
 
             if (identity == "系統預設管理員")
             {
-                MessageBox.Show("無法刪除系統預設管理員!");
+                MsgBox.Show("無法刪除系統預設管理員!");
                 return;
             }
-            DialogResult result = MessageBox.Show("確認是否要將' "+name+" '系統管理員身分刪除?", "警告", MessageBoxButtons.YesNo);
+            DialogResult result = MsgBox.Show("確認是否要將' "+name+" '系統管理員身分刪除?", "警告", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 string sql = string.Format(@"
@@ -101,12 +101,12 @@ WHERE
                 try
                 {
                     up.Execute(sql);
-                    MessageBox.Show("刪除成功!");
+                    MsgBox.Show("刪除成功!");
                     ReloadDataGridView();
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MsgBox.Show(ex.Message);
                 }
                 
             }

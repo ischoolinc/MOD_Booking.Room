@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.applicantTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
@@ -66,6 +66,8 @@
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.applyDateLb = new DevComponents.DotNetBar.LabelX();
             this.leaveBtn = new DevComponents.DotNetBar.ButtonX();
+            this.labelX15 = new DevComponents.DotNetBar.LabelX();
+            this.applyReasonTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.groupPanel2.SuspendLayout();
@@ -208,9 +210,9 @@
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanel1.Controls.Add(this.dataGridViewX1);
-            this.groupPanel1.Location = new System.Drawing.Point(12, 386);
+            this.groupPanel1.Location = new System.Drawing.Point(12, 451);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(565, 221);
+            this.groupPanel1.Size = new System.Drawing.Size(565, 196);
             // 
             // 
             // 
@@ -252,20 +254,20 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.RowTemplate.Height = 24;
-            this.dataGridViewX1.Size = new System.Drawing.Size(559, 194);
+            this.dataGridViewX1.Size = new System.Drawing.Size(559, 169);
             this.dataGridViewX1.TabIndex = 0;
             // 
             // Column1
@@ -296,7 +298,7 @@
             this.groupPanel2.Controls.Add(this.labelX7);
             this.groupPanel2.Controls.Add(this.reviewDateTbx);
             this.groupPanel2.Controls.Add(this.labelX6);
-            this.groupPanel2.Location = new System.Drawing.Point(15, 77);
+            this.groupPanel2.Location = new System.Drawing.Point(15, 142);
             this.groupPanel2.Name = "groupPanel2";
             this.groupPanel2.Size = new System.Drawing.Size(562, 130);
             // 
@@ -448,7 +450,7 @@
             this.groupPanel3.Controls.Add(this.labelX11);
             this.groupPanel3.Controls.Add(this.resultTbx);
             this.groupPanel3.Controls.Add(this.labelX10);
-            this.groupPanel3.Location = new System.Drawing.Point(12, 213);
+            this.groupPanel3.Location = new System.Drawing.Point(15, 278);
             this.groupPanel3.Name = "groupPanel3";
             this.groupPanel3.Size = new System.Drawing.Size(565, 167);
             // 
@@ -629,7 +631,7 @@
             this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(502, 616);
+            this.leaveBtn.Location = new System.Drawing.Point(502, 653);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -637,11 +639,40 @@
             this.leaveBtn.Text = "離開";
             this.leaveBtn.Click += new System.EventHandler(this.leaveBtn_Click);
             // 
+            // labelX15
+            // 
+            this.labelX15.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX15.BackgroundStyle.Class = "";
+            this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX15.Location = new System.Drawing.Point(12, 73);
+            this.labelX15.Name = "labelX15";
+            this.labelX15.Size = new System.Drawing.Size(74, 23);
+            this.labelX15.TabIndex = 15;
+            this.labelX15.Text = "申請事由";
+            // 
+            // applyReasonTbx
+            // 
+            // 
+            // 
+            // 
+            this.applyReasonTbx.Border.Class = "TextBoxBorder";
+            this.applyReasonTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.applyReasonTbx.Location = new System.Drawing.Point(96, 75);
+            this.applyReasonTbx.Multiline = true;
+            this.applyReasonTbx.Name = "applyReasonTbx";
+            this.applyReasonTbx.Size = new System.Drawing.Size(481, 61);
+            this.applyReasonTbx.TabIndex = 16;
+            // 
             // ApplicationDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 651);
+            this.ClientSize = new System.Drawing.Size(589, 688);
+            this.Controls.Add(this.applyReasonTbx);
+            this.Controls.Add(this.labelX15);
             this.Controls.Add(this.leaveBtn);
             this.Controls.Add(this.applyDateLb);
             this.Controls.Add(this.groupPanel3);
@@ -658,8 +689,6 @@
             this.Controls.Add(this.applicantTbx);
             this.Controls.Add(this.labelX1);
             this.DoubleBuffered = true;
-            this.MaximumSize = new System.Drawing.Size(605, 690);
-            this.MinimumSize = new System.Drawing.Size(605, 690);
             this.Name = "ApplicationDetailForm";
             this.Text = "申請紀錄";
             this.groupPanel1.ResumeLayout(false);
@@ -709,5 +738,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private DevComponents.DotNetBar.LabelX applyDateLb;
         private DevComponents.DotNetBar.ButtonX leaveBtn;
+        private DevComponents.DotNetBar.LabelX labelX15;
+        private DevComponents.DotNetBar.Controls.TextBoxX applyReasonTbx;
     }
 }

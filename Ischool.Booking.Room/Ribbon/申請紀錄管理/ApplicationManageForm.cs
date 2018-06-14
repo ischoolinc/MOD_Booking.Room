@@ -342,7 +342,7 @@ WHERE
                 }
                 else
                 {
-                    MessageBox.Show("此申請紀錄無須審核!");
+                    MsgBox.Show("此申請紀錄無須審核!");
                 }
             }
         }
@@ -372,7 +372,7 @@ WHERE
             }
             else
             {
-                MessageBox.Show("此申請紀錄未成立或已取消!");
+                MsgBox.Show("此申請紀錄未成立或已取消!");
             }
         }
 

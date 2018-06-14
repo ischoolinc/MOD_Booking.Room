@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,6 +54,8 @@
             this.falseCbx = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.cancelReasonTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.applyReasonTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +65,8 @@
             this.groupPanel1.BackColor = System.Drawing.Color.Transparent;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.groupPanel1.Controls.Add(this.applyReasonTbx);
+            this.groupPanel1.Controls.Add(this.labelX8);
             this.groupPanel1.Controls.Add(this.dataGridViewX1);
             this.groupPanel1.Controls.Add(this.labelX6);
             this.groupPanel1.Controls.Add(this.RepeatEndTbx);
@@ -77,7 +81,7 @@
             this.groupPanel1.Controls.Add(this.labelX1);
             this.groupPanel1.Location = new System.Drawing.Point(12, 108);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(537, 294);
+            this.groupPanel1.Size = new System.Drawing.Size(537, 347);
             // 
             // 
             // 
@@ -119,16 +123,16 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(3, 113);
+            this.dataGridViewX1.Location = new System.Drawing.Point(3, 166);
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.Size = new System.Drawing.Size(525, 151);
@@ -156,7 +160,7 @@
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(3, 84);
+            this.labelX6.Location = new System.Drawing.Point(3, 137);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(156, 23);
             this.labelX6.TabIndex = 10;
@@ -169,7 +173,7 @@
             // 
             this.RepeatEndTbx.Border.Class = "TextBoxBorder";
             this.RepeatEndTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.RepeatEndTbx.Location = new System.Drawing.Point(428, 51);
+            this.RepeatEndTbx.Location = new System.Drawing.Point(425, 50);
             this.RepeatEndTbx.Name = "RepeatEndTbx";
             this.RepeatEndTbx.Size = new System.Drawing.Size(100, 25);
             this.RepeatEndTbx.TabIndex = 9;
@@ -181,7 +185,7 @@
             // 
             this.hostTbx.Border.Class = "TextBoxBorder";
             this.hostTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.hostTbx.Location = new System.Drawing.Point(284, 12);
+            this.hostTbx.Location = new System.Drawing.Point(281, 12);
             this.hostTbx.Name = "hostTbx";
             this.hostTbx.Size = new System.Drawing.Size(100, 25);
             this.hostTbx.TabIndex = 8;
@@ -193,7 +197,7 @@
             // 
             this.applyStartTbx.Border.Class = "TextBoxBorder";
             this.applyStartTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.applyStartTbx.Location = new System.Drawing.Point(284, 52);
+            this.applyStartTbx.Location = new System.Drawing.Point(281, 50);
             this.applyStartTbx.Name = "applyStartTbx";
             this.applyStartTbx.Size = new System.Drawing.Size(100, 25);
             this.applyStartTbx.TabIndex = 7;
@@ -205,7 +209,7 @@
             // 
             this.roomNameTbx.Border.Class = "TextBoxBorder";
             this.roomNameTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.roomNameTbx.Location = new System.Drawing.Point(59, 53);
+            this.roomNameTbx.Location = new System.Drawing.Point(69, 50);
             this.roomNameTbx.Name = "roomNameTbx";
             this.roomNameTbx.Size = new System.Drawing.Size(100, 25);
             this.roomNameTbx.TabIndex = 6;
@@ -217,7 +221,7 @@
             // 
             this.applicantTbx.Border.Class = "TextBoxBorder";
             this.applicantTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.applicantTbx.Location = new System.Drawing.Point(59, 14);
+            this.applicantTbx.Location = new System.Drawing.Point(69, 12);
             this.applicantTbx.Name = "applicantTbx";
             this.applicantTbx.Size = new System.Drawing.Size(100, 25);
             this.applicantTbx.TabIndex = 5;
@@ -229,7 +233,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(397, 52);
+            this.labelX5.Location = new System.Drawing.Point(394, 51);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(21, 23);
             this.labelX5.TabIndex = 4;
@@ -242,7 +246,7 @@
             // 
             this.labelX4.BackgroundStyle.Class = "";
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(204, 53);
+            this.labelX4.Location = new System.Drawing.Point(201, 51);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(60, 23);
             this.labelX4.TabIndex = 3;
@@ -255,7 +259,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(3, 53);
+            this.labelX3.Location = new System.Drawing.Point(3, 51);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(50, 23);
             this.labelX3.TabIndex = 2;
@@ -268,7 +272,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(204, 14);
+            this.labelX2.Location = new System.Drawing.Point(201, 13);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(74, 23);
             this.labelX2.TabIndex = 1;
@@ -281,7 +285,7 @@
             // 
             this.labelX1.BackgroundStyle.Class = "";
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(3, 14);
+            this.labelX1.Location = new System.Drawing.Point(3, 13);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(50, 23);
             this.labelX1.TabIndex = 0;
@@ -320,7 +324,7 @@
             this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(474, 408);
+            this.leaveBtn.Location = new System.Drawing.Point(474, 461);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -333,7 +337,7 @@
             this.saveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.saveBtn.BackColor = System.Drawing.Color.Transparent;
             this.saveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.saveBtn.Location = new System.Drawing.Point(393, 408);
+            this.saveBtn.Location = new System.Drawing.Point(393, 461);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -417,11 +421,37 @@
             this.cancelReasonTbx.Size = new System.Drawing.Size(444, 59);
             this.cancelReasonTbx.TabIndex = 10;
             // 
+            // labelX8
+            // 
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.Class = "";
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Location = new System.Drawing.Point(3, 86);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(60, 23);
+            this.labelX8.TabIndex = 12;
+            this.labelX8.Text = "申請事由";
+            // 
+            // applyReasonTbx
+            // 
+            // 
+            // 
+            // 
+            this.applyReasonTbx.Border.Class = "TextBoxBorder";
+            this.applyReasonTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.applyReasonTbx.Location = new System.Drawing.Point(69, 86);
+            this.applyReasonTbx.Multiline = true;
+            this.applyReasonTbx.Name = "applyReasonTbx";
+            this.applyReasonTbx.Size = new System.Drawing.Size(456, 45);
+            this.applyReasonTbx.TabIndex = 13;
+            // 
             // ApplicationCancelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 443);
+            this.ClientSize = new System.Drawing.Size(561, 496);
             this.Controls.Add(this.cancelReasonTbx);
             this.Controls.Add(this.labelX10);
             this.Controls.Add(this.falseCbx);
@@ -468,5 +498,7 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX falseCbx;
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.Controls.TextBoxX cancelReasonTbx;
+        private DevComponents.DotNetBar.LabelX labelX8;
+        private DevComponents.DotNetBar.Controls.TextBoxX applyReasonTbx;
     }
 }
