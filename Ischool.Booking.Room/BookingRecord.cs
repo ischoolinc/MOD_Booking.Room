@@ -55,7 +55,33 @@ WHERE
         {
             Dictionary<string, MeetingRoomRecord> roomDic = new Dictionary<string, MeetingRoomRecord>();
 
-            string sql = string.Format(@"
+            string sql = "";
+
+            if (unitID == "")
+            {
+                sql = string.Format(@"
+SELECT
+	room.*
+	, equipment.uid AS equipment_id
+	, equipment.name  AS equipment_name
+	, equipment.count AS equipment_count
+	, equipment.status AS equipment_status
+    , teacher.teacher_name AS  created_name
+FROM
+	$ischool.booking.meetingroom AS room
+	LEFT OUTER JOIN $ischool.booking.meetingroom_equipment AS equipment
+		ON room.uid = equipment.ref_meetingroom_id
+    LEFT OUTER JOIN teacher
+        ON room.created_by = teacher.st_login_name
+    LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+        ON room.ref_unit_id = unit.uid
+WHERE
+    unit.uid IS NULL
+");
+            }
+            else
+            {
+                sql = string.Format(@"
 SELECT
 	room.*
 	, equipment.uid AS equipment_id
@@ -71,7 +97,9 @@ FROM
         ON room.created_by = teacher.st_login_name
 WHERE
 	room.ref_unit_id = {0}
-                ",unitID);
+                ", unitID);
+            }
+
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
 

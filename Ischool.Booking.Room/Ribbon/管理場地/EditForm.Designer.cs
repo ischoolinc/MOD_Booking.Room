@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.roomNameTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
@@ -48,6 +48,9 @@
             this.pictureURLTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelEx1 = new DevComponents.DotNetBar.PanelEx();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.unitTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.unitCbx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.groupPanel1.SuspendLayout();
             this.panelEx1.SuspendLayout();
@@ -103,7 +106,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(12, 292);
+            this.labelX3.Location = new System.Drawing.Point(11, 324);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(60, 23);
             this.labelX3.TabIndex = 3;
@@ -129,7 +132,7 @@
             // 
             this.capacityTbx.Border.Class = "TextBoxBorder";
             this.capacityTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.capacityTbx.Location = new System.Drawing.Point(78, 291);
+            this.capacityTbx.Location = new System.Drawing.Point(77, 323);
             this.capacityTbx.Name = "capacityTbx";
             this.capacityTbx.Size = new System.Drawing.Size(100, 25);
             this.capacityTbx.TabIndex = 6;
@@ -146,20 +149,20 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.RowTemplate.Height = 24;
-            this.dataGridViewX1.Size = new System.Drawing.Size(350, 211);
+            this.dataGridViewX1.Size = new System.Drawing.Size(350, 179);
             this.dataGridViewX1.TabIndex = 8;
             this.dataGridViewX1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellValueChanged);
             // 
@@ -194,9 +197,9 @@
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanel1.Controls.Add(this.dataGridViewX1);
-            this.groupPanel1.Location = new System.Drawing.Point(14, 321);
+            this.groupPanel1.Location = new System.Drawing.Point(14, 354);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(356, 238);
+            this.groupPanel1.Size = new System.Drawing.Size(356, 206);
             // 
             // 
             // 
@@ -236,7 +239,7 @@
             this.saveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveBtn.BackColor = System.Drawing.Color.Transparent;
             this.saveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.saveBtn.Location = new System.Drawing.Point(214, 569);
+            this.saveBtn.Location = new System.Drawing.Point(214, 570);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(75, 23);
             this.saveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -250,7 +253,7 @@
             this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(295, 569);
+            this.leaveBtn.Location = new System.Drawing.Point(295, 570);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -266,7 +269,7 @@
             // 
             this.isSpecialCbx.BackgroundStyle.Class = "";
             this.isSpecialCbx.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.isSpecialCbx.Location = new System.Drawing.Point(232, 292);
+            this.isSpecialCbx.Location = new System.Drawing.Point(231, 324);
             this.isSpecialCbx.Name = "isSpecialCbx";
             this.isSpecialCbx.Size = new System.Drawing.Size(132, 23);
             this.isSpecialCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -283,7 +286,7 @@
             this.errorText.BackgroundStyle.Class = "";
             this.errorText.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.errorText.ForeColor = System.Drawing.Color.Red;
-            this.errorText.Location = new System.Drawing.Point(14, 569);
+            this.errorText.Location = new System.Drawing.Point(14, 570);
             this.errorText.Name = "errorText";
             this.errorText.Size = new System.Drawing.Size(194, 23);
             this.errorText.TabIndex = 13;
@@ -346,11 +349,54 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // labelX5
+            // 
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Location = new System.Drawing.Point(11, 293);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(60, 23);
+            this.labelX5.TabIndex = 18;
+            this.labelX5.Text = "管理單位";
+            // 
+            // unitTbx
+            // 
+            // 
+            // 
+            // 
+            this.unitTbx.Border.Class = "TextBoxBorder";
+            this.unitTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.unitTbx.Location = new System.Drawing.Point(77, 292);
+            this.unitTbx.Name = "unitTbx";
+            this.unitTbx.ReadOnly = true;
+            this.unitTbx.Size = new System.Drawing.Size(148, 25);
+            this.unitTbx.TabIndex = 19;
+            // 
+            // unitCbx
+            // 
+            this.unitCbx.DisplayMember = "Text";
+            this.unitCbx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.unitCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.unitCbx.FormattingEnabled = true;
+            this.unitCbx.ItemHeight = 19;
+            this.unitCbx.Location = new System.Drawing.Point(77, 291);
+            this.unitCbx.Name = "unitCbx";
+            this.unitCbx.Size = new System.Drawing.Size(148, 25);
+            this.unitCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.unitCbx.TabIndex = 20;
+            // 
             // EditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 601);
+            this.ClientSize = new System.Drawing.Size(380, 602);
+            this.Controls.Add(this.unitCbx);
+            this.Controls.Add(this.unitTbx);
+            this.Controls.Add(this.labelX5);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.pictureURLTbx);
             this.Controls.Add(this.labelX4);
@@ -397,5 +443,8 @@
         private DevComponents.DotNetBar.Controls.TextBoxX pictureURLTbx;
         private DevComponents.DotNetBar.PanelEx panelEx1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private DevComponents.DotNetBar.LabelX labelX5;
+        private DevComponents.DotNetBar.Controls.TextBoxX unitTbx;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx unitCbx;
     }
 }

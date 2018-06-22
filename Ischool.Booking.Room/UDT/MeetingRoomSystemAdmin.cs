@@ -33,7 +33,7 @@ namespace Ischool.Booking.Room.UDT
         /// <summary>
         /// 建立日期
         /// </summary>
-        [Field(Field = "created_time", Indexed = false)]
+        [Field(Field = "create_time", Indexed = false)]
         public string CreatedTime { get; set; }
 
         /// <summary>

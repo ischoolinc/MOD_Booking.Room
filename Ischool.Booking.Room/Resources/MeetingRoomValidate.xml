@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="format.xsl" ?>
+<ValidateRule>
+  <DuplicateDetection>
+    <Detector Name="PrimaryKey">
+      <Field Name="會議室名稱"/>
+      <Field Name="所屬大樓名稱"/>
+    </Detector>
+  </DuplicateDetection>
+  <FieldList>
+    <Field Required="True" Name="會議室名稱" Description="會議室名稱/所屬大樓名稱為鍵值必填">
+      <Validate AutoCorrect="False" Description="「會議室名稱」不允許空白。" ErrorType="Error" Validator="不可空白" When=""/>
+    </Field>
+    <Field Required="True" Name="所屬大樓名稱" Description="會議室名稱/所屬大樓名稱為鍵值必填">
+      <Validate AutoCorrect="False" Description="「所屬大樓名稱」不允許空白。" ErrorType="Error" Validator="不可空白" When=""/>
+    </Field>
+    <Field Required="False" Name="照片" EmptyAlsoValidate="False" Description="照片URL">
+    </Field>
+    <Field Required="False" Name="容納人數" EmptyAlsoValidate="False" Description="會議室的容納人數">
+      <Validate AutoCorrect="False" Description="「容納人數」必須是數字。" ErrorType="Error" Validator="Integer極限" When=""/>
+    </Field>
+    <Field Required="False" Name="會議室目前狀態" EmptyAlsoValidate="False">
+      <Validate AutoCorrect="False" Description="「會議室目前狀態」只允許「開放」與「不開放」。" ErrorType="Error" Validator="狀態列舉" When=""/>
+    </Field>
+    <Field Required="True" Name="管理單位名稱" EmptyAlsoValidate="True" Description="會議室管理單位名稱">
+      <Validate AutoCorrect="False" Description="「管理單位名稱」是否存在系統" ErrorType="Error" Validator="管理單位是否存在系統" When="" />
+    </Field>
+    <Field Required="True" Name="是否為特殊場地" EmptyAlsoValidate="True" Description="會議室是否為特殊場地">
+      <Validate AutoCorrect="False" Description="「是否為特殊場地」只允許「true」與「false」" ErrorType="Error" Validator="布林列舉" When="" />
+    </Field>
+    <Field Required="False" Name="設備名稱" EmptyAlsoValidate="False" >
+      <Validate AutoCorrect="False" Description="「設備名稱」不允許空白。" ErrorType="Error" Validator="不可空白" When="" />
+    </Field>
+    <Field Required="False" Name="設備數量" EmptyAlsoValidate="False" Description="會議室是否為特殊場地">
+      <Validate AutoCorrect="False" Description="「設備數量」必須是數字" ErrorType="Error" Validator="Integer極限" When="" />
+    </Field>
+    <Field Required="False" Name="設備狀態" EmptyAlsoValidate="False" >
+      <Validate AutoCorrect="False" Description="「設備狀態」只允許「正常」、「故障」、「遺失」、「報廢」" ErrorType="Error" Validator="設備狀態列舉" When="" />
+    </Field>
+
+  </FieldList>
+  <ValidatorList>
+    <!-- 是否存在ischool教師-->
+    <FieldValidator Name="管理單位是否存在系統" Type="CHECKUNITINISCHOOL"/>
+    <FieldValidator Name="帳號是否存在系統" Type="CHECKACCOUNTINISCHOOL"/>
+    <FieldValidator Name="不可空白" Type="STRINGLENGTH">
+      <MinLength>1</MinLength>
+    </FieldValidator>
+    <FieldValidator Name="Integer極限" Type="Integer">
+      <MinValue>0</MinValue>
+      <MaxValue>2000000000</MaxValue>
+    </FieldValidator>
+    <FieldValidator Name="學期列舉" Type="Enumeration">
+      <Item Value="1"/>
+      <Item Value="2"/>
+    </FieldValidator>
+    <FieldValidator Name="設備狀態列舉" Type="Enumeration">
+      <Item Value="正常"/>
+      <Item Value="故障"/>
+      <Item Value="遺失"/>
+      <Item Value="報廢"/>
+    </FieldValidator>
+    <FieldValidator Name="多個英數字元" Type="Regex">
+      <ValidPattern>
+        <![CDATA[^[A-Za-z0-9]+$]]>
+        <!-- 正規表示法 -->
+      </ValidPattern>
+    </FieldValidator>
+    <FieldValidator Name="性別列舉" Type="Enumeration">
+      <Item Value="男">
+        <Variation>1</Variation>
+        <Variation>-1</Variation>
+        <Variation>t</Variation>
+        <Variation>true</Variation>
+        <Variation>M</Variation>
+        <Variation>m</Variation>
+      </Item>
+      <Item Value="女">
+        <Variation>0</Variation>
+        <Variation>f</Variation>
+        <Variation>F</Variation>
+        <Variation>false</Variation>
+      </Item>
+    </FieldValidator>
+    <FieldValidator Name="狀態列舉" Type="Enumeration">
+      <Item Value="開放">
+        <Variation>開放</Variation>
+        <Variation>T</Variation>
+        <Variation>t</Variation>
+        <Variation>true</Variation>
+      </Item>
+      <Item Value="不開放">
+        <Variation>不開放</Variation>
+        <Variation>f</Variation>
+        <Variation>F</Variation>
+        <Variation>false</Variation>
+      </Item>
+    </FieldValidator>
+    <FieldValidator Name="布林列舉" Type="Enumeration">
+      <Item Value="是">
+        <Variation>T</Variation>
+        <Variation>t</Variation>
+        <Variation>true</Variation>
+      </Item>
+      <Item Value="否">
+        <Variation>f</Variation>
+        <Variation>F</Variation>
+        <Variation>false</Variation>
+      </Item>
+    </FieldValidator>
+  </ValidatorList>
+
+  <RowValidate>
+  </RowValidate>
+  <ConditionList/>
+</ValidateRule>

@@ -117,17 +117,21 @@ namespace Ischool.Booking.Room
             {
                 sql = string.Format(@"
 SELECT
-    app.*
-	,room.name AS room_name
-    ,room.is_special
-FROM	
-	$ischool.booking.meetingroom_application AS app
-	LEFT OUTER JOIN $ischool.booking.meetingroom AS room
-		ON app.ref_meetingroom_id = room.uid
-    LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
-        ON room.ref_unit_id = unit.uid
+	app.*
+    , room.name AS room_name
+    , room.is_special
+FROM
+	$ischool.booking.meetingroom AS room
+	LEFT OUTER JOIN $ischool.booking.meetingroom_application AS app
+		ON room.uid = app.ref_meetingroom_id
+	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+		ON room.ref_unit_id = unit.uid
 WHERE
-    unit.uid = {0}
+	room.is_special = true
+	AND app.uid IS NOT NULL
+	AND app.reviewed_date IS NULL
+	AND app.is_canceled = false
+	AND unit.uid = {0}
 	AND app.apply_start_date >= '{1}'
 	AND app.apply_start_date <= '{2}'
                 ", unitID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
@@ -136,19 +140,18 @@ WHERE
             {
                 sql = string.Format(@"
 SELECT
-    app.*
-	,room.name AS room_name
-    ,room.is_special
-FROM	
-	$ischool.booking.meetingroom_application AS app
-	LEFT OUTER JOIN $ischool.booking.meetingroom AS room
-		ON app.ref_meetingroom_id = room.uid
-    LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
-        ON room.ref_unit_id = unit.uid
+	app.*
+    , room.name AS room_name
+    , room.is_special
+FROM
+	$ischool.booking.meetingroom AS room
+	LEFT OUTER JOIN $ischool.booking.meetingroom_application AS app
+		ON room.uid = app.ref_meetingroom_id
+	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+		ON room.ref_unit_id = unit.uid
 WHERE
-    unit.uid = {0}
-	AND app.reviewed_date IS NULL
-    AND room.is_special = true
+	app.uid IS NOT NULL
+	AND unit.uid = {0}
                 ", unitID);
             }
             else
@@ -195,7 +198,7 @@ WHERE
                     //審核狀態: 待審核、已審核、無須審核
                     if (("" + row["reviewed_date"]) == "")
                     {
-                        datarow.Cells[index++].Value = "待審核";
+                        datarow.Cells[index++].Value = "進行審核";
                     }
                     else
                     {
@@ -206,40 +209,47 @@ WHERE
                 }
                 else
                 {
-                    datarow.Cells[index].Value = "無須審核";
+                    datarow.Cells[index].Value = "無";
                     datarow.Cells[index].Style.BackColor = Color.LightGray;
                     datarow.Cells[index++].ReadOnly = true;
 
                 }
 
-                // 申請狀態: 申請核准、申請未核准、""
+                // 審核結果: 通過、未通過、空白
                 if (("" + row["is_approved"]) == "true" && bool.Parse("" + row["is_special"]))
                 {
-                    datarow.Cells[index++].Value = "申請核准";
+                    datarow.Cells[index++].Value = "通過";
                 }
                 else if (("" + row["is_approved"]) == "false" && bool.Parse("" + row["is_special"]))
                 {
-                    datarow.Cells[index++].Value = "申請未核准";
+                    datarow.Cells[index++].Value = "未通過";
                 }
                 else
                 {
                     datarow.Cells[index++].Value = "";
                 }
-                // 申請結果: 成立、取消
+                // 申請單狀態: 待審核、取消、通過、未通過
                 if (bool.Parse(("" + row["is_canceled"]) == "" ? "false" : ("" + row["is_canceled"])))
                 {
-                    datarow.Cells[index].Style.BackColor = Color.LightPink;
+                    datarow.Cells[index].Style.BackColor = Color.LightGray;
                     datarow.Cells[index++].Value = "取消";
+                    datarow.Cells[5].Value = "無";
+                    //datarow.DefaultCellStyle.BackColor = Color.LightGray;
                 }
-                else if (!bool.Parse(("" + row["is_approved"]) == "" ? "false" : ("" + row["is_approved"])) && bool.Parse("" + row["is_special"]))
+                else if (("" + row["reviewed_date"]) == "" && bool.Parse("" + row["is_special"]))
                 {
                     datarow.Cells[index].Style.BackColor = Color.LightPink;
-                    datarow.Cells[index++].Value = "未成立";
+                    datarow.Cells[index++].Value = "待審核";
+                }
+                else if (("" + row["is_approved"]) == "false" && bool.Parse("" + row["is_special"]))
+                {
+                    datarow.Cells[index].Style.BackColor = Color.LightPink;
+                    datarow.Cells[index++].Value = "未通過";
                 }
                 else
                 {
                     datarow.Cells[index].Style.BackColor = Color.LightGreen;
-                    datarow.Cells[index++].Value = "成立";
+                    datarow.Cells[index++].Value = "通過";
                 }
                 dataGridViewX1.Rows.Add(datarow);
             } 
@@ -328,7 +338,7 @@ WHERE
         {
             if (e.ColumnIndex == 5)
             {
-                if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == "待審核")
+                if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == "進行審核")
                 {
                     string applicationID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
                     ApplicationReviewForm form = new ApplicationReviewForm(applicationID);
@@ -358,7 +368,7 @@ WHERE
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            if ("" + dataGridViewX1.SelectedCells[7].Value == "成立")
+            if ("" + dataGridViewX1.SelectedCells[7].Value == "通過")
             {
                 string application = "" + dataGridViewX1.SelectedRows[0].Tag;
                 ApplicationCancelForm form = new ApplicationCancelForm(application);

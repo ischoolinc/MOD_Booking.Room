@@ -23,19 +23,19 @@ namespace Ischool.Booking.Room
             InitializeComponent();
 
             #region 設定Wizard會跟著Style跑
-            this.wizard1.HeaderStyle.ApplyStyle((GlobalManager.Renderer as Office2007Renderer).ColorTable.GetClass(ElementStyleClassKeys.RibbonFileMenuBottomContainerKey));
-            this.wizard1.FooterStyle.BackColorGradientAngle = -90;
-            this.wizard1.FooterStyle.BackColorGradientType = eGradientType.Linear;
-            this.wizard1.FooterStyle.BackColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.Start;
-            this.wizard1.FooterStyle.BackColor2 = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.End;
-            this.wizard1.BackColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.Start;
-            this.wizard1.BackgroundImage = null;
-            for (int i = 0; i < 5; i++)
-            {
-                (this.wizard1.Controls[1].Controls[i] as ButtonX).ColorTable = eButtonColor.OrangeWithBackground;
-            }
-            (this.wizard1.Controls[0].Controls[1] as System.Windows.Forms.Label).ForeColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.MouseOver.TitleText;
-            (this.wizard1.Controls[0].Controls[2] as System.Windows.Forms.Label).ForeColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TitleText;
+            //this.wizard1.HeaderStyle.ApplyStyle((GlobalManager.Renderer as Office2007Renderer).ColorTable.GetClass(ElementStyleClassKeys.RibbonFileMenuBottomContainerKey));
+            //this.wizard1.FooterStyle.BackColorGradientAngle = -90;
+            //this.wizard1.FooterStyle.BackColorGradientType = eGradientType.Linear;
+            //this.wizard1.FooterStyle.BackColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.Start;
+            //this.wizard1.FooterStyle.BackColor2 = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.End;
+            //this.wizard1.BackColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TopBackground.Start;
+            //this.wizard1.BackgroundImage = null;
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    (this.wizard1.Controls[1].Controls[i] as ButtonX).ColorTable = eButtonColor.OrangeWithBackground;
+            //}
+            //(this.wizard1.Controls[0].Controls[1] as System.Windows.Forms.Label).ForeColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.MouseOver.TitleText;
+            //(this.wizard1.Controls[0].Controls[2] as System.Windows.Forms.Label).ForeColor = (GlobalManager.Renderer as Office2007Renderer).ColorTable.RibbonBar.Default.TitleText;
             #endregion
 
         }
@@ -80,7 +80,7 @@ FROM
             DataTable dt = qh.Select(sql);
 
             Workbook report = new Workbook();
-            report.Worksheets[0].Name = "場地清單";
+            report.Worksheets[0].Name = "場地資料";
             
             //填表頭
             for (int i = 0; i < exportFieldList.Count; i++)
@@ -104,7 +104,7 @@ FROM
                             case "會議室名稱":
                                 report.Worksheets[0].Cells[rowIndex, col].PutValue("" + row["name"]);
                                 break;
-                            case "照片URL":
+                            case "照片":
                                 report.Worksheets[0].Cells[rowIndex, col].PutValue("" + row["picture"]);
                                 break;
                             case "所屬大樓名稱":
@@ -160,8 +160,8 @@ FROM
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "匯出場地清單";
-            saveFileDialog.FileName = "匯出場地清單.xlsx";
-            saveFileDialog.Filter = "Excel (*.xlsx)|*.xlsx|所有檔案 (*.*)|*.*";
+            saveFileDialog.FileName = "匯出場地清單.xls";
+            saveFileDialog.Filter = "Excel (*.xls)|*.xls|所有檔案 (*.*)|*.*";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -198,6 +198,17 @@ FROM
         private void wizard1_CancelButtonClick(object sender, CancelEventArgs e)
         {
             this.Close();
+        }
+
+        private void selectAllCbx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (selectAllCbx.Checked)
+            {
+                for (int i = 0;i< listViewEx1.Items.Count;i++)
+                {
+                    listViewEx1.Items[i].Checked = true;
+                }
+            }
         }
     }
 }

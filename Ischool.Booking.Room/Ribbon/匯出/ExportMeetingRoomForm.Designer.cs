@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("會議室系統編號");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("會議室名稱");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("照片URL");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("照片");
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("所屬大樓名稱");
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("容納人數");
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("會議室目前狀態");
@@ -46,7 +46,7 @@
             System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("設備狀態");
             this.wizard1 = new DevComponents.DotNetBar.Wizard();
             this.wizardPage1 = new DevComponents.DotNetBar.WizardPage();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.selectAllCbx = new System.Windows.Forms.CheckBox();
             this.listViewEx1 = new DevComponents.DotNetBar.Controls.ListViewEx();
             this.wizard1.SuspendLayout();
             this.wizardPage1.SuspendLayout();
@@ -119,7 +119,7 @@
             this.wizardPage1.AntiAlias = false;
             this.wizardPage1.BackButtonVisible = DevComponents.DotNetBar.eWizardButtonState.False;
             this.wizardPage1.BackColor = System.Drawing.Color.Transparent;
-            this.wizardPage1.Controls.Add(this.checkBox1);
+            this.wizardPage1.Controls.Add(this.selectAllCbx);
             this.wizardPage1.Controls.Add(this.listViewEx1);
             this.wizardPage1.Location = new System.Drawing.Point(7, 72);
             this.wizardPage1.Name = "wizardPage1";
@@ -143,17 +143,18 @@
             this.wizardPage1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.wizardPage1.TabIndex = 7;
             // 
-            // checkBox1
+            // selectAllCbx
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(5, 3);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(79, 21);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "選擇全部";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.selectAllCbx.AutoSize = true;
+            this.selectAllCbx.Checked = true;
+            this.selectAllCbx.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.selectAllCbx.Location = new System.Drawing.Point(5, 3);
+            this.selectAllCbx.Name = "selectAllCbx";
+            this.selectAllCbx.Size = new System.Drawing.Size(79, 21);
+            this.selectAllCbx.TabIndex = 1;
+            this.selectAllCbx.Text = "選擇全部";
+            this.selectAllCbx.UseVisualStyleBackColor = true;
+            this.selectAllCbx.CheckedChanged += new System.EventHandler(this.selectAllCbx_CheckedChanged);
             // 
             // listViewEx1
             // 
@@ -243,6 +244,6 @@
         private DevComponents.DotNetBar.Wizard wizard1;
         private DevComponents.DotNetBar.WizardPage wizardPage1;
         private DevComponents.DotNetBar.Controls.ListViewEx listViewEx1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox selectAllCbx;
     }
 }

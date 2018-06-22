@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.unitNameTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
@@ -47,7 +47,8 @@
             this.saveBtn = new DevComponents.DotNetBar.ButtonX();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.errorLb = new DevComponents.DotNetBar.LabelX();
+            this.errorLb1 = new DevComponents.DotNetBar.LabelX();
+            this.errorLb2 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.groupPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -78,6 +79,7 @@
             this.unitNameTbx.Name = "unitNameTbx";
             this.unitNameTbx.Size = new System.Drawing.Size(131, 25);
             this.unitNameTbx.TabIndex = 1;
+            this.unitNameTbx.TextChanged += new System.EventHandler(this.unitNameTbx_TextChanged);
             // 
             // labelX2
             // 
@@ -88,7 +90,7 @@
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelX2.Location = new System.Drawing.Point(12, 53);
+            this.labelX2.Location = new System.Drawing.Point(12, 52);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(60, 23);
             this.labelX2.TabIndex = 2;
@@ -102,10 +104,11 @@
             this.unitBossTbx.Border.Class = "TextBoxBorder";
             this.unitBossTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.unitBossTbx.Enabled = false;
-            this.unitBossTbx.Location = new System.Drawing.Point(78, 52);
+            this.unitBossTbx.Location = new System.Drawing.Point(78, 51);
             this.unitBossTbx.Name = "unitBossTbx";
             this.unitBossTbx.Size = new System.Drawing.Size(131, 25);
             this.unitBossTbx.TabIndex = 3;
+            this.unitBossTbx.TextChanged += new System.EventHandler(this.unitBossTbx_TextChanged);
             // 
             // dataGridViewX1
             // 
@@ -122,14 +125,14 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewX1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 41);
@@ -206,11 +209,11 @@
             // 
             this.dateLb.BackgroundStyle.Class = "";
             this.dateLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.dateLb.Location = new System.Drawing.Point(519, 12);
+            this.dateLb.Location = new System.Drawing.Point(482, 12);
             this.dateLb.Name = "dateLb";
-            this.dateLb.Size = new System.Drawing.Size(119, 23);
+            this.dateLb.Size = new System.Drawing.Size(156, 23);
             this.dateLb.TabIndex = 7;
-            this.dateLb.Text = "日期";
+            this.dateLb.Text = "建立日期";
             // 
             // leaveBtn
             // 
@@ -302,28 +305,45 @@
             this.labelX4.TabIndex = 7;
             this.labelX4.Text = "老師清單";
             // 
-            // errorLb
+            // errorLb1
             // 
-            this.errorLb.BackColor = System.Drawing.Color.Transparent;
+            this.errorLb1.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.errorLb.BackgroundStyle.Class = "";
-            this.errorLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.errorLb.ForeColor = System.Drawing.Color.Red;
-            this.errorLb.Location = new System.Drawing.Point(12, 437);
-            this.errorLb.Name = "errorLb";
-            this.errorLb.Size = new System.Drawing.Size(137, 23);
-            this.errorLb.TabIndex = 11;
-            this.errorLb.Text = "errorText";
-            this.errorLb.Visible = false;
+            this.errorLb1.BackgroundStyle.Class = "";
+            this.errorLb1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.errorLb1.ForeColor = System.Drawing.Color.Red;
+            this.errorLb1.Location = new System.Drawing.Point(215, 12);
+            this.errorLb1.Name = "errorLb1";
+            this.errorLb1.Size = new System.Drawing.Size(137, 23);
+            this.errorLb1.TabIndex = 11;
+            this.errorLb1.Text = "請輸入單位名稱!";
+            this.errorLb1.Visible = false;
+            // 
+            // errorLb2
+            // 
+            this.errorLb2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.errorLb2.BackgroundStyle.Class = "";
+            this.errorLb2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.errorLb2.ForeColor = System.Drawing.Color.Red;
+            this.errorLb2.Location = new System.Drawing.Point(215, 52);
+            this.errorLb2.Name = "errorLb2";
+            this.errorLb2.Size = new System.Drawing.Size(137, 23);
+            this.errorLb2.TabIndex = 12;
+            this.errorLb2.Text = "請選擇單位主管!";
+            this.errorLb2.Visible = false;
             // 
             // EditUnitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(650, 472);
-            this.Controls.Add(this.errorLb);
+            this.Controls.Add(this.errorLb2);
+            this.Controls.Add(this.errorLb1);
             this.Controls.Add(this.groupPanel1);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.leaveBtn);
@@ -363,6 +383,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn Column6;
         private DevComponents.DotNetBar.LabelX labelX4;
-        private DevComponents.DotNetBar.LabelX errorLb;
+        private DevComponents.DotNetBar.LabelX errorLb1;
+        private DevComponents.DotNetBar.LabelX errorLb2;
     }
 }

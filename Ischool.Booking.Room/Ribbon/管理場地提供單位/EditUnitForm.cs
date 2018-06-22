@@ -23,17 +23,34 @@ namespace Ischool.Booking.Room
         /// </summary>
         string _unitID;
 
+        Dictionary<string, DataRow> _teacherDic = new Dictionary<string, DataRow>();
+
         public EditUnitForm(string mode,string unitID)
         {
             InitializeComponent();
 
             _mode = mode;
-
             _unitID = unitID;
+
+            QueryHelper qh = new QueryHelper();
+
+            #region 讀取教師資料
+
+            string _sql = "SELECT * FROM teacher WHERE status = 1";
+            
+            DataTable _dt = qh.Select(_sql);
+
+            foreach (DataRow row in _dt.Rows)
+            {
+                _teacherDic.Add("" + row["id"],row);
+            }
+
+            #endregion
+
 
             if (mode == "新增")
             {
-                dateLb.Text = "日期:   " + DateTime.Now.ToShortDateString();
+                dateLb.Text = "建立日期:   " + DateTime.Now.ToShortDateString();
 
                 ReloadDataGridview();
             }
@@ -44,6 +61,7 @@ SELECT
     unit.name AS unit_name
     , teacher.teacher_name
     , unit.create_time
+    , teacher.id AS ref_teacher_id
 FROM
     $ischool.booking.meetingroom_unit AS unit
     LEFT OUTER JOIN $ischool.booking.meetingroom_unit_admin AS unit_admin
@@ -54,12 +72,12 @@ FROM
 WHERE
     unit.uid = {0}
                     ", unitID);
-                QueryHelper qh = new QueryHelper();
                 DataTable dt = qh.Select(sql);
 
                 unitNameTbx.Text = "" + dt.Rows[0]["unit_name"];
                 unitBossTbx.Text = "" + dt.Rows[0]["teacher_name"];
-                dateLb.Text = "日期:   " + DateTime.Parse("" + dt.Rows[0]["create_time"]).ToShortDateString();
+                unitBossTbx.Tag = "" + dt.Rows[0]["ref_teacher_id"];
+                dateLb.Text = "建立日期:   " + DateTime.Parse("" + dt.Rows[0]["create_time"]).ToShortDateString();
 
                 ReloadDataGridview();
             }
@@ -123,14 +141,12 @@ WHERE
             #region 資料驗證
             if (unitNameTbx.Text == "")
             {
-                errorLb.Text = "請輸入單位名稱!";
-                errorLb.Visible = true;
+                errorLb1.Visible = true;
                 return;
             }
             else if (unitBossTbx.Text == "")
             {
-                errorLb.Text = "請選擇單位主管!";
-                errorLb.Visible = true;
+                errorLb2.Visible = true;
                 return;
             }
             #endregion
@@ -141,8 +157,10 @@ WHERE
             string unitName = unitNameTbx.Text;
             string createTime = DateTime.Now.ToShortDateString();
             string createdBy = Actor.Account;
-            string adminAccount = "" + ((DataGridViewRow)unitBossTbx.Tag).Cells[3].Value;
-            string refTeacherID = "" + ((DataGridViewRow)unitBossTbx.Tag).Tag;
+
+            string adminAccount = "" +  _teacherDic["" + unitBossTbx.Tag]["st_login_name"];
+            string refTeacherID = "" + _teacherDic["" + unitBossTbx.Tag]["id"];
+
             string isBoss = "true";
 
             string sql = "";
@@ -227,7 +245,7 @@ WITH data_row AS(
     FROM
         $ischool.booking.meetingroom_unit_admin
     WHERE
-        uid = (SELECT unit_id FROM data_row )
+        ref_unit_id = (SELECT unit_id FROM data_row )
 )
 INSERT INTO $ischool.booking.meetingroom_unit_admin(
     account
@@ -286,14 +304,18 @@ FROM
             {
                 foreach (DataGridViewRow row in dataGridViewX1.Rows)
                 {
-                    if ("" + row.Cells[0].Value == searchTbx.Text)
+                    if (row.Cells[0].Value != null)
                     {
-                        row.Visible = true;
+                        row.Visible = (row.Cells[0].Value.ToString().IndexOf(searchTbx.Text) > -1);
                     }
-                    else
-                    {
-                        row.Visible = false;
-                    }
+                    //if ("" + row.Cells[0].Value == searchTbx.Text)
+                    //{
+                    //    row.Visible = true;
+                    //}
+                    //else
+                    //{
+                    //    row.Visible = false;
+                    //}
                 }
             }
         }
@@ -305,7 +327,32 @@ FROM
             if (col == 5)
             {
                 unitBossTbx.Text = "" + dataGridViewX1.Rows[row].Cells[0].Value;
-                unitBossTbx.Tag = dataGridViewX1.Rows[row];  // datarow
+                unitBossTbx.Tag = dataGridViewX1.Rows[row].Tag;  // 教師編號
+            }
+        }
+
+        // 資料驗證
+        private void unitNameTbx_TextChanged(object sender, EventArgs e)
+        {
+            if (unitNameTbx.Text == "")
+            {
+                errorLb1.Visible = true;
+            }
+            else
+            {
+                errorLb1.Visible = false;
+            }
+        }
+
+        private void unitBossTbx_TextChanged(object sender, EventArgs e)
+        {
+            if (unitBossTbx.Text == "")
+            {
+                errorLb2.Visible = true;
+            }
+            else
+            {
+                errorLb2.Visible = false;
             }
         }
     }

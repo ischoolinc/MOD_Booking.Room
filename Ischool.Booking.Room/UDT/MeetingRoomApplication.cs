@@ -55,6 +55,12 @@ namespace Ischool.Booking.Room.UDT
         public string ApplyReason { get; set; }
 
         /// <summary>
+        /// 是否重複
+        /// </summary>
+        [Field(Field = "is_repeat", Indexed = false)]
+        public bool IsRepeat { get; set; }
+
+        /// <summary>
         /// 重複類型
         /// </summary>
         [Field(Field = "repeat_type", Indexed = false)]

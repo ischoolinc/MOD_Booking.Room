@@ -84,14 +84,18 @@ WHERE
             {
                 foreach (DataGridViewRow row in dataGridViewX1.Rows)
                 {
-                    if ("" + row.Cells[0].Value == searchTbx.Text)
+                    if (row.Cells[0].Value != null)
                     {
-                        row.Visible = true;
+                        row.Visible = (row.Cells[0].Value.ToString().IndexOf(searchTbx.Text) > -1);
                     }
-                    else
-                    {
-                        row.Visible = false;
-                    }
+                    //if ("" + row.Cells[0].Value == searchTbx.Text)
+                    //{
+                    //    row.Visible = true;
+                    //}
+                    //else
+                    //{
+                    //    row.Visible = false;
+                    //}
                 }
             }
         }

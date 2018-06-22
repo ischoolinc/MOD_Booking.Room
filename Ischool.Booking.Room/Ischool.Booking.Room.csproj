@@ -31,9 +31,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.Cells_201402, Version=7.7.1.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+    <Reference Include="Aspose.Cells">
+      <HintPath>Library\Aspose.Cells.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Aspose.Words">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Aspose.Words.dll</HintPath>
+    </Reference>
+    <Reference Include="Campus.Configuration">
+      <HintPath>Library\Campus.Configuration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.DocumentValidator, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Library\Aspose.Cells_201402.dll</HintPath>
+      <HintPath>Library\Campus.DocumentValidator.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Import, Version=1.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\Campus.Import.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.IRewrite.Interface">
+      <HintPath>Library\Campus.IRewrite.Interface.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Report">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Campus.Report.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Campus.Windows">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Campus.Windows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
@@ -111,14 +139,38 @@
       <HintPath>Library\FISCA.UDT.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Framework">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="IntelliSchool.DSA.ClientFramework">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\IntelliSchool.DSA.ClientFramework.dll</HintPath>
+    </Reference>
     <Reference Include="K12.Data, Version=2.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\K12.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="K12.Presentation">
+      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\K12.Presentation.dll</HintPath>
+    </Reference>
     <Reference Include="SmartSchool.API.PlugIn, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\SmartSchool.API.PlugIn.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.Customization.Data, Version=1.3.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\SmartSchool.Customization.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.Customization.PlugIn, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\SmartSchool.Customization.PlugIn.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SmartSchool.ErrorReporting, Version=1.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\SmartSchool.ErrorReporting.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -141,11 +193,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckAccountInIschool.cs" />
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckUnitInIschool.cs" />
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\MeetingRoomFieldValidatorFactory.cs" />
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\MeetingRoomRowValidatorFactory.cs" />
+    <Compile Include="Ribbon\匯入\匯入會議室基本資料\ImportMeetingRoomData.cs" />
+    <Compile Include="Ribbon\匯入\匯入會議室基本資料\ImputLog.cs" />
+    <Compile Include="Ribbon\匯入\匯入會議室基本資料\MeetingRoomImportBot.cs" />
     <Compile Include="Ribbon\匯出\ExportMeetingRoomForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Ribbon\匯出\ExportMeetingRoomForm.Designer.cs">
       <DependentUpon>ExportMeetingRoomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbon\報表\StatisticalReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ribbon\報表\StatisticalReportForm.Designer.cs">
+      <DependentUpon>StatisticalReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\申請紀錄管理\ApplicationCancelForm.cs">
       <SubType>Form</SubType>
@@ -239,6 +304,10 @@
   <ItemGroup>
     <Content Include="Library\Aspose.Cells_201402.dll" />
     <Content Include="Library\Aspose.Cells_201402.xml" />
+    <Content Include="Library\Campus.DocumentValidator.dll" />
+    <Content Include="Library\Campus.DocumentValidator.xml" />
+    <Content Include="Library\Campus.Import.dll" />
+    <Content Include="Library\Campus.Import.xml" />
     <Content Include="Library\DevComponents.DotNetBar2.dll" />
     <Content Include="Library\FISCA.Authentication.dll" />
     <Content Include="Library\FISCA.Authentication.pdb" />
@@ -286,11 +355,15 @@
     <Content Include="Library\K12.Data.pdb" />
     <Content Include="Library\K12.Data.xml" />
     <Content Include="Library\SmartSchool.API.PlugIn.dll" />
+    <Content Include="Library\SmartSchool.Customization.Data.dll" />
+    <Content Include="Library\SmartSchool.Customization.PlugIn.dll" />
+    <Content Include="Library\SmartSchool.ErrorReporting.dll" />
     <Content Include="Resources\admissions_ok_64.png" />
     <Content Include="Resources\architecture_zoom_64.png" />
     <Content Include="Resources\barchart_64.png" />
     <Content Include="Resources\brand_write_64.png" />
     <Content Include="Resources\Export.Image.png" />
+    <None Include="Resources\format.xsl" />
     <Content Include="Resources\group_help_64.png" />
     <Content Include="Resources\group_up_64.png" />
     <Content Include="Resources\health_and_leisure_add_64.png" />
@@ -299,6 +372,9 @@
     <Content Include="Resources\layers_64.png" />
     <Content Include="Resources\loading.gif" />
     <Content Include="Resources\marker_fav_64.png" />
+    <Content Include="Resources\MeetingRoomValidate.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Resources\meeting_64.png" />
     <Content Include="Resources\network_lock_64.png" />
     <Content Include="Resources\presentation_a_config_64.png" />
@@ -311,6 +387,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\FISCA.dll.config" />
+    <None Include="Resources\統計會議室報表樣板.xls" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -319,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\匯出\ExportMeetingRoomForm.resx">
       <DependentUpon>ExportMeetingRoomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbon\報表\StatisticalReportForm.resx">
+      <DependentUpon>StatisticalReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationCancelForm.resx">
       <DependentUpon>ApplicationCancelForm.cs</DependentUpon>
@@ -360,8 +440,6 @@
       <DependentUpon>SetSystemAdminForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Ribbon\匯入\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

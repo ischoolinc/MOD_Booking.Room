@@ -42,6 +42,8 @@ namespace Ischool.Booking.Room
             applyStartTbx.Text = applyList[0].ApplyStarDate.ToShortDateString();
             RepeatEndTbx.Text = applyList[0].RepeatEndDate.ToShortDateString();
             applyReasonTbx.Text = applyList[0].ApplyReason;
+            repeatTbx.Text = ("" + applyList[0].IsRepeat) == "true" ? "是" : "否";
+            repeatTypeTbx.Text = ("" + applyList[0].RepeatType) == "null" ? "" : "" + applyList[0].RepeatType;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in applyDetailList)
             {
@@ -99,8 +101,18 @@ WHERE
     uid = {5}
                     ", trueCbx.Checked, DateTime.Parse(reviewDateLb.Text).ToShortDateString(), rejectReasonTbx.Text, Actor.RefTeacherID, teacherR.Name, _applicationID);
 
-                    MsgBox.Show("儲存成功!");
-                    this.Close();
+                    try
+                    {
+                        UpdateHelper up = new UpdateHelper();
+                        up.Execute(sql);
+                        MsgBox.Show("儲存成功!");
+                        this.Close();
+                    }
+                    catch(Exception ex)
+                    {
+                        MsgBox.Show(ex.Message);
+                    }
+                    
                 }
             }
         }

@@ -60,6 +60,8 @@ FROM(
                     appR.ApplyReason = "" + row["apply_reason"];
                     appR.ApplyStartDate = "" + row["apply_start_date"];
                     appR.RepeatEndDate = "" + row["repeat_end_date"];
+                    appR.IsRepeat = bool.Parse("" + row["is_repeat"]);
+                    appR.RepeatType = "" + row["repeat_type"];
                     appR.RefAdminID = "" + row["ref_admin_id"];
                     appR.AdminName = "" + row["admin_name"];
                     appR.ReviewedDate = "" + row["reviewed_date"];
@@ -124,6 +126,8 @@ FROM(
             reviewDateTbx.Text = appR.ReviewedDate;
             isApproveTbx.Text = appR.IsApproved;
             rejectReasonTbx.Text = appR.RejectReason;
+            repeatTbx.Text = ("" + appR.IsRepeat) == "true" ? "是" : "否";
+            repeatTypeTbx.Text = ("" + appR.RepeatType) == "null" ? "" : "" + appR.RepeatType;
             // (特殊場地、審核通過、未取消) ， (一般場地、未取消)  
             if ((appR.IsSpecial && appR.IsApproved == "是" && appR.IsCanceled == "否") || (!appR.IsSpecial && appR.IsCanceled == "否"))
             {
@@ -216,6 +220,14 @@ FROM(
         /// </summary>
         public string ApplyReason { get; set; }
 
+        /// <summary>
+        /// 是否重複
+        /// </summary>
+        public bool IsRepeat { get; set; }
+
+        /// <summary>
+        /// 重複類型
+        /// </summary>
         public string RepeatType { get; set; }
 
         /// <summary>

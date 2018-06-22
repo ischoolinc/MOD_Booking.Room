@@ -86,6 +86,7 @@
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 42);
             this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.Size = new System.Drawing.Size(626, 400);
             this.dataGridViewX1.TabIndex = 1;
@@ -95,33 +96,39 @@
             // 
             this.Column1.HeaderText = "姓名";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "暱稱";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "性別";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Width = 60;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "登入帳號";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             this.Column3.Width = 120;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "科別";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             this.Column6.Text = null;
             this.Column6.Width = 80;
             // 

@@ -33,6 +33,9 @@ namespace Ischool.Booking.Room
                 unitCbx.Items.Add(unit.Name);
                 unitDic.Add(unit.Name, unit.UID);
             }
+            // 沒有所屬單位的場地
+            unitCbx.Items.Add("--未指定--");
+            unitDic.Add("--未指定--","");
 
             if (identity == "系統管理員")
             {
@@ -115,22 +118,28 @@ namespace Ischool.Booking.Room
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             int row = dataGridViewX1.SelectedCells[0].RowIndex;
+            string roomName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
             string roomID = "" + dataGridViewX1.Rows[row].Tag;
 
-            string sql = string.Format("DELETE FROM $ischool.booking.meetingroom WHERE uid = {0}",roomID);
-            UpdateHelper up = new UpdateHelper();
-            try
-            {
-                up.Execute(sql);
-            }
-            catch(Exception ex)
-            {
-                MsgBox.Show(ex.Message);
-                return;
-            }
+            DialogResult result = MsgBox.Show("確定是否刪除"+ roomName + "此場地資料", "警告", MessageBoxButtons.YesNo);
 
-            MsgBox.Show("資料刪除成功!");
-            ReloadDataGridView();
+            if (result == DialogResult.Yes)
+            {
+                string sql = string.Format("DELETE FROM $ischool.booking.meetingroom WHERE uid = {0}", roomID);
+                UpdateHelper up = new UpdateHelper();
+                try
+                {
+                    up.Execute(sql);
+                }
+                catch (Exception ex)
+                {
+                    MsgBox.Show(ex.Message);
+                    return;
+                }
+
+                MsgBox.Show("資料刪除成功!");
+                ReloadDataGridView();
+            }
         }
 
         private void leaveBtn_Click(object sender, EventArgs e)

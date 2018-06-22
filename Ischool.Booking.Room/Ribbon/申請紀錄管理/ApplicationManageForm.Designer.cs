@@ -92,6 +92,7 @@
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 92);
             this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewX1.Size = new System.Drawing.Size(847, 371);
@@ -389,42 +390,48 @@
             this.conditionCbx.Size = new System.Drawing.Size(154, 23);
             this.conditionCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.conditionCbx.TabIndex = 15;
-            this.conditionCbx.Text = "檢視所有未審查紀錄";
+            this.conditionCbx.Text = "檢視所有申請紀錄";
             this.conditionCbx.CheckedChanged += new System.EventHandler(this.conditionCbx_CheckedChanged);
             // 
             // Column3
             // 
             this.Column3.HeaderText = "申請時間";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "場地名稱";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.FillWeight = 80F;
             this.Column2.HeaderText = "申請人";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             this.Column2.Width = 80;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "申請開始日期";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             this.Column5.Width = 110;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "申請結束日期";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             this.Column6.Width = 110;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "審核狀態";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Column4.Text = null;
@@ -433,12 +440,14 @@
             // 
             this.Column7.HeaderText = "審核結果";
             this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // Column8
             // 
-            this.Column8.HeaderText = "申請結果";
+            this.Column8.HeaderText = "申請單狀態";
             this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             // 
             // ReviewForm
             // 

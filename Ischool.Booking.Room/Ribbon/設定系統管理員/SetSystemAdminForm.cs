@@ -51,7 +51,7 @@ FROM
                 datarow.Cells[index++].Value = "" + row["account"];
                 datarow.Cells[index++].Value = ("" + row["is_default"]) == "true" ? "系統預設管理員" : "系統管理員";
                 datarow.Cells[index++].Value = ("" + row["is_default"]) == "true" ? "系統預設" : row["created_name"];
-                datarow.Cells[index++].Value = DateTime.Parse("" + row["created_time"]).ToShortDateString();
+                datarow.Cells[index++].Value = DateTime.Parse("" + row["create_time"]).ToShortDateString();
                 datarow.Tag = "" + row["uid"]; // 系統管理員編號
 
                 dataGridViewX1.Rows.Add(datarow);

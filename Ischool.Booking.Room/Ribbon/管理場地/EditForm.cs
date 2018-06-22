@@ -18,22 +18,54 @@ namespace Ischool.Booking.Room
         string _roomID;
         string _mode;
 
+        Dictionary<string, string> _unitNameDic = new Dictionary<string, string>();
+
+        
+        // 新增傳 unitID ; 修改傳 roomID
         public EditForm(string mode,string ID)
         {
             InitializeComponent();
 
             _mode = mode;
 
+            AccessHelper access = new AccessHelper();
+
+            #region unitCbx
+
+            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
+
+            foreach (UDT.MeetingRoomUnit unit in unitList)
+            {
+                _unitNameDic.Add(unit.Name, unit.UID);
+
+                unitCbx.Items.Add(unit.Name);
+            }
+
+            unitCbx.SelectedIndex = 0;
+
+            #endregion
+
             if (mode == "新增")
             {
                 _unitID = ID;
+                if (ID != "")
+                {
+                    List<UDT.MeetingRoomUnit> _unit = access.Select<UDT.MeetingRoomUnit>("uid = " + ID);
+                    unitTbx.Text = _unit[0].Name;
+                }
+                
+                unitCbx.Visible = false;
             }
             if (mode == "修改")
             {
+                unitTbx.Visible = false;
+
                 _roomID = ID;
 
                 #region Init
-                AccessHelper access = new AccessHelper();
+
+                
+
                 List<UDT.MeetingRoom> roomList = access.Select<UDT.MeetingRoom>("uid = "+ _roomID);
                 List<UDT.MeetingRoomEquipment> equipmentList = access.Select<UDT.MeetingRoomEquipment>("ref_meetingroom_id = "+ _roomID);
 
@@ -77,7 +109,6 @@ namespace Ischool.Booking.Room
                 #endregion
 
             }
-            
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -143,7 +174,7 @@ SELECT
     ,'{5}'::TIMESTAMP AS create_time
     ,'{6}'::TEXT AS picture
     ,'{7}'::TEXT AS created_by
-                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
+                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID == "" ? "null" : _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
 
 
                 List<string> equipmentDataList = new List<string>();
@@ -236,6 +267,9 @@ FROM
             if (_mode == "修改")
             {
                 #region 資料整理
+
+                string unitID = _unitNameDic[unitCbx.Text];
+
                 string roomData = string.Format(@"
 SELECT
     {0}::BIGINT AS uid
@@ -247,7 +281,7 @@ SELECT
     ,'{6}'::TIMESTAMP AS create_time
     ,'{7}'::TEXT AS picture
     ,'{8}'::TEXT AS created_by
-                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
+                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text, Actor.Account);
 
                 List<string> equipmentDataList = new List<string>();
 
@@ -359,7 +393,7 @@ WITH meetingroom_data AS(
         , ref_unit_id = meetingroom_data.ref_unit_id
         , is_special = meetingroom_data.is_special
         , create_time = meetingroom_data.create_time
-        , picture = meetingroom_data.pictrue
+        , picture = meetingroom_data.picture
         , created_by = meetingroom_data.created_by
     FROM
         meetingroom_data

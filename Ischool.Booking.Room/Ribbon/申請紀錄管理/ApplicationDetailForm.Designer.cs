@@ -68,6 +68,10 @@
             this.leaveBtn = new DevComponents.DotNetBar.ButtonX();
             this.labelX15 = new DevComponents.DotNetBar.LabelX();
             this.applyReasonTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX16 = new DevComponents.DotNetBar.LabelX();
+            this.labelX17 = new DevComponents.DotNetBar.LabelX();
+            this.repeatTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.repeatTypeTbx = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.groupPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.groupPanel2.SuspendLayout();
@@ -97,6 +101,7 @@
             this.applicantTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.applicantTbx.Location = new System.Drawing.Point(96, 12);
             this.applicantTbx.Name = "applicantTbx";
+            this.applicantTbx.ReadOnly = true;
             this.applicantTbx.Size = new System.Drawing.Size(100, 25);
             this.applicantTbx.TabIndex = 1;
             // 
@@ -123,6 +128,7 @@
             this.hostNameTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.hostNameTbx.Location = new System.Drawing.Point(294, 11);
             this.hostNameTbx.Name = "hostNameTbx";
+            this.hostNameTbx.ReadOnly = true;
             this.hostNameTbx.Size = new System.Drawing.Size(100, 25);
             this.hostNameTbx.TabIndex = 3;
             // 
@@ -134,7 +140,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(12, 44);
+            this.labelX3.Location = new System.Drawing.Point(12, 45);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(50, 23);
             this.labelX3.TabIndex = 4;
@@ -147,8 +153,9 @@
             // 
             this.roomNameTbx.Border.Class = "TextBoxBorder";
             this.roomNameTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.roomNameTbx.Location = new System.Drawing.Point(96, 43);
+            this.roomNameTbx.Location = new System.Drawing.Point(96, 44);
             this.roomNameTbx.Name = "roomNameTbx";
+            this.roomNameTbx.ReadOnly = true;
             this.roomNameTbx.Size = new System.Drawing.Size(100, 25);
             this.roomNameTbx.TabIndex = 5;
             // 
@@ -160,7 +167,7 @@
             // 
             this.labelX4.BackgroundStyle.Class = "";
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(219, 43);
+            this.labelX4.Location = new System.Drawing.Point(219, 44);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(63, 23);
             this.labelX4.TabIndex = 6;
@@ -174,7 +181,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(425, 44);
+            this.labelX5.Location = new System.Drawing.Point(425, 45);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(28, 23);
             this.labelX5.TabIndex = 7;
@@ -187,8 +194,9 @@
             // 
             this.applyStartTbx.Border.Class = "TextBoxBorder";
             this.applyStartTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.applyStartTbx.Location = new System.Drawing.Point(294, 42);
+            this.applyStartTbx.Location = new System.Drawing.Point(294, 43);
             this.applyStartTbx.Name = "applyStartTbx";
+            this.applyStartTbx.ReadOnly = true;
             this.applyStartTbx.Size = new System.Drawing.Size(125, 25);
             this.applyStartTbx.TabIndex = 8;
             // 
@@ -199,8 +207,9 @@
             // 
             this.repeatEndTbx.Border.Class = "TextBoxBorder";
             this.repeatEndTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.repeatEndTbx.Location = new System.Drawing.Point(452, 43);
+            this.repeatEndTbx.Location = new System.Drawing.Point(452, 44);
             this.repeatEndTbx.Name = "repeatEndTbx";
+            this.repeatEndTbx.ReadOnly = true;
             this.repeatEndTbx.Size = new System.Drawing.Size(125, 25);
             this.repeatEndTbx.TabIndex = 9;
             // 
@@ -210,7 +219,7 @@
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.groupPanel1.Controls.Add(this.dataGridViewX1);
-            this.groupPanel1.Location = new System.Drawing.Point(12, 451);
+            this.groupPanel1.Location = new System.Drawing.Point(12, 485);
             this.groupPanel1.Name = "groupPanel1";
             this.groupPanel1.Size = new System.Drawing.Size(565, 196);
             // 
@@ -266,6 +275,7 @@
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.Size = new System.Drawing.Size(559, 169);
             this.dataGridViewX1.TabIndex = 0;
@@ -274,16 +284,19 @@
             // 
             this.Column1.HeaderText = "日期";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "開始時間";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "結束時間";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // groupPanel2
             // 
@@ -298,7 +311,7 @@
             this.groupPanel2.Controls.Add(this.labelX7);
             this.groupPanel2.Controls.Add(this.reviewDateTbx);
             this.groupPanel2.Controls.Add(this.labelX6);
-            this.groupPanel2.Location = new System.Drawing.Point(15, 142);
+            this.groupPanel2.Location = new System.Drawing.Point(15, 176);
             this.groupPanel2.Name = "groupPanel2";
             this.groupPanel2.Size = new System.Drawing.Size(562, 130);
             // 
@@ -344,6 +357,7 @@
             this.rejectReasonTbx.Location = new System.Drawing.Point(78, 39);
             this.rejectReasonTbx.Multiline = true;
             this.rejectReasonTbx.Name = "rejectReasonTbx";
+            this.rejectReasonTbx.ReadOnly = true;
             this.rejectReasonTbx.Size = new System.Drawing.Size(475, 61);
             this.rejectReasonTbx.TabIndex = 7;
             // 
@@ -369,6 +383,7 @@
             this.isApproveTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.isApproveTbx.Location = new System.Drawing.Point(482, 7);
             this.isApproveTbx.Name = "isApproveTbx";
+            this.isApproveTbx.ReadOnly = true;
             this.isApproveTbx.Size = new System.Drawing.Size(71, 25);
             this.isApproveTbx.TabIndex = 5;
             // 
@@ -394,6 +409,7 @@
             this.adminTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.adminTbx.Location = new System.Drawing.Point(78, 7);
             this.adminTbx.Name = "adminTbx";
+            this.adminTbx.ReadOnly = true;
             this.adminTbx.Size = new System.Drawing.Size(100, 25);
             this.adminTbx.TabIndex = 3;
             // 
@@ -419,6 +435,7 @@
             this.reviewDateTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.reviewDateTbx.Location = new System.Drawing.Point(276, 7);
             this.reviewDateTbx.Name = "reviewDateTbx";
+            this.reviewDateTbx.ReadOnly = true;
             this.reviewDateTbx.Size = new System.Drawing.Size(100, 25);
             this.reviewDateTbx.TabIndex = 1;
             // 
@@ -450,7 +467,7 @@
             this.groupPanel3.Controls.Add(this.labelX11);
             this.groupPanel3.Controls.Add(this.resultTbx);
             this.groupPanel3.Controls.Add(this.labelX10);
-            this.groupPanel3.Location = new System.Drawing.Point(15, 278);
+            this.groupPanel3.Location = new System.Drawing.Point(15, 312);
             this.groupPanel3.Name = "groupPanel3";
             this.groupPanel3.Size = new System.Drawing.Size(565, 167);
             // 
@@ -496,6 +513,7 @@
             this.cancelReasonTbx.Location = new System.Drawing.Point(81, 70);
             this.cancelReasonTbx.Multiline = true;
             this.cancelReasonTbx.Name = "cancelReasonTbx";
+            this.cancelReasonTbx.ReadOnly = true;
             this.cancelReasonTbx.Size = new System.Drawing.Size(475, 67);
             this.cancelReasonTbx.TabIndex = 9;
             // 
@@ -521,6 +539,7 @@
             this.cancelTimeTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cancelTimeTbx.Location = new System.Drawing.Point(279, 37);
             this.cancelTimeTbx.Name = "cancelTimeTbx";
+            this.cancelTimeTbx.ReadOnly = true;
             this.cancelTimeTbx.Size = new System.Drawing.Size(100, 25);
             this.cancelTimeTbx.TabIndex = 7;
             // 
@@ -559,6 +578,7 @@
             this.cancelByTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.cancelByTbx.Location = new System.Drawing.Point(81, 37);
             this.cancelByTbx.Name = "cancelByTbx";
+            this.cancelByTbx.ReadOnly = true;
             this.cancelByTbx.Size = new System.Drawing.Size(100, 25);
             this.cancelByTbx.TabIndex = 4;
             // 
@@ -571,6 +591,7 @@
             this.isCancelTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.isCancelTbx.Location = new System.Drawing.Point(279, 3);
             this.isCancelTbx.Name = "isCancelTbx";
+            this.isCancelTbx.ReadOnly = true;
             this.isCancelTbx.Size = new System.Drawing.Size(52, 25);
             this.isCancelTbx.TabIndex = 3;
             // 
@@ -596,6 +617,7 @@
             this.resultTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.resultTbx.Location = new System.Drawing.Point(81, 3);
             this.resultTbx.Name = "resultTbx";
+            this.resultTbx.ReadOnly = true;
             this.resultTbx.Size = new System.Drawing.Size(100, 25);
             this.resultTbx.TabIndex = 1;
             // 
@@ -631,7 +653,7 @@
             this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(502, 653);
+            this.leaveBtn.Location = new System.Drawing.Point(502, 687);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -647,7 +669,7 @@
             // 
             this.labelX15.BackgroundStyle.Class = "";
             this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX15.Location = new System.Drawing.Point(12, 73);
+            this.labelX15.Location = new System.Drawing.Point(12, 107);
             this.labelX15.Name = "labelX15";
             this.labelX15.Size = new System.Drawing.Size(74, 23);
             this.labelX15.TabIndex = 15;
@@ -660,17 +682,76 @@
             // 
             this.applyReasonTbx.Border.Class = "TextBoxBorder";
             this.applyReasonTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.applyReasonTbx.Location = new System.Drawing.Point(96, 75);
+            this.applyReasonTbx.Location = new System.Drawing.Point(96, 109);
             this.applyReasonTbx.Multiline = true;
             this.applyReasonTbx.Name = "applyReasonTbx";
+            this.applyReasonTbx.ReadOnly = true;
             this.applyReasonTbx.Size = new System.Drawing.Size(481, 61);
             this.applyReasonTbx.TabIndex = 16;
+            // 
+            // labelX16
+            // 
+            this.labelX16.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX16.BackgroundStyle.Class = "";
+            this.labelX16.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX16.Location = new System.Drawing.Point(11, 78);
+            this.labelX16.Name = "labelX16";
+            this.labelX16.Size = new System.Drawing.Size(75, 23);
+            this.labelX16.TabIndex = 17;
+            this.labelX16.Text = "是否重複";
+            // 
+            // labelX17
+            // 
+            this.labelX17.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX17.BackgroundStyle.Class = "";
+            this.labelX17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX17.Location = new System.Drawing.Point(219, 78);
+            this.labelX17.Name = "labelX17";
+            this.labelX17.Size = new System.Drawing.Size(75, 23);
+            this.labelX17.TabIndex = 18;
+            this.labelX17.Text = "重複類型";
+            // 
+            // repeatTbx
+            // 
+            // 
+            // 
+            // 
+            this.repeatTbx.Border.Class = "TextBoxBorder";
+            this.repeatTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.repeatTbx.Location = new System.Drawing.Point(96, 77);
+            this.repeatTbx.Name = "repeatTbx";
+            this.repeatTbx.ReadOnly = true;
+            this.repeatTbx.Size = new System.Drawing.Size(100, 25);
+            this.repeatTbx.TabIndex = 19;
+            // 
+            // repeatTypeTbx
+            // 
+            // 
+            // 
+            // 
+            this.repeatTypeTbx.Border.Class = "TextBoxBorder";
+            this.repeatTypeTbx.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.repeatTypeTbx.Location = new System.Drawing.Point(294, 77);
+            this.repeatTypeTbx.Name = "repeatTypeTbx";
+            this.repeatTypeTbx.ReadOnly = true;
+            this.repeatTypeTbx.Size = new System.Drawing.Size(100, 25);
+            this.repeatTypeTbx.TabIndex = 20;
             // 
             // ApplicationDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(589, 688);
+            this.ClientSize = new System.Drawing.Size(589, 722);
+            this.Controls.Add(this.repeatTypeTbx);
+            this.Controls.Add(this.repeatTbx);
+            this.Controls.Add(this.labelX17);
+            this.Controls.Add(this.labelX16);
             this.Controls.Add(this.applyReasonTbx);
             this.Controls.Add(this.labelX15);
             this.Controls.Add(this.leaveBtn);
@@ -740,5 +821,9 @@
         private DevComponents.DotNetBar.ButtonX leaveBtn;
         private DevComponents.DotNetBar.LabelX labelX15;
         private DevComponents.DotNetBar.Controls.TextBoxX applyReasonTbx;
+        private DevComponents.DotNetBar.LabelX labelX16;
+        private DevComponents.DotNetBar.LabelX labelX17;
+        private DevComponents.DotNetBar.Controls.TextBoxX repeatTbx;
+        private DevComponents.DotNetBar.Controls.TextBoxX repeatTypeTbx;
     }
 }

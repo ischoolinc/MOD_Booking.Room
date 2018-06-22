@@ -13,6 +13,7 @@ using FISCA.Data;
 using K12.Data;
 using System.Windows.Forms;
 using FISCA.Presentation.Controls;
+using Campus.DocumentValidator;
 
 namespace Ischool.Booking.Room
 {
@@ -53,6 +54,11 @@ namespace Ischool.Booking.Room
             }
 
             #endregion
+
+
+            //驗證規則
+            FactoryProvider.FieldFactory.Add(new MeetingRoomFieldValidatorFactory());
+            FactoryProvider.RowFactory.Add(new MeetingRoomRowValidatorFactory());
 
             // 取得登入帳號身分
             Actor actor = new Actor();
@@ -178,7 +184,13 @@ namespace Ischool.Booking.Room
             #region 匯入場地清單
 
             dataItem["匯入"]["場地清單"].Enable = true;
-            dataItem["匯入"]["場地清單"].Click += delegate { };
+            dataItem["匯入"]["場地清單"].Click += delegate 
+            {
+                // ImportMeetingRoomForm form = new ImportMeetingRoomForm();
+                // form.ShowDialog();
+                // Campus Plugin
+                new ImportMeetingRoomData().Execute();
+            };
 
             #endregion
 
@@ -188,7 +200,11 @@ namespace Ischool.Booking.Room
             #region 統計場地使用狀況
 
             dataItem["報表"]["統計場地使用狀況"].Enable = true;
-            dataItem["報表"]["統計場地使用狀況"].Click += delegate { };
+            dataItem["報表"]["統計場地使用狀況"].Click += delegate 
+            {
+                StatisticalReportForm form = new StatisticalReportForm();
+                form.ShowDialog();
+            };
 
             #endregion
 

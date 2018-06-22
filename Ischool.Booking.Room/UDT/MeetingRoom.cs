@@ -13,6 +13,14 @@ namespace Ischool.Booking.Room.UDT
     class MeetingRoom : ActiveRecord
     {
         /// <summary>
+        /// 淺層複製CLUBRecord
+        /// </summary>
+        public MeetingRoom CopyExtension()
+        {
+            return (MeetingRoom)this.MemberwiseClone();
+        }
+
+        /// <summary>
         /// 照片URL
         /// </summary>
         [Field(Field = "picture", Indexed = false)]
