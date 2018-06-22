@@ -74,7 +74,7 @@ namespace Ischool.Booking.Room
             foreach (IRowStream Row in Rows)
             {
                 //a. 確認場地是新增或修改
-                string building = Row.GetValue("所屬大樓");
+                string building = Row.GetValue("所屬大樓名稱");
                 string roomName = Row.GetValue("會議室名稱");
                 string equipName = Row.GetValue("設備名稱");
                 string keyRoom = string.Format("{0}_{1}", roomName, building); // 會議室key
@@ -214,7 +214,7 @@ DELETE
 FROM
     $ischool.booking.meetingroom_equipment
 WHERE
-    ref_equipment_id IN( {0} )
+    ref_meetingroom_id IN( {0} )
                 ", ids);
             UpdateHelper up = new UpdateHelper();
             up.Execute(sql);

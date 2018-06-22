@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using FISCA.Data;
 using K12.Data;
+using FISCA.UDT;
 
 namespace Ischool.Booking.Room
 {
@@ -22,6 +23,10 @@ namespace Ischool.Booking.Room
         /// 管理單位編號
         /// </summary>
         string _unitID;
+        /// <summary>
+        /// 系統已存在管理單位名稱
+        /// </summary>
+        List<string> _unitNameList = new List<string>();
 
         Dictionary<string, DataRow> _teacherDic = new Dictionary<string, DataRow>();
 
@@ -31,6 +36,16 @@ namespace Ischool.Booking.Room
 
             _mode = mode;
             _unitID = unitID;
+
+            #region 讀取管理單位資料
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
+            foreach (UDT.MeetingRoomUnit unit in unitList)
+            {
+                _unitNameList.Add(unit.Name);
+            }
+
+            #endregion
 
             QueryHelper qh = new QueryHelper();
 
@@ -147,6 +162,12 @@ WHERE
             else if (unitBossTbx.Text == "")
             {
                 errorLb2.Visible = true;
+                return;
+            }
+            else if (_unitNameList.Contains(unitNameTbx.Text))
+            {
+                errorLb1.Text = "此單位名稱已存在系統!";
+                errorLb1.Visible = true;
                 return;
             }
             #endregion
@@ -334,13 +355,23 @@ FROM
         // 資料驗證
         private void unitNameTbx_TextChanged(object sender, EventArgs e)
         {
-            if (unitNameTbx.Text == "")
+            string unitName = unitNameTbx.Text.Trim();
+            if (_unitNameList.Contains(unitName))
             {
+                errorLb1.Text = "此單位名稱已存在!";
                 errorLb1.Visible = true;
+                saveBtn.Enabled = false;
+            }
+            else if (unitName == "")
+            {
+                errorLb1.Text = "請輸入單位名稱!";
+                errorLb1.Visible = true;
+                saveBtn.Enabled = false;
             }
             else
             {
                 errorLb1.Visible = false;
+                saveBtn.Enabled = true;
             }
         }
 

@@ -100,17 +100,31 @@ FROM
             string unitName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
             string unitID = "" + dataGridViewX1.Rows[row].Tag;
 
-            DialogResult result = MsgBox.Show("確定是否將' "+ unitName + " '管理單位刪除?","提醒",MessageBoxButtons.YesNo);
+            DialogResult result = MsgBox.Show("確定是否將' "+ unitName + " '管理單位刪除? \n 該單位管理員與主管將同步刪除，\n 該單位管理場地將更新為無歸屬單位","提醒",MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
                 string sql = string.Format(@"
-DELETE
-FROM
-    $ischool.booking.meetingroom_unit
+WITH delete_unit AS(
+    DELETE
+    FROM
+        $ischool.booking.meetingroom_unit
+    WHERE
+        uid = {0}
+) ,delete_unit_admin AS(
+    DELETE 
+    FROM
+        $ischool.booking.meetingroom_unit_admin
+    WHERE
+        ref_unit_id = {0}
+) 
+UPDATE
+    $ischool.booking.meetingroom
+SET
+    ref_unit_id = null
 WHERE
-    uid = {0}
-                ",unitID);
+    ref_unit_id = {0}
+                ", unitID);
 
                 UpdateHelper up = new UpdateHelper();
                 try
