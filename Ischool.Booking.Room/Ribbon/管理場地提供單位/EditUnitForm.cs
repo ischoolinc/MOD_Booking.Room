@@ -232,12 +232,15 @@ WHERE
 
         private void dataGridViewX1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int col = e.ColumnIndex;
-            int row = e.RowIndex;
-            if (col == 5)
+            if (e.RowIndex > -1)
             {
-                unitBossTbx.Text = "" + dataGridViewX1.Rows[row].Cells[0].Value;
-                unitBossTbx.Tag = dataGridViewX1.Rows[row].Tag;  // 教師編號
+                int col = e.ColumnIndex;
+                int row = e.RowIndex;
+                if (col == 5)
+                {
+                    unitBossTbx.Text = "" + dataGridViewX1.Rows[row].Cells[0].Value;
+                    unitBossTbx.Tag = dataGridViewX1.Rows[row].Tag;  // 教師編號
+                }
             }
         }
 

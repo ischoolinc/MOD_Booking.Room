@@ -102,42 +102,46 @@ WHERE
 
         private void dataGridViewX1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int col = e.ColumnIndex;
-            if (col == 5)
+            if (e.RowIndex > -1)
             {
-                string name = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
-                string text = string.Format("確認是否將' {0} '設定為系統管理員?", name);
-
-                DialogResult result = MsgBox.Show(text, "確認", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
+                int col = e.ColumnIndex;
+                if (col == 5)
                 {
-                    string teacherAccount = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
-                    string teacherName = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
+                    string name = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
+                    string text = string.Format("確認是否將' {0} '設定為系統管理員?", name);
 
-                    if (teacherAccount == "")
+                    DialogResult result = MsgBox.Show(text, "確認", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
                     {
-                        MsgBox.Show(string.Format("{0}老師沒有登入帳號，\n無法設定為單位管理員! ", teacherName));
-                        return;
-                    }
+                        string teacherAccount = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
+                        string teacherName = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
 
-                    string sql = GetSQL(dataGridViewX1.Rows[e.RowIndex]);
+                        if (teacherAccount == "")
+                        {
+                            MsgBox.Show(string.Format("{0}老師沒有登入帳號，\n無法設定為單位管理員! ", teacherName));
+                            return;
+                        }
 
-                    UpdateHelper up = new UpdateHelper();
-                    try
-                    {
-                        up.Execute(sql);
-                        MsgBox.Show("儲存成功!");
+                        string sql = GetSQL(dataGridViewX1.Rows[e.RowIndex]);
 
-                        this.Close();
+                        UpdateHelper up = new UpdateHelper();
+                        try
+                        {
+                            up.Execute(sql);
+                            MsgBox.Show("儲存成功!");
+
+                            this.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MsgBox.Show(ex.Message);
+                        }
+
                     }
-                    catch(Exception ex)
-                    {
-                        MsgBox.Show(ex.Message);
-                    }
-                    
                 }
             }
+            
         }
 
         public string GetSQL(DataGridViewRow dgvRow)
