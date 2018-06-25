@@ -14,15 +14,22 @@ using K12.Data;
 using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using Campus.DocumentValidator;
+using Customization.Tagging;
+using System.Drawing;
 
 namespace Ischool.Booking.Room
 {
     public class Program
     {
         /// <summary>
-        /// 場地預約模組專用角色ID
+        /// 會議室預約模組專用角色ID
         /// </summary>
         static public string _roleID;
+        
+        /// <summary>
+        /// 會議室預約管理者專用角色ID
+        /// </summary>
+        static public string _roleAdminID;
 
         [MainMethod()]
         static public void Main()
@@ -60,17 +67,8 @@ namespace Ischool.Booking.Room
 
             #endregion
 
-            // 在指定系統管理員、單位主管、單位管理員時都會應到這個角色
-            #region 建立場地預約專用腳色
-
-            bool _checkrole = CheckRole();
-            
-            if (!_checkrole) 
-            {
-                string roleName = "場地預約模組專用";
-                string description = "";
-                #region permission
-                string permission = @"
+            #region permission
+            string permission = @"
 <Permissions>
 <Feature Code=""ischool.System.UDQ.CreateQuery"" Permission=""None""/>
 <Feature Code=""System0060"" Permission=""None""/><Feature Code=""System0050"" Permission=""None""/>
@@ -282,17 +280,48 @@ namespace Ischool.Booking.Room
 <Feature Code=""ischool.DiagnosticsMode"" Permission=""None""/>
 <Feature Code=""ischool.AdvancedToolSet"" Permission=""None""/>
 </Permissions>";
-                #endregion
+            #endregion
 
-                string sqlInsert = string.Format(@"
+            // Init 系統管理員專用角色
+            #region 建立會議室預約系統管理員專用角色
+            {
+                string roleName = "會議室預約管理者";
+                bool _checkAdminrole = CheckRole(roleName);
+
+                if (!_checkAdminrole)
+                {
+                    string description = "";
+                    string sqlInsert = string.Format(@"
 INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}' )
-                    ",roleName,description,permission);
+                    ", roleName, description, permission);
 
-                UpdateHelper up = new UpdateHelper();
-                up.Execute(sqlInsert);
+                    UpdateHelper up = new UpdateHelper();
+                    up.Execute(sqlInsert);
 
+                }
             }
             
+            #endregion
+
+            // Init 單位主管、單位管理員時都會應到這個角色
+            #region 建立會議室預約專用腳色
+            {
+                string roleName = "會議室預約模組專用";
+                bool _checkrole = CheckRole(roleName);
+
+                if (!_checkrole)
+                {
+                    string description = "";
+                    string sqlInsert = string.Format(@"
+INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}' )
+                    ", roleName, description, permission);
+
+                    UpdateHelper up = new UpdateHelper();
+                    up.Execute(sqlInsert);
+
+                }
+            }
+
             #endregion
 
             //驗證規則
@@ -337,21 +366,22 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             settingItem["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
             settingItem["設定"].Image = Properties.Resources.sandglass_unlock_64;
 
+            // 此功能廢除，將由標籤設計取代
             #region 設定系統管理員
 
-            settingItem["設定"]["系統管理員"].Enable = Permissions.設定系統管理員權限;
-            settingItem["設定"]["系統管理員"].Click += delegate
-            {
-                if (identity == "系統管理員")
-                {
-                    SetSystemAdminForm form = new SetSystemAdminForm();
-                    form.ShowDialog();
-                }
-                else
-                {
-                    MsgBox.Show("此帳號沒有設定系統管理員權限!");
-                }
-            };
+            //settingItem["設定"]["系統管理員"].Enable = Permissions.設定系統管理員權限;
+            //settingItem["設定"]["系統管理員"].Click += delegate
+            //{
+            //    if (identity == "系統管理員")
+            //    {
+            //        SetSystemAdminForm form = new SetSystemAdminForm();
+            //        form.ShowDialog();
+            //    }
+            //    else
+            //    {
+            //        MsgBox.Show("此帳號沒有設定系統管理員權限!");
+            //    }
+            //};
 
             #endregion
 
@@ -411,8 +441,15 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             dataItem["匯出"]["場地清單"].Enable = true;
             dataItem["匯出"]["場地清單"].Click += delegate
             {
-                ExportMeetingRoomForm form = new ExportMeetingRoomForm();
-                form.ShowDialog();
+                if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
+                {
+                    ExportMeetingRoomForm form = new ExportMeetingRoomForm();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MsgBox.Show("此帳號沒有使用權限!");
+                }
             };
 
             #endregion
@@ -425,7 +462,14 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             dataItem["匯入"]["場地清單"].Enable = true;
             dataItem["匯入"]["場地清單"].Click += delegate 
             {
-                new ImportMeetingRoomData().Execute();
+                if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
+                {
+                    new ImportMeetingRoomData().Execute();
+                }
+                else
+                {
+                    MsgBox.Show("此帳號沒有使用權限!");
+                }
             };
 
             #endregion
@@ -438,8 +482,16 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             dataItem["報表"]["統計場地使用狀況"].Enable = true;
             dataItem["報表"]["統計場地使用狀況"].Click += delegate 
             {
-                StatisticalReportForm form = new StatisticalReportForm();
-                form.ShowDialog();
+                if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
+                {
+                    StatisticalReportForm form = new StatisticalReportForm();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    MsgBox.Show("此帳號沒有使用權限!");
+                }
+                
             };
 
             #endregion
@@ -480,24 +532,36 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
         }
 
         /// <summary>
-        /// 檢查系統中是否存在專用 場地預約模組專用腳色
+        /// 檢查系統中是否存在專用 會議室預約模組專用腳色
         /// </summary>
         /// <returns></returns>
-        static public bool CheckRole()
+        static public bool CheckRole(string roleName)
         {
-            string sql = "SELECT * FROM _role WHERE role_name = '場地預約模組專用' ";
+            string sql = string.Format("SELECT * FROM _role WHERE role_name = '{0}' ", roleName);
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
             int n = 0;
             bool b = true;
-            foreach (DataRow row in dt.Rows)
+            if (roleName == "會議室預約管理者")
             {
-                n++;
-                _roleID = "" + row["id"];
+                foreach (DataRow row in dt.Rows)
+                {
+                    n++;
+                    _roleAdminID = "" + row["id"];
+                }
             }
+            else if (roleName == "會議室預約模組專用")
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    n++;
+                    _roleID = "" + row["id"];
+                }
+            }
+            
             if (n > 1) // 角色重複
             {
-                MsgBox.Show("場地預約模組專用角色重複! \n  請先確認角色權限管理是否有重複角色!");
+                MsgBox.Show("會議室預約模組專用角色重複! \n  請先確認角色權限管理是否有重複角色!");
 
             }
             else if (n == 1) // 角色存在

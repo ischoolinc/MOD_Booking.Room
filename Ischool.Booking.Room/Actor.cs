@@ -60,14 +60,46 @@ namespace Ischool.Booking.Room
         public Actor()
         {
             AccessHelper access = new AccessHelper();
-            List<UDT.MeetingRoomSystemAdmin> systemAdminList = access.Select<UDT.MeetingRoomSystemAdmin>("account = '"+ Account +"'");
+            //List<UDT.MeetingRoomSystemAdmin> systemAdminList = access.Select<UDT.MeetingRoomSystemAdmin>("account = '"+ Account +"'");
             List<UDT.MeetingRoomUnitAdmin> unitAdminList = access.Select<UDT.MeetingRoomUnitAdmin>("account = '"+ Account + "'");
+            Dictionary<string, string> systemAdminDic = new Dictionary<string, string>();
 
-            if (systemAdminList.Count > 0)
+            #region 取得會議室預約管理者帳號
+
+            QueryHelper qh = new QueryHelper();
+            string sql = string.Format(@"
+SELECT 
+    teacher.id
+    , _login.login_name
+FROM
+    _lr_belong
+    LEFT OUTER JOIN _login
+        ON _lr_belong._login_id = _login.id
+    LEFT OUTER JOIN teacher
+        ON _login.login_name = teacher.st_login_name
+WHERE
+    _lr_belong._role_id = {0}
+                ", Program._roleAdminID);
+            DataTable dt = qh.Select(sql);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                systemAdminDic.Add("" + row["login_name"],"" + row["id"]);
+            }
+
+            #endregion
+
+            if (systemAdminDic.ContainsKey(Account))
             {
                 Identity = "系統管理員";
-                RefTeacherID = systemAdminList[0].RefTeacherID;
+                RefTeacherID = int.Parse(systemAdminDic[Account]);
             }
+
+            //if (systemAdminList.Count > 0)
+            //{
+            //    Identity = "系統管理員";
+            //    RefTeacherID = systemAdminList[0].RefTeacherID;
+            //}
 
             else if (unitAdminList.Count > 0 && unitAdminList[0].IsBoss == false)
             {
