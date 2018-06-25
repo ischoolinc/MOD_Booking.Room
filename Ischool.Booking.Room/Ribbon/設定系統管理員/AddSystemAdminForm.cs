@@ -113,29 +113,16 @@ WHERE
 
                 if (result == DialogResult.Yes)
                 {
-                    string account = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
-                    string teacherID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
-                    string time = DateTime.Now.ToShortDateString();
-                    string actor = Actor.Account;
+                    string teacherAccount = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
+                    string teacherName = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
 
-                    string sql = string.Format(@"
-INSERT INTO 
-    $ischool.booking.meetingroom_system_admin( 
-        account
-        , ref_teacher_id
-        , is_default
-        , create_time
-        , created_by
-    )
-    VALUES(
-        '{0}'
-        , {1}
-        , 'false'
-        , '{2}'
-        , '{3}'
-    )
-                        ", account, teacherID, time, actor);
+                    if (teacherAccount == "")
+                    {
+                        MsgBox.Show(string.Format("{0}老師沒有登入帳號，\n無法設定為系統管理員! ", teacherName));
+                        return;
+                    }
 
+                    string sql = GetSql(dataGridViewX1.Rows[e.RowIndex]);
                     UpdateHelper up = new UpdateHelper();
 
                     try
@@ -152,6 +139,95 @@ INSERT INTO
                     
                 }
             }
+        }
+
+        public string GetSql(DataGridViewRow dgvRow)
+        {
+            string teacherAccount = "" + dgvRow.Cells[3].Value;
+            string teacherName = "" + dgvRow.Cells[0].Value;
+            string teacherID = "" + dgvRow.Tag;
+            string time = DateTime.Now.ToShortDateString();
+            string actor = Actor.Account;
+            string loginID = Actor.GetLoginIDByAccount(teacherAccount); // 透過使用者帳號取得loginID ，如果沒有會回傳空字串
+
+            string sql = "";
+            if (loginID == "")
+            {
+                // 新增系統管理員 、新增_login、新增關聯_lr_belong
+                sql = string.Format(@"
+WITH insert_system_admin AS(
+    INSERT INTO 
+        $ischool.booking.meetingroom_system_admin( 
+            account
+            , ref_teacher_id
+            , is_default
+            , create_time
+            , created_by
+        )
+        VALUES(
+            '{0}'
+            , {1}
+            , 'false'
+            , '{2}'
+            , '{3}'
+        )
+) ,insert_login AS(
+    INSERT INTO _login(
+        login_name
+        , password
+        , sys_admin
+        , account_type
+    )
+    VALUES(
+        '{0}'
+        , '1234'
+        , '0'
+        , 'greening'
+    )
+    RETURNING _login.id
+)
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    id 
+    , {4}
+FROM 
+    insert_login
+                        ", teacherAccount, teacherID, time, actor, Program._roleID);
+            }
+            else
+            {
+                // 新增系統管理員、新增關聯_lr_belong
+                sql = string.Format(@"
+WITH insert_system_admin AS(
+    INSERT INTO 
+        $ischool.booking.meetingroom_system_admin( 
+            account
+            , ref_teacher_id
+            , is_default
+            , create_time
+            , created_by
+        )
+        VALUES(
+            '{0}'
+            , {1}
+            , 'false'
+            , '{2}'
+            , '{3}'
+        )
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    {4} 
+    , {5}
+                        ", teacherAccount, teacherID, time, actor, loginID, Program._roleID);
+            }
+            return sql;
         }
     }
 }

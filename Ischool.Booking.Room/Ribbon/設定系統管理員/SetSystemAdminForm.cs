@@ -79,6 +79,8 @@ FROM
             string adminID = "" + dataGridViewX1.Rows[row].Tag;
             string identity = "" + dataGridViewX1.Rows[row].Cells[2].Value;
             string name = "" + dataGridViewX1.Rows[row].Cells[0].Value;
+            string account = "" + dataGridViewX1.Rows[row].Cells[1].Value;
+            string loginID = Actor.GetLoginIDByAccount(account);
 
             if (identity == "系統預設管理員")
             {
@@ -88,13 +90,21 @@ FROM
             DialogResult result = MsgBox.Show("確認是否要將' "+name+" '系統管理員身分刪除?", "警告", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
+                // 刪除system_admin 、  刪除_lr_belong
                 string sql = string.Format(@"
+WITH delete_system_admin AS(
+    DELETE
+    FROM
+        $ischool.booking.meetingroom_system_admin
+    WHERE
+        uid = {0}
+)
 DELETE
 FROM
-    $ischool.booking.meetingroom_system_admin
+    _lr_belong
 WHERE
-    uid = {0}
-                    ",adminID);
+    _login_id = {1}
+                    ", adminID, loginID);
 
                 UpdateHelper up = new UpdateHelper();
 

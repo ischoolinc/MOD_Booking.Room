@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using FISCA.Presentation.Controls;
 using FISCA.Data;
 using K12.Data;
+using FISCA.UDT;
 
 namespace Ischool.Booking.Room
 {
@@ -31,6 +32,7 @@ SELECT
     unit.*
     , unit_admin.uid AS ref_admin_id
     , unit_admin.is_boss
+    , unit_admin.account 
     , teacher.teacher_name AS boss_name
     , teacher2.teacher_name AS created_name
     , system_admin.is_default
@@ -59,7 +61,8 @@ FROM
                 int index = 0;
 
                 datarow.Cells[index++].Value = "" + row["name"];
-                datarow.Cells[index].Tag = "" + row["ref_admin_id"]; // 單位主管編號
+                //datarow.Cells[index].Tag = "" + row["ref_admin_id"]; // 單位主管編號
+                datarow.Cells[index].Tag = "" + row["account"]; // 單位主管登入帳號
                 datarow.Cells[index++].Value = "" + row["boss_name"];
                 datarow.Cells[index++].Value = "" + row["created_name"];
                 datarow.Cells[index++].Value = ("" + row["is_default"]) == "true" ? "系統預設管理員" : "系統管理員";
@@ -99,9 +102,21 @@ FROM
             int row = dataGridViewX1.SelectedCells[0].RowIndex;
             string unitName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
             string unitID = "" + dataGridViewX1.Rows[row].Tag;
+            //string account = "" + dataGridViewX1.Rows[row].Cells[1].Tag;
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnitAdmin> unitAdminList = access.Select<UDT.MeetingRoomUnitAdmin>("ref_unit_id = " + unitID);
+            List<string> loginIDList = new List<string>();
+            // 取得該單位所有管理員登入ID
+            foreach (UDT.MeetingRoomUnitAdmin admin in unitAdminList)
+            {
+                string loginID = Actor.GetLoginIDByAccount(admin.Account);
+                loginIDList.Add(loginID);
+            }
+
+            string loginIDs = string.Join(" , ", loginIDList);
 
             DialogResult result = MsgBox.Show("確定是否將' "+ unitName + " '管理單位刪除? \n 該單位管理員與主管將同步刪除，\n 該單位管理場地將更新為無歸屬單位","提醒",MessageBoxButtons.YesNo);
-
+            // 刪除unit_admin 、刪除unit、刪除lr_belong
             if (result == DialogResult.Yes)
             {
                 string sql = string.Format(@"
@@ -117,14 +132,20 @@ WITH delete_unit AS(
         $ischool.booking.meetingroom_unit_admin
     WHERE
         ref_unit_id = {0}
-) 
+) ,delete_lr_belong AS(
+    DELETE
+    FROM
+        _lr_belong
+    WHERE
+        _login_id = {1}
+)
 UPDATE
     $ischool.booking.meetingroom
 SET
     ref_unit_id = null
 WHERE
     ref_unit_id = {0}
-                ", unitID);
+                ", unitID, loginIDs);
 
                 UpdateHelper up = new UpdateHelper();
                 try

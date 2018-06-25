@@ -32,6 +32,29 @@ namespace Ischool.Booking.Room
         public static int RefTeacherID { get; set; }
 
         /// <summary>
+        /// 透過使用者登入帳號取得_loginID
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLoginIDByAccount(string targetAccount)
+        {
+            string loginID;
+            string sql = string.Format("SELECT * FROM _login WHERE login_name = '{0}'", targetAccount);
+            QueryHelper qh = new QueryHelper();
+            DataTable dt = qh.Select(sql);
+
+            if (dt.Rows.Count > 0)
+            {
+                loginID = "" + dt.Rows[0]["id"];
+            }
+            else
+            {
+                loginID = "";
+            }
+
+            return loginID;
+        }
+
+        /// <summary>
         /// 確認身分
         /// </summary>
         public Actor()

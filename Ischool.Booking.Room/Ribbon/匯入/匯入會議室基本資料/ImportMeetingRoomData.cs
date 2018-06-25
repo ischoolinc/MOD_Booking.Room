@@ -47,8 +47,6 @@ namespace Ischool.Booking.Room
 
                 //2. 處理設備
                 saveEquipments(dicEquipmentsInRoom);
-
-                
             }
 
             return "";
@@ -233,12 +231,6 @@ WHERE
         public override void Prepare(ImportOption Option)
         {
             mOption = Option;
-
-
-            //importBot.MeetingRoomDic = importBot.GetMeetingRoomDic();
-
-            //importBot.UnitNameDic = importBot.GetUnitDic();
-            
         }
     }
 }

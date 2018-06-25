@@ -164,7 +164,7 @@ WHERE
                 errorLb2.Visible = true;
                 return;
             }
-            else if (_unitNameList.Contains(unitNameTbx.Text))
+            else if (_unitNameList.Contains(unitNameTbx.Text) && _mode == "新增")
             {
                 errorLb1.Text = "此單位名稱已存在系統!";
                 errorLb1.Visible = true;
@@ -172,126 +172,15 @@ WHERE
             }
             #endregion
 
-            // 根據模式調整SQL內容
-            #region SQL
-
-            string unitName = unitNameTbx.Text;
-            string createTime = DateTime.Now.ToShortDateString();
-            string createdBy = Actor.Account;
-
-            string adminAccount = "" +  _teacherDic["" + unitBossTbx.Tag]["st_login_name"];
-            string refTeacherID = "" + _teacherDic["" + unitBossTbx.Tag]["id"];
-
-            string isBoss = "true";
-
-            string sql = "";
-
-            if (_mode == "新增")
+            string adminAccount = "" + _teacherDic["" + unitBossTbx.Tag]["st_login_name"];
+            // 沒有登入帳號的老師不能被指定管理員身分
+            if (adminAccount == "")
             {
-                #region sql
-
-                sql = string.Format(@"
-WITH data_row AS(
-    SELECT
-        '{0}'::TEXT AS unit_name
-        , '{1}'::TIMESTAMP AS create_time
-        , '{2}'::TEXT AS created_by
-        , '{3}'::TEXT AS admin_account
-        , {4}::BIGINT AS ref_teacher_id
-        , '{5}'::BOOLEAN AS is_boss
-) ,insert_unit_data AS(
-    INSERT INTO $ischool.booking.meetingroom_unit(
-        name
-        , create_time
-        , created_by
-    )
-    SELECT
-        unit_name
-        , create_time
-        , created_by
-    FROM
-        data_row
-
-    RETURNING $ischool.booking.meetingroom_unit.*
-)
-INSERT INTO $ischool.booking.meetingroom_unit_admin(
-    account
-    , ref_unit_id
-    , ref_teacher_id
-    , is_boss
-    , create_time
-    , created_by
-)
-SELECT
-    data_row.admin_account
-    , insert_unit_data.uid
-    , data_row.ref_teacher_id
-    , data_row.is_boss
-    , data_row.create_time
-    , data_row.created_by
-FROM
-    data_row
-    LEFT OUTER JOIN insert_unit_data
-        ON data_row.unit_name = insert_unit_data.name
-                ", unitName, createTime, createdBy, adminAccount, refTeacherID, isBoss);
-
-                #endregion
-
-            }
-            else if(_mode == "修改")
-            {
-                #region sql
-
-                sql = string.Format(@"
-WITH data_row AS(
-    SELECT
-        '{0}'::TEXT AS unit_name
-        , {1}::BIGINT AS unit_id
-        , '{2}'::TEXT AS created_by
-        , '{3}'::TEXT AS account
-        , '{4}'::BIGINT AS ref_teacher_id
-        , '{5}'::BOOLEAN AS is_boss
-        , '{6}'::TIMESTAMP AS create_time
-) ,update_unit_data AS(
-    UPDATE
-        $ischool.booking.meetingroom_unit
-    SET
-        name = data_row.unit_name
-    FROM
-        data_row
-    WHERE
-        uid = data_row.unit_id
-) ,delete_unit_admin AS(
-    DELETE
-    FROM
-        $ischool.booking.meetingroom_unit_admin
-    WHERE
-        ref_unit_id = (SELECT unit_id FROM data_row )
-)
-INSERT INTO $ischool.booking.meetingroom_unit_admin(
-    account
-    , ref_unit_id
-    , ref_teacher_id
-    , is_boss
-    , create_time
-    , created_by
-)    
-SELECT
-    data_row.account
-    , data_row.unit_id
-    , data_row.ref_teacher_id
-    , data_row.is_boss
-    , data_row.create_time
-    , data_row.created_by
-FROM
-    data_row
-                    ", unitName, _unitID, createdBy, adminAccount, refTeacherID, isBoss, createTime);
-
-                #endregion
+                MsgBox.Show(string.Format("{0}老師沒有登入帳號，\n無法設定為單位主管! ", unitBossTbx.Text));
+                return;
             }
 
-            #endregion
-
+            string sql = GetSQL();
             UpdateHelper up = new UpdateHelper();
             try
             {
@@ -356,7 +245,7 @@ FROM
         private void unitNameTbx_TextChanged(object sender, EventArgs e)
         {
             string unitName = unitNameTbx.Text.Trim();
-            if (_unitNameList.Contains(unitName))
+            if (_unitNameList.Contains(unitName) && _mode == "新增")
             {
                 errorLb1.Text = "此單位名稱已存在!";
                 errorLb1.Visible = true;
@@ -385,6 +274,325 @@ FROM
             {
                 errorLb2.Visible = false;
             }
+        }
+
+        public string GetSQL()
+        {
+            // 根據模式調整SQL內容
+            #region SQL
+
+            string unitName = unitNameTbx.Text;
+            string createTime = DateTime.Now.ToShortDateString();
+            string createdBy = Actor.Account;
+            string teacherAccount = "" + _teacherDic["" + unitBossTbx.Tag]["st_login_name"];
+            string refTeacherID = "" + _teacherDic["" + unitBossTbx.Tag]["id"];
+            string isBoss = "true";
+            string loginID = Actor.GetLoginIDByAccount(teacherAccount);
+            string sql = "";
+            // 新增場地管理單位 、 新增單位主管 、 新增login 、 新增 lr_belong
+            if (_mode == "新增")
+            {
+                #region sql
+
+                if (loginID == "")
+                {
+                    sql = string.Format(@"
+WITH data_row AS(
+    SELECT
+        '{0}'::TEXT AS unit_name
+        , '{1}'::TIMESTAMP AS create_time
+        , '{2}'::TEXT AS created_by
+        , '{3}'::TEXT AS admin_account
+        , {4}::BIGINT AS ref_teacher_id
+        , '{5}'::BOOLEAN AS is_boss
+) ,insert_unit_data AS(
+    INSERT INTO $ischool.booking.meetingroom_unit(
+        name
+        , create_time
+        , created_by
+    )
+    SELECT
+        unit_name
+        , create_time
+        , created_by
+    FROM
+        data_row
+
+    RETURNING $ischool.booking.meetingroom_unit.*
+) ,insert_unit_admin AS(
+    INSERT INTO $ischool.booking.meetingroom_unit_admin(
+    account
+    , ref_unit_id
+    , ref_teacher_id
+    , is_boss
+    , create_time
+    , created_by
+)
+SELECT
+    data_row.admin_account
+    , insert_unit_data.uid
+    , data_row.ref_teacher_id
+    , data_row.is_boss
+    , data_row.create_time
+    , data_row.created_by
+FROM
+    data_row
+    LEFT OUTER JOIN insert_unit_data
+        ON data_row.unit_name = insert_unit_data.name
+) ,insert_login AS(
+    INSERT INTO _login(
+        login_name
+        , password
+        , sys_admin
+        , account_type
+    )
+    VALUES(
+        '{3}'
+        , '1234'
+        , '0'
+        , 'greening'
+    )
+    RETURNING _login.id
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    id 
+    , {6}
+FROM 
+    insert_login
+                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, Program._roleID);
+                }
+                else
+                {
+                    sql = string.Format(@"
+WITH data_row AS(
+    SELECT
+        '{0}'::TEXT AS unit_name
+        , '{1}'::TIMESTAMP AS create_time
+        , '{2}'::TEXT AS created_by
+        , '{3}'::TEXT AS admin_account
+        , {4}::BIGINT AS ref_teacher_id
+        , '{5}'::BOOLEAN AS is_boss
+) ,insert_unit_data AS(
+    INSERT INTO $ischool.booking.meetingroom_unit(
+        name
+        , create_time
+        , created_by
+    )
+    SELECT
+        unit_name
+        , create_time
+        , created_by
+    FROM
+        data_row
+
+    RETURNING $ischool.booking.meetingroom_unit.*
+) ,insert_unit_admin AS(
+    INSERT INTO $ischool.booking.meetingroom_unit_admin(
+    account
+    , ref_unit_id
+    , ref_teacher_id
+    , is_boss
+    , create_time
+    , created_by
+)
+SELECT
+    data_row.admin_account
+    , insert_unit_data.uid
+    , data_row.ref_teacher_id
+    , data_row.is_boss
+    , data_row.create_time
+    , data_row.created_by
+FROM
+    data_row
+    LEFT OUTER JOIN insert_unit_data
+        ON data_row.unit_name = insert_unit_data.name
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    {6} 
+    , {7}
+                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, loginID, Program._roleID);
+                }
+
+                #endregion
+
+            }
+           
+            else if (_mode == "修改")
+            {
+                #region sql
+                // 修改場地管理單位 、 刪除舊單位主管 、刪除lr_belong、新增單位主管、新增login 、新增lr_belong
+                if (loginID == "")
+                {
+                    sql = string.Format(@"
+WITH data_row AS(
+    SELECT
+        '{0}'::TEXT AS unit_name
+        , {1}::BIGINT AS unit_id
+        , '{2}'::TEXT AS created_by
+        , '{3}'::TEXT AS account
+        , '{4}'::BIGINT AS ref_teacher_id
+        , '{5}'::BOOLEAN AS is_boss
+        , '{6}'::TIMESTAMP AS create_time
+) ,update_unit_data AS(
+    UPDATE
+        $ischool.booking.meetingroom_unit
+    SET
+        name = data_row.unit_name
+    FROM
+        data_row
+    WHERE
+        uid = data_row.unit_id
+) ,delete_unit_admin AS(
+    DELETE
+    FROM
+        $ischool.booking.meetingroom_unit_admin
+    WHERE
+        ref_unit_id = (SELECT unit_id FROM data_row )
+    RETURNING account
+) , insert_unit_admin AS(
+    INSERT INTO $ischool.booking.meetingroom_unit_admin(
+        account
+        , ref_unit_id
+        , ref_teacher_id
+        , is_boss
+        , create_time
+        , created_by
+    )    
+    SELECT
+        data_row.account
+        , data_row.unit_id
+        , data_row.ref_teacher_id
+        , data_row.is_boss
+        , data_row.create_time
+        , data_row.created_by
+    FROM
+        data_row
+) ,delete_lr_belong AS(
+    DELETE
+    FROM
+        _lr_belong
+    WHERE
+        _login_id IN(
+            SELECT 
+                id
+            FROM
+                _login
+            WHERE
+                login_name =  delete_unit_admin.account
+        )
+) ,insert_login AS(
+    INSERT INTO _login(
+        login_name
+        , password
+        , sys_admin
+        , account_type
+    )
+    VALUES(
+        '{3}'
+        , '1234'
+        , '0'
+        , 'greening'
+    )
+    RETURNING _login.id
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    id 
+    , {7}
+FROM 
+    insert_login
+                    ", unitName, _unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, Program._roleID);
+                }
+                // 修改場地管理單位 、 刪除舊單位主管 、刪除lr_belong、新增單位主管 、新增lr_belong
+                else
+                {
+                    sql = string.Format(@"
+WITH data_row AS(
+    SELECT
+        '{0}'::TEXT AS unit_name
+        , {1}::BIGINT AS unit_id
+        , '{2}'::TEXT AS created_by
+        , '{3}'::TEXT AS account
+        , '{4}'::BIGINT AS ref_teacher_id
+        , '{5}'::BOOLEAN AS is_boss
+        , '{6}'::TIMESTAMP AS create_time
+) ,update_unit_data AS(
+    UPDATE
+        $ischool.booking.meetingroom_unit
+    SET
+        name = data_row.unit_name
+    FROM
+        data_row
+    WHERE
+        uid = data_row.unit_id
+) ,delete_unit_admin AS(
+    DELETE
+    FROM
+        $ischool.booking.meetingroom_unit_admin
+    WHERE
+        ref_unit_id = (SELECT unit_id FROM data_row )
+    RETURNING account
+) , insert_unit_admin AS(
+    INSERT INTO $ischool.booking.meetingroom_unit_admin(
+        account
+        , ref_unit_id
+        , ref_teacher_id
+        , is_boss
+        , create_time
+        , created_by
+    )    
+    SELECT
+        data_row.account
+        , data_row.unit_id
+        , data_row.ref_teacher_id
+        , data_row.is_boss
+        , data_row.create_time
+        , data_row.created_by
+    FROM
+        data_row
+) ,delete_lr_belong AS(
+    DELETE
+    FROM
+        _lr_belong
+    WHERE
+        _login_id IN(
+            SELECT 
+                id
+            FROM
+                _login
+                LEFT OUTER JOIN delete_unit_admin
+                    ON _login.login_name = delete_unit_admin.account
+            WHERE
+                delete_unit_admin.account IS NOT NULL
+        )
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    {7} 
+    , {8}
+                    ", unitName, _unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, loginID ,Program._roleID);
+                }
+                
+                #endregion
+            }
+
+            #endregion
+
+            return sql;
         }
     }
 }

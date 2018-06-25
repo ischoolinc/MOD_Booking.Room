@@ -78,6 +78,7 @@
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 41);
             this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.Size = new System.Drawing.Size(775, 351);
             this.dataGridViewX1.TabIndex = 0;
@@ -86,26 +87,31 @@
             // 
             this.Column1.HeaderText = "場地名稱";
             this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "所屬大樓";
             this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
             this.Column3.HeaderText = "容納人數";
             this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "特殊場地";
             this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "建立者";
             this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // Column5
             // 
@@ -114,6 +120,7 @@
             this.Column5.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column5.HeaderText = "設備";
             this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 

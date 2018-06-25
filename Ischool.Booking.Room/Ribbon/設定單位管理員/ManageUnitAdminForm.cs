@@ -109,8 +109,10 @@ WHERE
             string adminID = "" + dataGridViewX1.Rows[row].Tag;
             string identity = "" + dataGridViewX1.Rows[row].Cells[2].Value;
             string name = "" + dataGridViewX1.Rows[row].Cells[0].Value;
+            string teacherAccount = "" + dataGridViewX1.Rows[row].Cells[1].Value;
             int index = unitCbx.SelectedIndex;
             string unitID = unitDic["" + unitCbx.Items[index]];
+            string loginID = Actor.GetLoginIDByAccount(teacherAccount);
 
             if (identity == "單位主管")
             {
@@ -121,12 +123,19 @@ WHERE
             if (result == DialogResult.Yes)
             {
                 string sql = string.Format(@"
+WITH delete_unit_admin AS(
+    DELETE
+    FROM
+        $ischool.booking.meetingroom_unit_admin
+    WHERE
+        uid = {0}
+)
 DELETE
 FROM
-    $ischool.booking.meetingroom_unit_admin
+    _lr_belong
 WHERE
-    uid = {0}
-                    ", adminID);
+    _login_id = {1}
+                    ", adminID, loginID);
 
                 UpdateHelper up = new UpdateHelper();
 

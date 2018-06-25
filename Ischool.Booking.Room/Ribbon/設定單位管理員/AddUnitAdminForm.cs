@@ -112,30 +112,16 @@ WHERE
 
                 if (result == DialogResult.Yes)
                 {
-                    string account = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
-                    string teacherID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
-                    string time = DateTime.Now.ToShortDateString();
-                    string actor = Actor.Account;
+                    string teacherAccount = "" + dataGridViewX1.Rows[e.RowIndex].Cells[3].Value;
+                    string teacherName = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
 
-                    string sql = string.Format(@"
-INSERT INTO 
-    $ischool.booking.meetingroom_unit_admin( 
-        account
-        , ref_teacher_id
-        , ref_unit_id
-        , is_boss
-        , create_time
-        , created_by
-    )
-    VALUES(
-        '{0}'
-        , {1}
-        , {2}
-        , 'false'
-        , '{3}'
-        , '{4}'
-    )
-                        ", account, teacherID, _unitID, time, actor);
+                    if (teacherAccount == "")
+                    {
+                        MsgBox.Show(string.Format("{0}老師沒有登入帳號，\n無法設定為單位管理員! ", teacherName));
+                        return;
+                    }
+
+                    string sql = GetSQL(dataGridViewX1.Rows[e.RowIndex]);
 
                     UpdateHelper up = new UpdateHelper();
                     try
@@ -152,6 +138,101 @@ INSERT INTO
                     
                 }
             }
+        }
+
+        public string GetSQL(DataGridViewRow dgvRow)
+        {
+            string teacherAccount = "" + dgvRow.Cells[3].Value;
+            string teacherName = "" + dgvRow.Cells[0].Value;
+            string teacherID = "" + dgvRow.Tag;
+            string time = DateTime.Now.ToShortDateString();
+            string actor = Actor.Account;
+            string loginID = Actor.GetLoginIDByAccount(teacherAccount);
+
+            string sql = "";
+            // 新增unit_admin 、 新增_login 、新增 lr_belong
+            if (loginID == "")
+            {
+                sql = string.Format(@"
+WITH insert_unit_admin AS(
+    INSERT INTO 
+        $ischool.booking.meetingroom_unit_admin( 
+            account
+            , ref_teacher_id
+            , ref_unit_id
+            , is_boss
+            , create_time
+            , created_by
+        )
+        VALUES(
+            '{0}'
+            , {1}
+            , {2}
+            , 'false'
+            , '{3}'
+            , '{4}'
+        )
+) ,insert_login AS(
+    INSERT INTO _login(
+        login_name
+        , password
+        , sys_admin
+        , account_type
+    )
+    VALUES(
+        '{0}'
+        , '1234'
+        , '0'
+        , 'greening'
+    )
+    RETURNING _login.id
+) 
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    id 
+    , {5}
+FROM 
+    insert_login
+
+                        ", teacherAccount, teacherID, _unitID, time, actor, Program._roleID);
+            }
+            // 新增unit_admin、新增 lr_belong
+            else
+            {
+                sql = string.Format(@"
+WITH insert_unit_admin AS(
+    INSERT INTO 
+        $ischool.booking.meetingroom_unit_admin( 
+            account
+            , ref_teacher_id
+            , ref_unit_id
+            , is_boss
+            , create_time
+            , created_by
+        )
+        VALUES(
+            '{0}'
+            , {1}
+            , {2}
+            , 'false'
+            , '{3}'
+            , '{4}'
+        )
+)
+INSERT INTO _lr_belong(
+    _login_id
+    , _role_id
+)
+SELECT 
+    {5}
+    , {6}
+                        ", teacherAccount, teacherID, _unitID, time, actor, loginID,Program._roleID);
+            }
+            
+            return sql;
         }
     }
 }
