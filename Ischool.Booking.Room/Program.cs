@@ -343,8 +343,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 管理場地
 
-            settingItem["管理"]["管理場地"].Enable = Permissions.管理場地權限;
-            settingItem["管理"]["管理場地"].Click += delegate
+            settingItem["管理"]["管理會議室"].Enable = Permissions.管理場地權限;
+            settingItem["管理"]["管理會議室"].Click += delegate
             {
                 if (identity == "系統管理員" || identity == "單位管理員" || identity == "單位主管")
                 {
@@ -366,7 +366,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             settingItem["設定"].Size = RibbonBarButton.MenuButtonSize.Large;
             settingItem["設定"].Image = Properties.Resources.sandglass_unlock_64;
 
-            // 此功能廢除，將由標籤設計取代
+            // 此功能廢除，將由admin帳號做使用者設定
+            // admin帳號可透過使用者管理功能新增老師帳號並設定為會議室預約管理者角色
             #region 設定系統管理員
 
             //settingItem["設定"]["系統管理員"].Enable = Permissions.設定系統管理員權限;
@@ -387,8 +388,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 設定場地管理單位
 
-            settingItem["設定"]["場地管理單位"].Enable = Permissions.設定場地管理單位權限;
-            settingItem["設定"]["場地管理單位"].Click += delegate
+            settingItem["設定"]["會議室管理單位"].Enable = Permissions.設定場地管理單位權限;
+            settingItem["設定"]["會議室管理單位"].Click += delegate
             {
                 if (identity == "系統管理員")
                 {
@@ -438,8 +439,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 匯出場地清單
 
-            dataItem["匯出"]["場地清單"].Enable = true;
-            dataItem["匯出"]["場地清單"].Click += delegate
+            dataItem["匯出"]["會議室清單"].Enable = true;
+            dataItem["匯出"]["會議室清單"].Click += delegate
             {
                 if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
                 {
@@ -459,8 +460,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 匯入場地清單
 
-            dataItem["匯入"]["場地清單"].Enable = true;
-            dataItem["匯入"]["場地清單"].Click += delegate 
+            dataItem["匯入"]["會議室清單"].Enable = true;
+            dataItem["匯入"]["會議室清單"].Click += delegate 
             {
                 if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
                 {
@@ -479,8 +480,8 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 統計場地使用狀況
 
-            dataItem["報表"]["統計場地使用狀況"].Enable = true;
-            dataItem["報表"]["統計場地使用狀況"].Click += delegate 
+            dataItem["報表"]["統計會議室使用狀況"].Enable = true;
+            dataItem["報表"]["統計會議室使用狀況"].Click += delegate 
             {
                 if (identity == "系統管理員" || identity == "單位主管" || identity == "單位管理員")
                 {
@@ -500,7 +501,7 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
 
             #region 審核作業
 
-            RibbonBarItem assignment = MotherForm.RibbonBarItems["會議室預約", "場地預約"];
+            RibbonBarItem assignment = MotherForm.RibbonBarItems["會議室預約", "會議室預約"];
             assignment["審核作業"].Size = RibbonBarButton.MenuButtonSize.Large;
             assignment["審核作業"].Image = Properties.Resources.architecture_zoom_64;
             assignment["審核作業"].Enable = Permissions.審核作業權限;

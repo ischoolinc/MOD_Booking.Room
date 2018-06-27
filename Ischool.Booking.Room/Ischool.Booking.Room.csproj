@@ -397,6 +397,9 @@
     <None Include="Resources\統計會議室報表樣板.xls" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BookingRoomAdmin.resx">
+      <DependentUpon>BookingRoomAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

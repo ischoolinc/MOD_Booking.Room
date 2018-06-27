@@ -292,7 +292,7 @@ WHERE
             string isBoss = "true";
             string loginID = Actor.GetLoginIDByAccount(teacherAccount);
             string sql = "";
-            // 新增場地管理單位 、 新增單位主管 、 新增login 、 新增 lr_belong
+            // 新增場地管理單位 、 新增單位主管 、 新增_login 、 新增_lr_belong
             if (_mode == "新增")
             {
                 #region sql

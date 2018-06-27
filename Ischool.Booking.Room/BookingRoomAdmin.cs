@@ -27,5 +27,21 @@ namespace Ischool.Booking.Room
                 return _BookingRoomAdmin;
             }
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // ContentPanePanel
+            // 
+            this.ContentPanePanel.Location = new System.Drawing.Point(0, 163);
+            this.ContentPanePanel.Size = new System.Drawing.Size(870, 421);
+            // 
+            // BookingRoomAdmin
+            // 
+            this.Name = "BookingRoomAdmin";
+            this.ResumeLayout(false);
+
+        }
     }
 }
