@@ -123,7 +123,7 @@ FROM
                                 report.Worksheets[0].Cells[rowIndex, col].PutValue("" + row["unit_name"]);
                                 break;
                             case "是否為特殊場地":
-                                report.Worksheets[0].Cells[rowIndex, col].PutValue("" + row["is_special"]);
+                                report.Worksheets[0].Cells[rowIndex, col].PutValue(("" + row["is_special"]) == "true" ? "是" : "否");
                                 break;
                             case "建立日期":
                                 report.Worksheets[0].Cells[rowIndex, col].PutValue("" + row["create_time"]);

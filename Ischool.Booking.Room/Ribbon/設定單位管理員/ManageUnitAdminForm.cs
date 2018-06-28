@@ -189,7 +189,8 @@ WHERE
         private void unitCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
             int index = unitCbx.SelectedIndex;
-            string unitID = unitDic["" + unitCbx.Items[index]];
+
+            string unitID = unitDic[unitCbx.Items[index].ToString()];
 
             ReloadDataGridview(unitID);
         }

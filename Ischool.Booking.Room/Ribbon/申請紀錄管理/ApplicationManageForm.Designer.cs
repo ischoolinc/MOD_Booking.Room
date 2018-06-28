@@ -29,8 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitLb = new DevComponents.DotNetBar.LabelX();
             this.unitCbx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
@@ -43,18 +51,10 @@
             this.starTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.endTime = new DevComponents.Editors.DateTimeAdv.DateTimeInput();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.errorLb = new DevComponents.DotNetBar.LabelX();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionCbx = new DevComponents.DotNetBar.Controls.CheckBoxX();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).BeginInit();
@@ -81,25 +81,82 @@
             this.Column4,
             this.Column7,
             this.Column8});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 92);
+            this.dataGridViewX1.MultiSelect = false;
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewX1.Size = new System.Drawing.Size(847, 371);
+            this.dataGridViewX1.Size = new System.Drawing.Size(847, 413);
             this.dataGridViewX1.TabIndex = 11;
             this.dataGridViewX1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellClick);
             this.dataGridViewX1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellDoubleClick);
             this.dataGridViewX1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewX1_MouseDown);
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "申請時間";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "場地名稱";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 80F;
+            this.Column2.HeaderText = "申請人";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "申請開始日期";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 110;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "申請結束日期";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 110;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "審核狀態";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column4.Text = null;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "審核結果";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "申請單狀態";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             // 
             // unitLb
             // 
@@ -111,7 +168,7 @@
             this.unitLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.unitLb.Location = new System.Drawing.Point(280, 12);
             this.unitLb.Name = "unitLb";
-            this.unitLb.Size = new System.Drawing.Size(132, 23);
+            this.unitLb.Size = new System.Drawing.Size(122, 23);
             this.unitLb.TabIndex = 3;
             this.unitLb.Text = "labelX4";
             // 
@@ -174,20 +231,22 @@
             // 
             // labelX6
             // 
+            this.labelX6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelX6.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(655, 12);
+            this.labelX6.Location = new System.Drawing.Point(641, 12);
             this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(40, 23);
+            this.labelX6.Size = new System.Drawing.Size(54, 23);
             this.labelX6.TabIndex = 0;
-            this.labelX6.Text = "場地";
+            this.labelX6.Text = "會議室";
             // 
             // roomCbx
             // 
+            this.roomCbx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.roomCbx.DisplayMember = "Text";
             this.roomCbx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.roomCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -203,9 +262,10 @@
             // leaveBtn
             // 
             this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(784, 469);
+            this.leaveBtn.Location = new System.Drawing.Point(784, 521);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -215,13 +275,14 @@
             // 
             // labelX5
             // 
+            this.labelX5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelX5.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(415, 62);
+            this.labelX5.Location = new System.Drawing.Point(415, 60);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(139, 23);
             this.labelX5.TabIndex = 1;
@@ -229,6 +290,7 @@
             // 
             // starTime
             // 
+            this.starTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.starTime.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
@@ -238,7 +300,7 @@
             this.starTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.starTime.ButtonDropDown.Visible = true;
             this.starTime.IsPopupCalendarOpen = false;
-            this.starTime.Location = new System.Drawing.Point(560, 61);
+            this.starTime.Location = new System.Drawing.Point(560, 59);
             // 
             // 
             // 
@@ -282,6 +344,7 @@
             // 
             // endTime
             // 
+            this.endTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.endTime.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
@@ -291,7 +354,7 @@
             this.endTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.endTime.ButtonDropDown.Visible = true;
             this.endTime.IsPopupCalendarOpen = false;
-            this.endTime.Location = new System.Drawing.Point(724, 61);
+            this.endTime.Location = new System.Drawing.Point(724, 59);
             // 
             // 
             // 
@@ -335,33 +398,18 @@
             // 
             // labelX2
             // 
+            this.labelX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelX2.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(701, 62);
+            this.labelX2.Location = new System.Drawing.Point(701, 60);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(17, 23);
             this.labelX2.TabIndex = 13;
             this.labelX2.Text = "至";
-            // 
-            // errorLb
-            // 
-            this.errorLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.errorLb.BackgroundStyle.Class = "";
-            this.errorLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.errorLb.ForeColor = System.Drawing.Color.Red;
-            this.errorLb.Location = new System.Drawing.Point(12, 469);
-            this.errorLb.Name = "errorLb";
-            this.errorLb.Size = new System.Drawing.Size(271, 23);
-            this.errorLb.TabIndex = 14;
-            this.errorLb.Text = "errorText";
-            this.errorLb.Visible = false;
             // 
             // contextMenuStrip1
             // 
@@ -385,7 +433,7 @@
             // 
             this.conditionCbx.BackgroundStyle.Class = "";
             this.conditionCbx.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.conditionCbx.Location = new System.Drawing.Point(12, 62);
+            this.conditionCbx.Location = new System.Drawing.Point(12, 60);
             this.conditionCbx.Name = "conditionCbx";
             this.conditionCbx.Size = new System.Drawing.Size(154, 23);
             this.conditionCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -393,74 +441,33 @@
             this.conditionCbx.Text = "檢視所有申請紀錄";
             this.conditionCbx.CheckedChanged += new System.EventHandler(this.conditionCbx_CheckedChanged);
             // 
-            // Column3
+            // labelX4
             // 
-            this.Column3.HeaderText = "申請時間";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
+            this.labelX4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
             // 
-            // Column1
             // 
-            this.Column1.HeaderText = "場地名稱";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
             // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 80F;
-            this.Column2.HeaderText = "申請人";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "申請開始日期";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 110;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "申請結束日期";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 110;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "審核狀態";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column4.Text = null;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "審核結果";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "申請單狀態";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
+            this.labelX4.BackgroundStyle.Class = "";
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(12, 509);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(502, 42);
+            this.labelX4.TabIndex = 16;
+            this.labelX4.Text = "說明 : 畫面只會顯示須審核的申請紀錄，或者可勾選左上\r\n          方檢視所有申請紀錄按鈕，總覽會議室所有申請紀錄。";
             // 
             // ReviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 504);
+            this.ClientSize = new System.Drawing.Size(871, 556);
+            this.Controls.Add(this.labelX4);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.actorLb);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.unitLb);
             this.Controls.Add(this.conditionCbx);
             this.Controls.Add(this.unitCbx);
-            this.Controls.Add(this.errorLb);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.endTime);
             this.Controls.Add(this.leaveBtn);
@@ -471,7 +478,7 @@
             this.Controls.Add(this.dataGridViewX1);
             this.DoubleBuffered = true;
             this.Name = "ReviewForm";
-            this.Text = "申請紀錄管理";
+            this.Text = "審核作業";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).EndInit();
@@ -494,7 +501,6 @@
         private DevComponents.Editors.DateTimeAdv.DateTimeInput starTime;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.LabelX errorLb;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancelBtn;
         private DevComponents.DotNetBar.Controls.CheckBoxX conditionCbx;
@@ -506,5 +512,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private DevComponents.DotNetBar.LabelX labelX4;
     }
 }

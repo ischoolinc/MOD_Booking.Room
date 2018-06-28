@@ -31,13 +31,13 @@ namespace Ischool.Booking.Room
         public string _unitID { get; set; }
 
         /// <summary>
-        /// Winform是否載入完成
+        /// 畫面初始化完成
         /// </summary>
-        public bool initFinish { get; set; }
+        public bool _initFinish { get; set; }
 
         public ReviewForm()
         {
-            initFinish = false;
+            _initFinish = false;
             InitializeComponent();
 
             string identity = Actor.Identity;
@@ -70,7 +70,8 @@ namespace Ischool.Booking.Room
                 _unitID = ur.UID;
                 ReloadRoomCbx(_unitID);
             }
-            initFinish = true;
+
+            _initFinish = true;
         }
 
         public void ReloadRoomCbx(string unitID)
@@ -111,11 +112,63 @@ namespace Ischool.Booking.Room
 
             #region 取得資料
 
-            #region SQL
             string sql;
-            if (roomID == "全部" && !conditionCbx.Checked)
+
+            // 單位、所有申請紀錄
+            if (conditionCbx.Checked)
             {
-                sql = string.Format(@"
+                // 取得該單位所有場地的所有申請紀錄
+                if (roomID == "全部")
+                {
+                    #region sql
+                    sql = string.Format(@"
+SELECT
+	app.*
+    , room.name AS room_name
+    , room.is_special
+FROM
+	$ischool.booking.meetingroom AS room
+	LEFT OUTER JOIN $ischool.booking.meetingroom_application AS app
+		ON room.uid = app.ref_meetingroom_id
+	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+		ON room.ref_unit_id = unit.uid
+WHERE
+	app.uid IS NOT NULL
+	AND unit.uid = {0}
+                ", unitID);
+                    #endregion
+                }
+                // 取得該單位某一個場地的所有申請紀錄
+                else
+                {
+                    #region sql
+                    sql = string.Format(@"
+SELECT
+	app.*
+    , room.name AS room_name
+    , room.is_special
+FROM
+	$ischool.booking.meetingroom AS room
+	LEFT OUTER JOIN $ischool.booking.meetingroom_application AS app
+		ON room.uid = app.ref_meetingroom_id
+	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
+		ON room.ref_unit_id = unit.uid
+WHERE
+	app.uid IS NOT NULL
+	AND unit.uid = {0}
+    AND room.uid = {1}
+                ", unitID, roomID);
+                    #endregion
+                }
+            }
+            // 單位、場地、日期區間
+            else
+            {
+                // 取得該單位所有場地須審核的申請紀錄
+                if (roomID == "全部")
+                {
+                    #region sql
+                    sql = string.Format(@"
 SELECT
 	app.*
     , room.name AS room_name
@@ -135,10 +188,14 @@ WHERE
 	AND app.apply_start_date >= '{1}'
 	AND app.apply_start_date <= '{2}'
                 ", unitID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
-            }
-            else if (roomID == "全部" && conditionCbx.Checked)
-            {
-                sql = string.Format(@"
+                    #endregion
+
+                }
+                // 取得該單位某一個場地須審核的申請紀錄
+                else
+                {
+                    #region sql
+                    sql = string.Format(@"
 SELECT
 	app.*
     , room.name AS room_name
@@ -150,31 +207,18 @@ FROM
 	LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
 		ON room.ref_unit_id = unit.uid
 WHERE
-	app.uid IS NOT NULL
+	room.is_special = true
+	AND app.uid IS NOT NULL
+	AND app.reviewed_date IS NULL
+	AND app.is_canceled = false
 	AND unit.uid = {0}
-                ", unitID);
+	AND app.apply_start_date >= '{1}'
+	AND app.apply_start_date <= '{2}'
+    AND room.uid = {3}
+                ", unitID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString(), roomID);
+                    #endregion
+                }
             }
-            else
-            {
-                sql = string.Format(@"
-SELECT
-    app.*
-	,room.name AS room_name
-    ,room.is_special
-FROM	
-	$ischool.booking.meetingroom_application AS app
-	LEFT OUTER JOIN $ischool.booking.meetingroom AS room
-		ON app.ref_meetingroom_id = room.uid
-    LEFT OUTER JOIN $ischool.booking.meetingroom_unit AS unit
-        ON room.ref_unit_id = unit.uid
-WHERE
-    unit.uid = {0}
-	AND app.ref_meetingroom_id = '{1}'
-	AND app.apply_start_date >= '{2}'
-	AND app.apply_start_date <= '{3}'
-                ", unitID, roomID, starTime.Value.ToShortDateString(), endTime.Value.ToShortDateString());
-            }
-            #endregion
 
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
@@ -233,7 +277,7 @@ WHERE
                 {
                     datarow.Cells[index].Style.BackColor = Color.LightGray;
                     datarow.Cells[index++].Value = "取消";
-                    datarow.Cells[5].Value = "無";
+                    //datarow.Cells[5].Value = "無";
                     //datarow.DefaultCellStyle.BackColor = Color.LightGray;
                 }
                 else if (("" + row["reviewed_date"]) == "" && bool.Parse("" + row["is_special"]))
@@ -258,7 +302,7 @@ WHERE
 
         private void roomCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (initFinish)
+            if (_initFinish)
             {
                 string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
                 string roomID;
@@ -286,41 +330,47 @@ WHERE
             ReloadRoomCbx(_unitID);
         }
 
-        private void leaveBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void starTime_ValueChanged(object sender, EventArgs e)
         {
-            RunDateTimeCondition();
+            if (_initFinish)
+            {
+                string unitID = unitDic[unitCbx.Text];
+                string roomID = meetingroomDic[roomCbx.Text];
+
+                ReloadDataGridView(unitID, roomID);
+            }
         }
 
         private void endTime_ValueChanged(object sender, EventArgs e)
         {
-            RunDateTimeCondition();
+            if (_initFinish)
+            {
+                string unitID = unitDic[unitCbx.Text];
+                string roomID = meetingroomDic[roomCbx.Text];
+
+                ReloadDataGridView(unitID, roomID);
+            }
         }
 
-        public void RunDateTimeCondition()
+        private void conditionCbx_CheckedChanged(object sender, EventArgs e)
         {
-            if (initFinish)
+            if (_initFinish)
             {
-                string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
-                string roomID = meetingroomDic[roomName];
-
-                int result = DateTime.Compare(starTime.Value, endTime.Value);
-
-                if (result > 0)
+                if (conditionCbx.Checked)
                 {
-                    errorLb.Text = "查詢條件錯誤:開始時間不能大於結束時間!";
-                    errorLb.Visible = true;
-                    dataGridViewX1.Rows.Clear();
+                    starTime.Enabled = false;
+                    endTime.Enabled = false;
                 }
                 else
                 {
-                    errorLb.Visible = false;
-                    ReloadDataGridView(_unitID, roomID);
+                    starTime.Enabled = true;
+                    endTime.Enabled = true;
                 }
+
+                string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
+                string roomID = meetingroomDic[roomName];
+
+                ReloadDataGridView(_unitID, roomID);
             }
         }
 
@@ -386,26 +436,11 @@ WHERE
             }
         }
 
-        private void conditionCbx_CheckedChanged(object sender, EventArgs e)
+        private void leaveBtn_Click(object sender, EventArgs e)
         {
-            if (initFinish)
-            {
-                if (conditionCbx.Checked)
-                {
-                    starTime.Enabled = false;
-                    endTime.Enabled = false;
-                }
-                else
-                {
-                    starTime.Enabled = true;
-                    endTime.Enabled = true;
-                }
-
-                string roomName = "" + roomCbx.Items[roomCbx.SelectedIndex];
-                string roomID = meetingroomDic[roomName];
-
-                ReloadDataGridView(_unitID, roomID);
-            }
+            this.Close();
         }
+
+        
     }
 }
