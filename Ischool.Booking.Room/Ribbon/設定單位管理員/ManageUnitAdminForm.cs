@@ -20,42 +20,17 @@ namespace Ischool.Booking.Room
         /// </summary>
         Dictionary<string, string> unitDic = new Dictionary<string, string>();
 
+        /// <summary>
+        /// 使用者身分
+        /// </summary>
+        Actor actor = Actor.Instance;
+
+        RoleUnitDecorator decorator;
+
         public ManageUnitAdminForm()
         {
             InitializeComponent();
-
-            string identity = Actor.Identity;
-            identityLb.Text = identity;
-
-            if (identity == "系統管理員")
-            {
-                unitCbx.Visible = true;
-
-                AccessHelper access = new AccessHelper();
-                List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
-                foreach (UDT.MeetingRoomUnit unit in unitList)
-                {
-                    unitDic.Add(unit.Name, unit.UID);
-
-                    unitCbx.Items.Add(unit.Name);
-                }
-                unitCbx.SelectedIndex = 0;
-
-                string unitID = unitDic["" + unitCbx.Items[0]];
-                ReloadDataGridview(unitID);
-            }
-            else if (identity == "單位主管")
-            {               
-                unitLb.Visible = true;
-
-                UnitRecord ur = BookingRecord.SelectUnitByAccount(Actor.Account);
-                unitLb.Text = ur.Name;
-                unitLb.Tag = ur.UID;
-
-                ReloadDataGridview(ur.UID);
-            }
         }
-
 
         public void ReloadDataGridview(string unitID)
         {
@@ -156,33 +131,24 @@ WHERE
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (Actor.Identity == "系統管理員")
+            if (actor.isSysAdmin())
             {
-                int index = unitCbx.SelectedIndex;
-                string unitName = "" + unitCbx.Items[index];
-                string unitID = unitDic[unitName];
+                //int index = unitCbx.SelectedIndex;
+                //string unitName = "" + unitCbx.Items[index];
+                string unitID = unitDic[unitCbx.Text];
 
                 AddUnitAdminForm form = new AddUnitAdminForm(unitID);
-                form.Text = string.Format("新增{0}管理員",unitName);
+                form.Text = string.Format("新增{0}管理員", unitCbx.Text);
                 form.FormClosed += delegate 
                 {
                     ReloadDataGridview(unitID);
                 };
                 form.ShowDialog();
             }
-            else if (Actor.Identity == "單位主管")
+            else if (actor.isUnitBoss())
             {
                 int index = unitCbx.SelectedIndex;
-                string unitName = unitLb.Text;
-                string unitID = "" + unitLb.Tag;
 
-                AddUnitAdminForm form = new AddUnitAdminForm(unitID);
-                form.Text = string.Format("新增{0}管理員", unitName);
-                form.FormClosed += delegate
-                {
-                    ReloadDataGridview(unitID);
-                };
-                form.ShowDialog();
             }
         }
 
@@ -190,9 +156,22 @@ WHERE
         {
             int index = unitCbx.SelectedIndex;
 
-            string unitID = unitDic[unitCbx.Items[index].ToString()];
+            string unitID = unitDic[unitCbx.Text];
 
             ReloadDataGridview(unitID);
+        }
+
+        private void ManageUnitAdminForm_Load(object sender, EventArgs e)
+        {
+            // Init unitDic 供ReloadDataGridView使用
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> listUnit = access.Select<UDT.MeetingRoomUnit>();
+            foreach (UDT.MeetingRoomUnit unit in listUnit)
+            {
+                unitDic.Add(unit.Name, unit.UID);
+            }
+
+            this.decorator = new RoleUnitDecorator(identityLb, cbxIdentity, unitCbx);
         }
     }
 }

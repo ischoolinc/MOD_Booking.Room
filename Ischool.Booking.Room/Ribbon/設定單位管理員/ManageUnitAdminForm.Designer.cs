@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,13 +36,13 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.identityLb = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.unitCbx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.unitLb = new DevComponents.DotNetBar.LabelX();
             this.addBtn = new DevComponents.DotNetBar.ButtonX();
             this.deleteBtn = new DevComponents.DotNetBar.ButtonX();
             this.leaveBtn = new DevComponents.DotNetBar.ButtonX();
+            this.cbxIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.identityLb = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +54,7 @@
             // 
             this.labelX1.BackgroundStyle.Class = "";
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(12, 15);
+            this.labelX1.Location = new System.Drawing.Point(12, 16);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(60, 23);
             this.labelX1.TabIndex = 0;
@@ -77,14 +77,14 @@
             this.Column3,
             this.Column4,
             this.Column5});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 54);
             this.dataGridViewX1.MultiSelect = false;
@@ -124,21 +124,6 @@
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
             // 
-            // identityLb
-            // 
-            this.identityLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.identityLb.BackgroundStyle.Class = "";
-            this.identityLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.identityLb.ForeColor = System.Drawing.Color.Blue;
-            this.identityLb.Location = new System.Drawing.Point(78, 15);
-            this.identityLb.Name = "identityLb";
-            this.identityLb.Size = new System.Drawing.Size(75, 23);
-            this.identityLb.TabIndex = 2;
-            this.identityLb.Text = "labelX2";
-            // 
             // labelX3
             // 
             this.labelX3.BackColor = System.Drawing.Color.Transparent;
@@ -147,7 +132,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(355, 14);
+            this.labelX3.Location = new System.Drawing.Point(355, 16);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(60, 23);
             this.labelX3.TabIndex = 3;
@@ -160,28 +145,12 @@
             this.unitCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.unitCbx.FormattingEnabled = true;
             this.unitCbx.ItemHeight = 19;
-            this.unitCbx.Location = new System.Drawing.Point(421, 14);
+            this.unitCbx.Location = new System.Drawing.Point(421, 15);
             this.unitCbx.Name = "unitCbx";
             this.unitCbx.Size = new System.Drawing.Size(153, 25);
             this.unitCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.unitCbx.TabIndex = 4;
-            this.unitCbx.Visible = false;
             this.unitCbx.SelectedIndexChanged += new System.EventHandler(this.unitCbx_SelectedIndexChanged);
-            // 
-            // unitLb
-            // 
-            this.unitLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.unitLb.BackgroundStyle.Class = "";
-            this.unitLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.unitLb.Location = new System.Drawing.Point(453, 15);
-            this.unitLb.Name = "unitLb";
-            this.unitLb.Size = new System.Drawing.Size(171, 23);
-            this.unitLb.TabIndex = 5;
-            this.unitLb.Text = "labelX4";
-            this.unitLb.Visible = false;
             // 
             // addBtn
             // 
@@ -225,11 +194,40 @@
             this.leaveBtn.Text = "離開";
             this.leaveBtn.Click += new System.EventHandler(this.leaveBtn_Click);
             // 
+            // cbxIdentity
+            // 
+            this.cbxIdentity.DisplayMember = "Text";
+            this.cbxIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxIdentity.FormattingEnabled = true;
+            this.cbxIdentity.ItemHeight = 19;
+            this.cbxIdentity.Location = new System.Drawing.Point(78, 15);
+            this.cbxIdentity.Name = "cbxIdentity";
+            this.cbxIdentity.Size = new System.Drawing.Size(121, 25);
+            this.cbxIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxIdentity.TabIndex = 9;
+            // 
+            // identityLb
+            // 
+            this.identityLb.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.identityLb.BackgroundStyle.Class = "";
+            this.identityLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.identityLb.ForeColor = System.Drawing.Color.Blue;
+            this.identityLb.Location = new System.Drawing.Point(72, 16);
+            this.identityLb.Name = "identityLb";
+            this.identityLb.Size = new System.Drawing.Size(117, 23);
+            this.identityLb.TabIndex = 2;
+            this.identityLb.Text = "會議室模組管理者";
+            this.identityLb.Visible = false;
+            // 
             // ManageUnitAdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 406);
+            this.Controls.Add(this.cbxIdentity);
             this.Controls.Add(this.leaveBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.addBtn);
@@ -238,10 +236,10 @@
             this.Controls.Add(this.identityLb);
             this.Controls.Add(this.dataGridViewX1);
             this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.unitLb);
             this.DoubleBuffered = true;
             this.Name = "ManageUnitAdminForm";
             this.Text = "設定單位管理員";
+            this.Load += new System.EventHandler(this.ManageUnitAdminForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
 
@@ -256,12 +254,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private DevComponents.DotNetBar.LabelX identityLb;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.Controls.ComboBoxEx unitCbx;
-        private DevComponents.DotNetBar.LabelX unitLb;
         private DevComponents.DotNetBar.ButtonX addBtn;
         private DevComponents.DotNetBar.ButtonX deleteBtn;
         private DevComponents.DotNetBar.ButtonX leaveBtn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxIdentity;
+        private DevComponents.DotNetBar.LabelX identityLb;
     }
 }

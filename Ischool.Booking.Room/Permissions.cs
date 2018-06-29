@@ -52,6 +52,31 @@ namespace Ischool.Booking.Room
             }
         }
 
+        public static string 匯出會議室清單 { get { return "0CB5F779-97B7-4950-877F-DE8731F4F63C"; } }
+        public static bool 匯出會議室清單權限
+        {
+            get
+            {
+                return FISCA.Permission.UserAcl.Current[匯出會議室清單].Executable;
+            }
+        }
 
+        public static string 匯入會議室清單 { get { return "1B4FE9E3-E763-4E2D-9F5D-92979A18CEC1"; } }
+        public static bool 匯入會議室清單權限
+        {
+            get
+            {
+                return FISCA.Permission.UserAcl.Current[匯入會議室清單].Executable;
+            }
+        }
+
+        public static string 統計會議室使用狀況 { get { return "40111E44-1A30-4D3C-9D43-3069F7F46014"; } }
+        public static bool 統計會議室使用狀況權限
+        {
+            get
+            {
+                return FISCA.Permission.UserAcl.Current[統計會議室使用狀況].Executable;
+            }
+        }
     }
 }

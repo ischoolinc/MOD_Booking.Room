@@ -102,20 +102,22 @@ WHERE
         public void ReloadDataGridview()
         {
             // 取得未指定系統管理員的老師清單
-            string sql = @"
-SELECT 
-    teacher.* 
+            string sql = string.Format(@"
+SELECT DISTINCT
+    teacher.*
 FROM 
-    teacher 
-    LEFT OUTER JOIN $ischool.booking.meetingroom_system_admin AS system_admin
-        ON teacher.id = system_admin.ref_teacher_id
-    LEFT OUTER JOIN $ischool.booking.meetingroom_unit_admin AS unit_admin
-        ON teacher.id = unit_admin.ref_teacher_id
+    teacher
+    LEFT OUTER JOIN _login
+        ON teacher.st_login_name = _login.login_name
+    LEFT OUTER JOIN _lr_belong
+        ON _login.id = _lr_belong._login_id
+            AND _lr_belong._role_id = {0}
 WHERE 
-    status = 1
-    AND system_admin.uid IS NULL
-    AND unit_admin.uid IS NULL
-";
+     _lr_belong.id IS NULL
+    AND teacher.teacher_name IS NOT NULL
+    AND teacher.status = 1
+            ",Program._roleAdminID);
+
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
 
@@ -145,7 +147,6 @@ WHERE
                 datarow.Cells[index++].Value = gender;
                 datarow.Cells[index++].Value = "" + row["st_login_name"];
                 datarow.Cells[index++].Value = "" + row["dept"];
-                datarow.Cells[index++].Value = "指定";
                 datarow.Tag = "" + row["id"];   // 老師系統編號
                 dataGridViewX1.Rows.Add(datarow);
             }
@@ -236,11 +237,9 @@ WHERE
             {
                 int col = e.ColumnIndex;
                 int row = e.RowIndex;
-                if (col == 5)
-                {
-                    unitBossTbx.Text = "" + dataGridViewX1.Rows[row].Cells[0].Value;
-                    unitBossTbx.Tag = dataGridViewX1.Rows[row].Tag;  // 教師編號
-                }
+
+                unitBossTbx.Text = "" + dataGridViewX1.Rows[row].Cells[0].Value;
+                unitBossTbx.Tag = dataGridViewX1.Rows[row].Tag;  // 教師編號
             }
         }
 
@@ -458,7 +457,8 @@ WITH data_row AS(
     FROM
         $ischool.booking.meetingroom_unit_admin
     WHERE
-        ref_unit_id = (SELECT unit_id FROM data_row )
+        ref_unit_id IN (SELECT unit_id FROM data_row )
+        AND is_boss = 'true'
     RETURNING account
 ) , insert_unit_admin AS(
     INSERT INTO $ischool.booking.meetingroom_unit_admin(
@@ -488,8 +488,10 @@ WITH data_row AS(
                 id
             FROM
                 _login
+                LEFT OUTER JOIN delete_unit_admin
+                        ON _login.login_name = delete_unit_admin.account
             WHERE
-                login_name =  delete_unit_admin.account
+                delete_unit_admin.account IS NOT NULL
         )
 ) ,insert_login AS(
     INSERT INTO _login(
@@ -544,7 +546,8 @@ WITH data_row AS(
     FROM
         $ischool.booking.meetingroom_unit_admin
     WHERE
-        ref_unit_id = (SELECT unit_id FROM data_row )
+        ref_unit_id IN (SELECT unit_id FROM data_row )
+        AND is_boss = 'true'
     RETURNING account
 ) , insert_unit_admin AS(
     INSERT INTO $ischool.booking.meetingroom_unit_admin(

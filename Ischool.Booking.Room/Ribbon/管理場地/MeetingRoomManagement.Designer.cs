@@ -31,21 +31,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
-            this.actorLb = new DevComponents.DotNetBar.LabelX();
-            this.unitLb = new DevComponents.DotNetBar.LabelX();
-            this.unitCbx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.cbxUnit = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.addBtn = new DevComponents.DotNetBar.ButtonX();
             this.updateBtn = new DevComponents.DotNetBar.ButtonX();
             this.deleteBtn = new DevComponents.DotNetBar.ButtonX();
             this.leaveBtn = new DevComponents.DotNetBar.ButtonX();
+            this.cbxIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.lblSysAdminRole = new DevComponents.DotNetBar.LabelX();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             this.dataGridViewX1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
+            this.Column7,
             this.Column3,
             this.Column4,
             this.Column6,
@@ -81,8 +83,138 @@
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
-            this.dataGridViewX1.Size = new System.Drawing.Size(775, 351);
+            this.dataGridViewX1.Size = new System.Drawing.Size(824, 351);
             this.dataGridViewX1.TabIndex = 0;
+            // 
+            // labelX1
+            // 
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(256, 10);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(60, 23);
+            this.labelX1.TabIndex = 1;
+            this.labelX1.Text = "管理單位";
+            // 
+            // labelX2
+            // 
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(12, 10);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(60, 23);
+            this.labelX2.TabIndex = 2;
+            this.labelX2.Text = "管理身分";
+            // 
+            // cbxUnit
+            // 
+            this.cbxUnit.DisplayMember = "Text";
+            this.cbxUnit.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxUnit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxUnit.FormattingEnabled = true;
+            this.cbxUnit.ItemHeight = 19;
+            this.cbxUnit.Location = new System.Drawing.Point(318, 9);
+            this.cbxUnit.Name = "cbxUnit";
+            this.cbxUnit.Size = new System.Drawing.Size(132, 25);
+            this.cbxUnit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxUnit.TabIndex = 5;
+            this.cbxUnit.SelectedIndexChanged += new System.EventHandler(this.unitCbx_SelectedIndexChanged_1);
+            // 
+            // addBtn
+            // 
+            this.addBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.addBtn.BackColor = System.Drawing.Color.Transparent;
+            this.addBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.addBtn.Location = new System.Drawing.Point(517, 398);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.addBtn.TabIndex = 6;
+            this.addBtn.Text = "新增";
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            // 
+            // updateBtn
+            // 
+            this.updateBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.updateBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.updateBtn.BackColor = System.Drawing.Color.Transparent;
+            this.updateBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.updateBtn.Location = new System.Drawing.Point(598, 398);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(75, 23);
+            this.updateBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.updateBtn.TabIndex = 7;
+            this.updateBtn.Text = "修改";
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.deleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteBtn.BackColor = System.Drawing.Color.Transparent;
+            this.deleteBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.deleteBtn.Location = new System.Drawing.Point(679, 398);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.deleteBtn.TabIndex = 8;
+            this.deleteBtn.Text = "刪除";
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
+            // leaveBtn
+            // 
+            this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
+            this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.leaveBtn.Location = new System.Drawing.Point(760, 398);
+            this.leaveBtn.Name = "leaveBtn";
+            this.leaveBtn.Size = new System.Drawing.Size(75, 23);
+            this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.leaveBtn.TabIndex = 9;
+            this.leaveBtn.Text = "離開";
+            this.leaveBtn.Click += new System.EventHandler(this.leaveBtn_Click);
+            // 
+            // cbxIdentity
+            // 
+            this.cbxIdentity.DisplayMember = "Text";
+            this.cbxIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxIdentity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxIdentity.FormattingEnabled = true;
+            this.cbxIdentity.ItemHeight = 19;
+            this.cbxIdentity.Location = new System.Drawing.Point(78, 9);
+            this.cbxIdentity.Name = "cbxIdentity";
+            this.cbxIdentity.Size = new System.Drawing.Size(121, 25);
+            this.cbxIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxIdentity.TabIndex = 10;
+            this.cbxIdentity.Visible = false;
+            this.cbxIdentity.SelectedIndexChanged += new System.EventHandler(this.identityCbx_SelectedIndexChanged);
+            // 
+            // lblSysAdminRole
+            // 
+            this.lblSysAdminRole.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.lblSysAdminRole.BackgroundStyle.Class = "";
+            this.lblSysAdminRole.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblSysAdminRole.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lblSysAdminRole.ForeColor = System.Drawing.Color.Blue;
+            this.lblSysAdminRole.Location = new System.Drawing.Point(76, 9);
+            this.lblSysAdminRole.Name = "lblSysAdminRole";
+            this.lblSysAdminRole.Size = new System.Drawing.Size(121, 25);
+            this.lblSysAdminRole.TabIndex = 11;
+            this.lblSysAdminRole.Text = "會議室模組管理者";
+            this.lblSysAdminRole.Visible = false;
             // 
             // Column1
             // 
@@ -96,17 +228,26 @@
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "場地狀態";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 83;
+            // 
             // Column3
             // 
             this.Column3.HeaderText = "容納人數";
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
+            this.Column3.Width = 83;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "特殊場地";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
+            this.Column4.Width = 83;
             // 
             // Column6
             // 
@@ -125,146 +266,18 @@
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // labelX1
-            // 
-            this.labelX1.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.Class = "";
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(256, 12);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(60, 23);
-            this.labelX1.TabIndex = 1;
-            this.labelX1.Text = "管理單位";
-            // 
-            // labelX2
-            // 
-            this.labelX2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(12, 12);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(60, 23);
-            this.labelX2.TabIndex = 2;
-            this.labelX2.Text = "管理身分";
-            // 
-            // actorLb
-            // 
-            this.actorLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.actorLb.BackgroundStyle.Class = "";
-            this.actorLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.actorLb.ForeColor = System.Drawing.Color.Blue;
-            this.actorLb.Location = new System.Drawing.Point(72, 12);
-            this.actorLb.Name = "actorLb";
-            this.actorLb.Size = new System.Drawing.Size(75, 23);
-            this.actorLb.TabIndex = 3;
-            this.actorLb.Text = "actorLb";
-            // 
-            // unitLb
-            // 
-            this.unitLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.unitLb.BackgroundStyle.Class = "";
-            this.unitLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.unitLb.ForeColor = System.Drawing.Color.Blue;
-            this.unitLb.Location = new System.Drawing.Point(315, 12);
-            this.unitLb.Name = "unitLb";
-            this.unitLb.Size = new System.Drawing.Size(250, 23);
-            this.unitLb.TabIndex = 4;
-            this.unitLb.Text = "labelX4";
-            // 
-            // unitCbx
-            // 
-            this.unitCbx.DisplayMember = "Text";
-            this.unitCbx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.unitCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.unitCbx.FormattingEnabled = true;
-            this.unitCbx.ItemHeight = 19;
-            this.unitCbx.Location = new System.Drawing.Point(318, 11);
-            this.unitCbx.Name = "unitCbx";
-            this.unitCbx.Size = new System.Drawing.Size(132, 25);
-            this.unitCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.unitCbx.TabIndex = 5;
-            this.unitCbx.SelectedIndexChanged += new System.EventHandler(this.unitCbx_SelectedIndexChanged);
-            // 
-            // addBtn
-            // 
-            this.addBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.addBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.addBtn.BackColor = System.Drawing.Color.Transparent;
-            this.addBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.addBtn.Location = new System.Drawing.Point(468, 398);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(75, 23);
-            this.addBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.addBtn.TabIndex = 6;
-            this.addBtn.Text = "新增";
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
-            // updateBtn
-            // 
-            this.updateBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.updateBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.updateBtn.BackColor = System.Drawing.Color.Transparent;
-            this.updateBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.updateBtn.Location = new System.Drawing.Point(549, 398);
-            this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(75, 23);
-            this.updateBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.updateBtn.TabIndex = 7;
-            this.updateBtn.Text = "修改";
-            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
-            // 
-            // deleteBtn
-            // 
-            this.deleteBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.deleteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.deleteBtn.BackColor = System.Drawing.Color.Transparent;
-            this.deleteBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.deleteBtn.Location = new System.Drawing.Point(630, 398);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
-            this.deleteBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.deleteBtn.TabIndex = 8;
-            this.deleteBtn.Text = "刪除";
-            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
-            // 
-            // leaveBtn
-            // 
-            this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
-            this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(711, 398);
-            this.leaveBtn.Name = "leaveBtn";
-            this.leaveBtn.Size = new System.Drawing.Size(75, 23);
-            this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.leaveBtn.TabIndex = 9;
-            this.leaveBtn.Text = "離開";
-            this.leaveBtn.Click += new System.EventHandler(this.leaveBtn_Click);
-            // 
             // MeetingRoomManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(798, 431);
+            this.ClientSize = new System.Drawing.Size(847, 431);
+            this.Controls.Add(this.lblSysAdminRole);
+            this.Controls.Add(this.cbxIdentity);
             this.Controls.Add(this.leaveBtn);
             this.Controls.Add(this.deleteBtn);
             this.Controls.Add(this.updateBtn);
             this.Controls.Add(this.addBtn);
-            this.Controls.Add(this.unitCbx);
-            this.Controls.Add(this.unitLb);
-            this.Controls.Add(this.actorLb);
+            this.Controls.Add(this.cbxUnit);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.dataGridViewX1);
@@ -272,7 +285,8 @@
             this.MaximizeBox = true;
             this.MinimizeBox = true;
             this.Name = "MeetingRoomManagement";
-            this.Text = "管理場地";
+            this.Text = "管理會議室";
+            this.Load += new System.EventHandler(this.MeetingRoomManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
 
@@ -283,15 +297,16 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.LabelX labelX2;
-        private DevComponents.DotNetBar.LabelX actorLb;
-        private DevComponents.DotNetBar.LabelX unitLb;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx unitCbx;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxUnit;
         private DevComponents.DotNetBar.ButtonX addBtn;
         private DevComponents.DotNetBar.ButtonX updateBtn;
         private DevComponents.DotNetBar.ButtonX deleteBtn;
         private DevComponents.DotNetBar.ButtonX leaveBtn;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxIdentity;
+        private DevComponents.DotNetBar.LabelX lblSysAdminRole;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +39,6 @@
             this.Column4 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitLb = new DevComponents.DotNetBar.LabelX();
             this.unitCbx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.actorLb = new DevComponents.DotNetBar.LabelX();
@@ -55,6 +54,7 @@
             this.cancelBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionCbx = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.cbxIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).BeginInit();
@@ -81,14 +81,14 @@
             this.Column4,
             this.Column7,
             this.Column8});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 92);
             this.dataGridViewX1.MultiSelect = false;
@@ -158,20 +158,6 @@
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 
-            // unitLb
-            // 
-            this.unitLb.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.unitLb.BackgroundStyle.Class = "";
-            this.unitLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.unitLb.Location = new System.Drawing.Point(280, 12);
-            this.unitLb.Name = "unitLb";
-            this.unitLb.Size = new System.Drawing.Size(122, 23);
-            this.unitLb.TabIndex = 3;
-            this.unitLb.Text = "labelX4";
-            // 
             // unitCbx
             // 
             this.unitCbx.DisplayMember = "Text";
@@ -211,9 +197,10 @@
             this.actorLb.ForeColor = System.Drawing.Color.Blue;
             this.actorLb.Location = new System.Drawing.Point(71, 12);
             this.actorLb.Name = "actorLb";
-            this.actorLb.Size = new System.Drawing.Size(92, 23);
+            this.actorLb.Size = new System.Drawing.Size(120, 23);
             this.actorLb.TabIndex = 1;
-            this.actorLb.Text = "actor";
+            this.actorLb.Text = "會議室模組管理者";
+            this.actorLb.Visible = false;
             // 
             // labelX1
             // 
@@ -456,16 +443,29 @@
             this.labelX4.TabIndex = 16;
             this.labelX4.Text = "說明 : 畫面只會顯示須審核的申請紀錄，或者可勾選左上\r\n          方檢視所有申請紀錄按鈕，總覽會議室所有申請紀錄。";
             // 
+            // cbxIdentity
+            // 
+            this.cbxIdentity.DisplayMember = "Text";
+            this.cbxIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxIdentity.FormattingEnabled = true;
+            this.cbxIdentity.ItemHeight = 19;
+            this.cbxIdentity.Location = new System.Drawing.Point(78, 10);
+            this.cbxIdentity.Name = "cbxIdentity";
+            this.cbxIdentity.Size = new System.Drawing.Size(100, 25);
+            this.cbxIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxIdentity.TabIndex = 17;
+            this.cbxIdentity.Visible = false;
+            // 
             // ReviewForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(871, 556);
+            this.Controls.Add(this.cbxIdentity);
             this.Controls.Add(this.labelX4);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.actorLb);
             this.Controls.Add(this.labelX3);
-            this.Controls.Add(this.unitLb);
             this.Controls.Add(this.conditionCbx);
             this.Controls.Add(this.unitCbx);
             this.Controls.Add(this.labelX2);
@@ -479,6 +479,7 @@
             this.DoubleBuffered = true;
             this.Name = "ReviewForm";
             this.Text = "審核作業";
+            this.Load += new System.EventHandler(this.ReviewForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.starTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).EndInit();
@@ -489,7 +490,6 @@
 
         #endregion
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
-        private DevComponents.DotNetBar.LabelX unitLb;
         private DevComponents.DotNetBar.Controls.ComboBoxEx unitCbx;
         private DevComponents.DotNetBar.LabelX labelX3;
         private DevComponents.DotNetBar.LabelX actorLb;
@@ -513,5 +513,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private DevComponents.DotNetBar.LabelX labelX4;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxIdentity;
     }
 }

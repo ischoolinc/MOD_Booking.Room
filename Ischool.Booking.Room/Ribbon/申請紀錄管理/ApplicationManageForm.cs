@@ -35,43 +35,16 @@ namespace Ischool.Booking.Room
         /// </summary>
         public bool _initFinish { get; set; }
 
+        /// <summary>
+        /// 使用者身分
+        /// </summary>
+        Actor actor = Actor.Instance;
+
+        RoleUnitDecorator decorator;
+
         public ReviewForm()
-        {
-            _initFinish = false;
+        {            
             InitializeComponent();
-
-            string identity = Actor.Identity;
-            actorLb.Text = identity;
-
-            // Init 日期區間
-            starTime.Text = DateTime.Now.ToShortDateString();
-            endTime.Text = DateTime.Now.AddDays(7).ToShortDateString();
-            
-            AccessHelper access = new AccessHelper();
-            
-            if (identity == "系統管理員")
-            {
-                unitLb.Visible = false;
-                List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
-                foreach (UDT.MeetingRoomUnit unit in unitList)
-                {
-                    unitCbx.Items.Add(unit.Name);
-                    unitDic.Add(unit.Name,unit.UID);
-                }
-                unitCbx.SelectedIndex = 0;
-            }
-            if (identity == "單位管理員" || identity == "單位主管")
-            {
-                unitCbx.Visible = false;
-
-                UnitRecord ur = BookingRecord.SelectUnitByAccount(Actor.Account);
-                
-                unitLb.Text = ur.Name;
-                _unitID = ur.UID;
-                ReloadRoomCbx(_unitID);
-            }
-
-            _initFinish = true;
         }
 
         public void ReloadRoomCbx(string unitID)
@@ -324,8 +297,9 @@ WHERE
 
         private void unitCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string unitName = "" + unitCbx.Items[unitCbx.SelectedIndex];
-            _unitID = unitDic[unitName];
+            //string unitName = "" + unitCbx.Items[unitCbx.SelectedIndex];
+
+            _unitID = unitDic[unitCbx.Text];
 
             ReloadRoomCbx(_unitID);
         }
@@ -441,6 +415,25 @@ WHERE
             this.Close();
         }
 
-        
+        private void ReviewForm_Load(object sender, EventArgs e)
+        {
+            _initFinish = false;
+
+            // Init unitDic 供ReloadDataGridView使用
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> listUnit = access.Select<UDT.MeetingRoomUnit>();
+            foreach (UDT.MeetingRoomUnit unit in listUnit)
+            {
+                unitDic.Add(unit.Name, unit.UID);
+            }
+
+            // Init 日期區間
+            starTime.Text = DateTime.Now.ToShortDateString();
+            endTime.Text = DateTime.Now.AddDays(7).ToShortDateString();
+
+            this.decorator = new RoleUnitDecorator(actorLb,cbxIdentity,unitCbx);
+
+            _initFinish = true;
+        }
     }
 }

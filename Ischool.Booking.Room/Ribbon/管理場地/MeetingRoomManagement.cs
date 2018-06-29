@@ -15,54 +15,31 @@ namespace Ischool.Booking.Room
 {
     public partial class MeetingRoomManagement : BaseForm
     {
+        /// <summary>
+        /// Name / UID
+        /// </summary>
         Dictionary<string, string> unitDic = new Dictionary<string, string>();
         AccessHelper _access = new AccessHelper();
-        string _unitID;
+
+        /// <summary>
+        /// 使用者身分
+        /// </summary>
+        Actor actor = Actor.Instance;
+
+        RoleUnitDecorator decorator;
 
         public MeetingRoomManagement()
         {
             InitializeComponent();
-
-            #region 確認身分
-            string identity = Actor.Identity;
-            
-            actorLb.Text = identity;
-            List<UDT.MeetingRoomUnit> unitList = _access.Select<UDT.MeetingRoomUnit>();
-            foreach (UDT.MeetingRoomUnit unit in unitList)
-            {
-                unitCbx.Items.Add(unit.Name);
-                unitDic.Add(unit.Name, unit.UID);
-            }
-            // 沒有所屬單位的場地
-            unitCbx.Items.Add("--未指定--");
-            unitDic.Add("--未指定--","");
-
-            if (identity == "系統管理員")
-            {
-                unitLb.Visible = false;
-                if (unitCbx.Items.Count > 0)
-                {
-                    unitCbx.SelectedIndex = 0;
-                }
-                _unitID = unitDic["" + unitCbx.Items[unitCbx.SelectedIndex]];
-                ReloadDataGridView();
-            }
-            if (identity == "單位主管" || identity == "單位管理員")
-            {
-                unitCbx.Visible = false;
-                UnitRecord ur = BookingRecord.SelectUnitByAccount(Actor.Account);
-                unitLb.Text = ur.Name;
-                _unitID = unitDic[unitLb.Text];
-                ReloadDataGridView();
-            }
-            #endregion
         }
 
         public void ReloadDataGridView()
         {
             dataGridViewX1.Rows.Clear();
 
-            Dictionary<string, MeetingRoomRecord> dataDic = BookingRecord.SelectMeetingRoomByUnitID(_unitID);
+            string unitID = unitDic[cbxUnit.Text];
+
+            Dictionary<string, MeetingRoomRecord> dataDic = BookingRecord.SelectMeetingRoomByUnitID(unitID);
 
             int rowIndex = 0;
             foreach (string roomID in dataDic.Keys)
@@ -74,6 +51,7 @@ namespace Ischool.Booking.Room
 
                 datarow.Cells[index++].Value = dataDic[roomID].Name;
                 datarow.Cells[index++].Value = dataDic[roomID].Building;
+                datarow.Cells[index++].Value = dataDic[roomID].Status;
                 datarow.Cells[index++].Value = dataDic[roomID].Capacity;
                 datarow.Cells[index++].Value = dataDic[roomID].IsSpecial == "true" ? "是" : "否";
                 datarow.Cells[index++].Value = dataDic[roomID].CreatedName;
@@ -96,7 +74,16 @@ namespace Ischool.Booking.Room
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            EditForm form = new EditForm("新增",_unitID);
+            string unitID = unitDic[cbxUnit.Text];
+            EditForm form;
+            if (actor.isSysAdmin())
+            {
+                form = new EditForm("新增", unitID,"會議室模組管理者");
+            }
+            else
+            {
+                form = new EditForm("新增", unitID,cbxIdentity.Text);
+            }
             form.FormClosed += delegate {
                 ReloadDataGridView();
             };
@@ -107,7 +94,16 @@ namespace Ischool.Booking.Room
         {
             int row = dataGridViewX1.SelectedCells[0].RowIndex;
             string roomID = "" + dataGridViewX1.Rows[row].Tag;
-            EditForm form = new EditForm("修改", roomID);
+            EditForm form;
+            if (actor.isSysAdmin())
+            {
+                form = new EditForm("修改", roomID, "會議室模組管理者");
+            }
+            else
+            {
+                form = new EditForm("修改", roomID, cbxIdentity.Text);
+            }
+
             form.FormClosed += delegate {
                 ReloadDataGridView();
             };
@@ -160,10 +156,53 @@ namespace Ischool.Booking.Room
             }
         }
 
-        private void unitCbx_SelectedIndexChanged(object sender, EventArgs e)
+        private void identityCbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _unitID = unitDic["" + unitCbx.Items[unitCbx.SelectedIndex]];
+            string identity = cbxIdentity.Text;
+            ReloadUnit(identity);
+        }
+
+        private void unitCbx_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
             ReloadDataGridView();
+        }
+
+        public void ReloadUnit(string identity)
+        {
+            cbxUnit.Items.Clear();
+
+            if (identity == "單位管理員")
+            {
+                foreach (DAO.UnitRoleInfo unit in actor.getUnitAdminUnits())
+                {
+                    cbxUnit.Items.Add(unit.Name);
+                }
+                
+            }
+            else if (identity == "單位主管")
+            {
+                foreach(DAO.UnitRoleInfo unit in actor.getBossUnits())
+                {
+                    cbxUnit.Items.Add(unit.Name);
+                }
+            }
+        }
+
+        private void MeetingRoomManagement_Load(object sender, EventArgs e)
+        {
+            // Init unitDic 供ReloadDataGridView使用
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> listUnit = access.Select<UDT.MeetingRoomUnit>();
+            foreach (UDT.MeetingRoomUnit unit in listUnit)
+            {
+                unitDic.Add(unit.Name, unit.UID);
+            }
+
+            unitDic.Add("--未指定--", "");
+
+            // Init 畫面
+            this.decorator = new RoleUnitDecorator(this.lblSysAdminRole, this.cbxIdentity, this.cbxUnit ,true);
+            
         }
     }    
 }

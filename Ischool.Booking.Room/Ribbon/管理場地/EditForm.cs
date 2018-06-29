@@ -14,101 +14,26 @@ namespace Ischool.Booking.Room
 {
     public partial class EditForm : BaseForm
     {
-        string _unitID;
-        string _roomID;
-        string _mode;
+        private string _unitID;
+        private string _roomID;
+        private string _mode;
+        private string _identity;
 
         Dictionary<string, string> _unitNameDic = new Dictionary<string, string>();
 
-        
+        /// <summary>
+        /// 使用者身分
+        /// </summary>
+        Actor actor = Actor.Instance;
+
         // 新增傳 unitID ; 修改傳 roomID
-        public EditForm(string mode,string ID)
+        public EditForm(string mode,string ID,string identity)
         {
             InitializeComponent();
 
-            _mode = mode;
-
-            AccessHelper access = new AccessHelper();
-
-            #region unitCbx
-
-            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
-
-            foreach (UDT.MeetingRoomUnit unit in unitList)
-            {
-                _unitNameDic.Add(unit.Name, unit.UID);
-
-                unitCbx.Items.Add(unit.Name);
-            }
-
-            unitCbx.SelectedIndex = 0;
-
-            #endregion
-
-            if (mode == "新增")
-            {
-                _unitID = ID;
-                if (ID != "")
-                {
-                    List<UDT.MeetingRoomUnit> _unit = access.Select<UDT.MeetingRoomUnit>("uid = " + ID);
-                    unitTbx.Text = _unit[0].Name;
-                }
-                
-                unitCbx.Visible = false;
-            }
-            if (mode == "修改")
-            {
-                unitTbx.Visible = false;
-
-                _roomID = ID;
-
-                #region Init
-
-                
-
-                List<UDT.MeetingRoom> roomList = access.Select<UDT.MeetingRoom>("uid = "+ _roomID);
-                List<UDT.MeetingRoomEquipment> equipmentList = access.Select<UDT.MeetingRoomEquipment>("ref_meetingroom_id = "+ _roomID);
-
-                roomNameTbx.Text = roomList[0].Name;
-                buildingTbx.Text = roomList[0].Building;
-                capacityTbx.Text = "" + roomList[0].Capacity;
-                isSpecialCbx.Checked = roomList[0].IsSpecial;
-                _unitID = "" + roomList[0].RefUnitID;
-                pictureBox1.ImageLocation = "" + roomList[0].Picture;
-                if (("" + roomList[0].Picture) != "")
-                {
-                    try
-                    {
-                        System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
-                        pictureBox1.Load();
-                    }
-                    catch(Exception ex)
-                    {
-                        MsgBox.Show(ex.Message);
-                    }
-                    
-                }
-                
-                pictureURLTbx.Text = "" + roomList[0].Picture;
-
-                foreach (UDT.MeetingRoomEquipment equipment in equipmentList)
-                {
-                    DataGridViewRow datarow = new DataGridViewRow();
-                    datarow.CreateCells(dataGridViewX1);
-
-                    int index = 0;
-                    datarow.Cells[index++].Value = equipment.Name;
-                    datarow.Cells[index++].Value = equipment.Count;
-                    datarow.Cells[index++].Value = equipment.Status;
-                    datarow.Tag = equipment.UID;
-
-                    dataGridViewX1.Rows.Add(datarow);
-                }
-
-                #endregion
-
-            }
+            this._unitID = ID;
+            this._mode = mode;
+            this._identity = identity;
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
@@ -174,7 +99,8 @@ SELECT
     ,'{5}'::TIMESTAMP AS create_time
     ,'{6}'::TEXT AS picture
     ,'{7}'::TEXT AS created_by
-                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID == "" ? "null" : _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account);
+    ,'{8}'::TEXT AS status
+                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID == "" ? "null" : _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account,cbxStatus.Text);
 
 
                 List<string> equipmentDataList = new List<string>();
@@ -215,6 +141,7 @@ WITH meetingroom_data AS(
         , create_time
         , picture
         , created_by
+        , status
     )
     SELECT
         *
@@ -254,6 +181,7 @@ INSERT INTO $ischool.booking.meetingroom(
     , create_time
     , picture
     , created_by
+    , status
 )
 SELECT
     *
@@ -281,7 +209,8 @@ SELECT
     ,'{6}'::TIMESTAMP AS create_time
     ,'{7}'::TEXT AS picture
     ,'{8}'::TEXT AS created_by
-                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text, Actor.Account);
+    ,'{9}'::TEXT AS status
+                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text, Actor.Account,cbxStatus.Text);
 
                 List<string> equipmentDataList = new List<string>();
 
@@ -327,6 +256,7 @@ WITH meetingroom_data AS(
         , create_time = meetingroom_data.create_time
         , picture = meetingroom_data.picture
         , created_by = meetingroom_data.created_by
+        , status = meetingroom_data.status
     FROM
         meetingroom_data
     WHERE
@@ -395,6 +325,7 @@ WITH meetingroom_data AS(
         , create_time = meetingroom_data.create_time
         , picture = meetingroom_data.picture
         , created_by = meetingroom_data.created_by
+        , status = meetingroom_data.status
     FROM
         meetingroom_data
     WHERE
@@ -541,6 +472,113 @@ WHERE
                 picError = ex.Message;
             }
             
+        }
+
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+            cbxStatus.SelectedIndex = 0;
+            // 整理所有管理單位 名稱與編號 供 unitCbx 使用
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
+
+            foreach (UDT.MeetingRoomUnit unit in unitList)
+            {
+                _unitNameDic.Add(unit.Name, unit.UID);
+            }
+
+            InitCbxUnit(this._mode);
+        }
+
+        public void InitCbxUnit(string mode)
+        {
+            AccessHelper access = new AccessHelper();
+            
+            if (_mode == "新增")
+            {
+                ReloadUnitCbx();
+            }
+            if (_mode == "修改")
+            {
+                _roomID = _unitID;
+
+                ReloadUnitCbx();
+
+                #region Init
+
+                List<UDT.MeetingRoom> roomList = access.Select<UDT.MeetingRoom>("uid = " + _roomID);
+                List<UDT.MeetingRoomEquipment> equipmentList = access.Select<UDT.MeetingRoomEquipment>("ref_meetingroom_id = " + _roomID);
+
+                roomNameTbx.Text = roomList[0].Name;
+                buildingTbx.Text = roomList[0].Building;
+                capacityTbx.Text = "" + roomList[0].Capacity;
+                isSpecialCbx.Checked = roomList[0].IsSpecial;
+                _unitID = "" + roomList[0].RefUnitID;
+                pictureBox1.ImageLocation = "" + roomList[0].Picture;
+                if (("" + roomList[0].Picture) != "")
+                {
+                    try
+                    {
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+                        System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
+                        pictureBox1.Load();
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgBox.Show(ex.Message);
+                    }
+
+                }
+
+                pictureURLTbx.Text = "" + roomList[0].Picture;
+
+                foreach (UDT.MeetingRoomEquipment equipment in equipmentList)
+                {
+                    DataGridViewRow datarow = new DataGridViewRow();
+                    datarow.CreateCells(dataGridViewX1);
+
+                    int index = 0;
+                    datarow.Cells[index++].Value = equipment.Name;
+                    datarow.Cells[index++].Value = equipment.Count;
+                    datarow.Cells[index++].Value = equipment.Status;
+                    datarow.Tag = equipment.UID;
+
+                    dataGridViewX1.Rows.Add(datarow);
+                }
+
+                #endregion
+
+            }
+        }
+
+        public void ReloadUnitCbx()
+        {
+            if (this._identity == "會議室模組管理者")
+            {
+                foreach (DAO.UnitRoleInfo unit in actor.getUnits())
+                {
+                    unitCbx.Items.Add(unit.Name);
+                }
+                if (unitCbx.Items.Count > 0)
+                    unitCbx.SelectedIndex = 0;
+            }
+            else if (this._identity == "單位管理員")
+            {
+                foreach (DAO.UnitRoleInfo unit in actor.getUnitAdminUnits())
+                {
+                    unitCbx.Items.Add(unit.Name);
+                }
+                if (unitCbx.Items.Count > 0)
+                    unitCbx.SelectedIndex = 0;
+            }
+            else if (this._identity == "單位主管")
+            {
+                foreach (DAO.UnitRoleInfo unit in actor.getBossUnits())
+                {
+                    unitCbx.Items.Add(unit.Name);
+                }
+                if (unitCbx.Items.Count > 0)
+                    unitCbx.SelectedIndex = 0;
+            }
         }
     }
 }

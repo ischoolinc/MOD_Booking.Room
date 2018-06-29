@@ -188,11 +188,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
+    <Compile Include="DAO\Actor.cs" />
     <Compile Include="BookingRecord.cs" />
     <Compile Include="BookingRoomAdmin.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DAO\UnitRoleInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -298,6 +299,7 @@
     <Compile Include="Ribbon\設定系統管理員\SetSystemAdminForm.Designer.cs">
       <DependentUpon>SetSystemAdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RoleUnitDecorator.cs" />
     <Compile Include="UDT\MeetingRoom.cs" />
     <Compile Include="UDT\MeetingRoomApplication.cs" />
     <Compile Include="UDT\MeetingRoomApplicationDetail.cs" />

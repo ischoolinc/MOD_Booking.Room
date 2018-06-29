@@ -18,7 +18,7 @@ namespace Ischool.Booking.Room
         List<UDT.MeetingRoomApplicationDetail> applyDetailList = new List<UDT.MeetingRoomApplicationDetail>();
         List<UDT.MeetingRoom> roomList = new List<UDT.MeetingRoom>();
         TeacherRecord teacherR = new TeacherRecord();
-        Actor actor = new Actor();
+        Actor actor =  Actor.Instance;
         string _applicationID;
 
         public ApplicationCancelForm(string applicationID)

@@ -15,7 +15,7 @@ namespace Ischool.Booking.Room
 {
     public partial class AddSystemAdminForm : BaseForm
     {
-        Actor _actor = new Actor();
+        Actor _actor = Actor.Instance;
 
 
         public AddSystemAdminForm()

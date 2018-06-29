@@ -21,21 +21,25 @@ namespace Ischool.Booking.Room
 
             _unitID = unitID;
 
-            // 取得未指定為系統管理員、單位管理員、單位主管的老師清單
-            string sql = @"
-SELECT 
-    teacher.* 
+            // 取得未指定為會議室模組管理者以及尚未在這個管理單位擔任腳色之教師
+            string sql = string.Format(@"
+SELECT DISTINCT
+    teacher.*
 FROM 
-    teacher 
-    LEFT OUTER JOIN $ischool.booking.meetingroom_system_admin AS system_admin
-        ON teacher.id = system_admin.ref_teacher_id
-    LEFT OUTER JOIN $ischool.booking.meetingroom_unit_admin AS unit_admin
-        ON teacher.id = unit_admin.ref_teacher_id
+    teacher
+    LEFT OUTER JOIN _login
+        ON teacher.st_login_name = _login.login_name
+    LEFT OUTER JOIN _lr_belong
+        ON _login.id = _lr_belong._login_id 
+        AND _lr_belong._role_id = {0}
+    LEFT OUTER JOIN $ischool.booking.equip_unit_admin AS unit_admin
+        ON  teacher.id = unit_admin.ref_teacher_id
+        AND unit_admin.ref_unit_id = {1}
 WHERE 
-    status = 1
-    AND system_admin.uid IS NULL
+    _lr_belong.id IS NULL
     AND unit_admin.uid IS NULL
-";
+    AND teacher.status = 1
+            ",Program._roleAdminID,unitID);
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
 

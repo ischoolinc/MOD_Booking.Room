@@ -20,54 +20,18 @@ namespace Ischool.Booking.Room
         /// <summary>
         /// 使用者身分
         /// </summary>
-        string _identity = Actor.Identity;
+        Actor actor =  Actor.Instance;
 
         /// <summary>
         /// Name/UID
         /// </summary>
         Dictionary<string, string> unitDic = new Dictionary<string, string>();
 
+        RoleUnitDecorator decorator;
+
         public StatisticalReportForm()
         {
             InitializeComponent();
-
-            identifyLb.Text = _identity;
-
-            AccessHelper access = new AccessHelper();
-            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
-            foreach (UDT.MeetingRoomUnit unit in unitList)
-            {
-                unitDic.Add(unit.Name,unit.UID);
-            }
-
-            // 確認身分
-            if (_identity == "系統管理員")
-            {
-                unitCbx.Items.Add("--全部--");
-
-                foreach (UDT.MeetingRoomUnit unit in unitList)
-                {
-                    unitCbx.Items.Add(unit.Name);
-                }
-
-                unitCbx.SelectedIndex = 0;
-            }
-            else if (_identity == "單位管理員")
-            {
-                UnitRecord ur = BookingRecord.SelectUnitByAccount(Actor.Account);
-
-                unitCbx.Items.Add(ur.Name);
-
-                unitCbx.SelectedIndex = 0;
-            }
-
-            #region InitDateTimeInput
-
-            startTime.Text = DateTime.Now.AddDays(-7).ToShortDateString();
-
-            endTime.Text = DateTime.Now.ToShortDateString();
-
-            #endregion
         }
 
         private void printBtn_Click(object sender, EventArgs e)
@@ -184,7 +148,7 @@ GROUP BY
                 sheet.Cells[rowIndex, colIndex].PutValue("" + row["使用次數"]);
                 sheet.Cells[rowIndex, colIndex++].Style = style;
 
-                sheet.Cells[rowIndex, colIndex].PutValue("" + row["使用時數"]);
+                sheet.Cells[rowIndex, colIndex].PutValue(DateTime.Parse("" + row["使用時數"]).ToString("hh"));
                 sheet.Cells[rowIndex, colIndex++].Style = style;
 
             }
@@ -221,6 +185,36 @@ GROUP BY
         private void leaveBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void StatisticalReportForm_Load(object sender, EventArgs e)
+        {
+            AccessHelper access = new AccessHelper();
+            List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
+            foreach (UDT.MeetingRoomUnit unit in unitList)
+            {
+                unitDic.Add(unit.Name, unit.UID);
+            }
+            
+
+            decorator = new RoleUnitDecorator(identifyLb,cbxIdentity,unitCbx);
+
+            // 會議室預約管理者有權限列印所有單位場地使用狀況
+            if (actor.isSysAdmin())
+            {
+                unitCbx.Items.Insert(0,"--全部--");
+            }
+
+            unitCbx.SelectedIndex = 0;
+
+            
+            #region InitDateTimeInput
+
+            startTime.Text = DateTime.Now.AddDays(-7).ToShortDateString();
+
+            endTime.Text = DateTime.Now.ToShortDateString();
+
+            #endregion
         }
     }
 }

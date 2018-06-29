@@ -39,6 +39,7 @@
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.groupPanel1 = new DevComponents.DotNetBar.Controls.GroupPanel();
+            this.cbxIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             ((System.ComponentModel.ISupportInitialize)(this.startTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).BeginInit();
             this.groupPanel1.SuspendLayout();
@@ -64,24 +65,26 @@
             // 
             // 
             // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.identifyLb.BackgroundStyle.Class = "";
+            this.identifyLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.identifyLb.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.identifyLb.Location = new System.Drawing.Point(78, 12);
+            this.identifyLb.Location = new System.Drawing.Point(73, 12);
             this.identifyLb.Name = "identifyLb";
-            this.identifyLb.Size = new System.Drawing.Size(75, 23);
+            this.identifyLb.Size = new System.Drawing.Size(122, 23);
             this.identifyLb.TabIndex = 1;
-            this.identifyLb.Text = "labelX2";
+            this.identifyLb.Text = "會議室模組管理者";
+            this.identifyLb.Visible = false;
             // 
             // labelX3
             // 
+            this.labelX3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelX3.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(180, 12);
+            this.labelX3.Location = new System.Drawing.Point(206, 12);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(60, 23);
             this.labelX3.TabIndex = 2;
@@ -89,12 +92,13 @@
             // 
             // unitCbx
             // 
+            this.unitCbx.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.unitCbx.DisplayMember = "Text";
             this.unitCbx.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.unitCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.unitCbx.FormattingEnabled = true;
             this.unitCbx.ItemHeight = 19;
-            this.unitCbx.Location = new System.Drawing.Point(244, 11);
+            this.unitCbx.Location = new System.Drawing.Point(270, 11);
             this.unitCbx.Name = "unitCbx";
             this.unitCbx.Size = new System.Drawing.Size(115, 25);
             this.unitCbx.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -103,9 +107,10 @@
             // printBtn
             // 
             this.printBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.printBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.printBtn.BackColor = System.Drawing.Color.Transparent;
             this.printBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.printBtn.Location = new System.Drawing.Point(203, 223);
+            this.printBtn.Location = new System.Drawing.Point(229, 223);
             this.printBtn.Name = "printBtn";
             this.printBtn.Size = new System.Drawing.Size(75, 23);
             this.printBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -116,9 +121,10 @@
             // leaveBtn
             // 
             this.leaveBtn.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(284, 223);
+            this.leaveBtn.Location = new System.Drawing.Point(310, 223);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -260,6 +266,9 @@
             // 
             // groupPanel1
             // 
+            this.groupPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupPanel1.BackColor = System.Drawing.Color.Transparent;
             this.groupPanel1.CanvasColor = System.Drawing.SystemColors.Control;
             this.groupPanel1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
@@ -269,7 +278,7 @@
             this.groupPanel1.Controls.Add(this.endTime);
             this.groupPanel1.Location = new System.Drawing.Point(12, 57);
             this.groupPanel1.Name = "groupPanel1";
-            this.groupPanel1.Size = new System.Drawing.Size(347, 157);
+            this.groupPanel1.Size = new System.Drawing.Size(373, 157);
             // 
             // 
             // 
@@ -303,11 +312,24 @@
             this.groupPanel1.TabIndex = 11;
             this.groupPanel1.Text = "統計日期區間";
             // 
+            // cbxIdentity
+            // 
+            this.cbxIdentity.DisplayMember = "Text";
+            this.cbxIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxIdentity.FormattingEnabled = true;
+            this.cbxIdentity.ItemHeight = 19;
+            this.cbxIdentity.Location = new System.Drawing.Point(74, 10);
+            this.cbxIdentity.Name = "cbxIdentity";
+            this.cbxIdentity.Size = new System.Drawing.Size(121, 25);
+            this.cbxIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.cbxIdentity.TabIndex = 12;
+            // 
             // StatisticalReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 258);
+            this.ClientSize = new System.Drawing.Size(397, 258);
+            this.Controls.Add(this.cbxIdentity);
             this.Controls.Add(this.groupPanel1);
             this.Controls.Add(this.leaveBtn);
             this.Controls.Add(this.printBtn);
@@ -318,6 +340,7 @@
             this.DoubleBuffered = true;
             this.Name = "StatisticalReportForm";
             this.Text = "統計場地使用狀況";
+            this.Load += new System.EventHandler(this.StatisticalReportForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.startTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).EndInit();
             this.groupPanel1.ResumeLayout(false);
@@ -338,5 +361,6 @@
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.Controls.GroupPanel groupPanel1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx cbxIdentity;
     }
 }
