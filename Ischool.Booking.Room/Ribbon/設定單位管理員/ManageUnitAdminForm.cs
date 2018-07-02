@@ -86,7 +86,7 @@ WHERE
             string name = "" + dataGridViewX1.Rows[row].Cells[0].Value;
             string teacherAccount = "" + dataGridViewX1.Rows[row].Cells[1].Value;
             int index = unitCbx.SelectedIndex;
-            string unitID = unitDic["" + unitCbx.Items[index]];
+            string unitID = unitDic[unitCbx.Text];
             string loginID = Actor.GetLoginIDByAccount(teacherAccount);
 
             if (identity == "單位主管")
@@ -171,7 +171,8 @@ WHERE
                 unitDic.Add(unit.Name, unit.UID);
             }
 
-            this.decorator = new RoleUnitDecorator(identityLb, cbxIdentity, unitCbx);
+            this.decorator = new RoleUnitDecorator(identityLb, cbxIdentity, unitCbx,false,false);
+
         }
     }
 }

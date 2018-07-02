@@ -14,6 +14,7 @@ namespace Ischool.Booking.Room
         private ComboBoxEx cboRoles;
         private ComboBoxEx cboUnits;
         private bool needUnAssignedItem = false;
+        private bool needUnitAdminRoleItem = true;
 
         public RoleUnitDecorator( LabelX lbl , ComboBoxEx cboRoles , ComboBoxEx cboUnits, bool needUnAssignedItem)
         {
@@ -21,6 +22,17 @@ namespace Ischool.Booking.Room
             this.cboRoles = cboRoles;
             this.cboUnits = cboUnits;
             this.needUnAssignedItem = needUnAssignedItem;
+
+            initialize();
+        }
+
+        public RoleUnitDecorator(LabelX lbl, ComboBoxEx cboRoles, ComboBoxEx cboUnits, bool needUnAssignedItem, bool needUnitAdminRoleItem)
+        {
+            this.lbl = lbl;
+            this.cboRoles = cboRoles;
+            this.cboUnits = cboUnits;
+            this.needUnAssignedItem = needUnAssignedItem;
+            this.needUnitAdminRoleItem = needUnAssignedItem;
 
             initialize();
         }
@@ -39,7 +51,7 @@ namespace Ischool.Booking.Room
             {
                 this.cboRoles.Items.Add("單位主管");
             }
-            if (Actor.Instance.isUnitAdmin())
+            if (Actor.Instance.isUnitAdmin() && needUnitAdminRoleItem)
             {
                 this.cboRoles.Items.Add("單位管理員");
             }

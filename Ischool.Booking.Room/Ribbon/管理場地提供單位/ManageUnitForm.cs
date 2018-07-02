@@ -137,7 +137,7 @@ WITH delete_unit AS(
     FROM
         _lr_belong
     WHERE
-        _login_id = {1}
+        _login_id IN( {1} )
 )
 UPDATE
     $ischool.booking.meetingroom
