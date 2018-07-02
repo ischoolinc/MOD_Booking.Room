@@ -64,10 +64,13 @@ WHERE
                         break;
                 }
 
+                // 避免帳號中有空白的問題
+                string teacherAccount = ("" + row["st_login_name"]).Trim();
+
                 datarow.Cells[index++].Value = "" + row["teacher_name"];
                 datarow.Cells[index++].Value = "" + row["nickname"];
                 datarow.Cells[index++].Value = gender;
-                datarow.Cells[index++].Value = "" + row["st_login_name"];
+                datarow.Cells[index++].Value = teacherAccount;
                 datarow.Cells[index++].Value = "" + row["dept"];
                 datarow.Cells[index++].Value = "指定";
                 datarow.Tag = "" + row["id"];
@@ -92,14 +95,6 @@ WHERE
                     {
                         row.Visible = (row.Cells[0].Value.ToString().IndexOf(searchTbx.Text) > -1);
                     }
-                    //if ("" + row.Cells[0].Value == searchTbx.Text)
-                    //{
-                    //    row.Visible = true;
-                    //}
-                    //else
-                    //{
-                    //    row.Visible = false;
-                    //}
                 }
             }
         }

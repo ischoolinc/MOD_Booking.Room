@@ -62,7 +62,6 @@ namespace Ischool.Booking.Room
 
             #endregion
 
-
             if (mode == "新增")
             {
                 dateLb.Text = "建立日期:   " + DateTime.Now.ToShortDateString();
@@ -286,7 +285,8 @@ WHERE
             string unitName = unitNameTbx.Text;
             string createTime = DateTime.Now.ToShortDateString();
             string createdBy = Actor.Account;
-            string teacherAccount = "" + _teacherDic["" + unitBossTbx.Tag]["st_login_name"];
+            // 避免帳號中有空白的問題
+            string teacherAccount = ("" + _teacherDic["" + unitBossTbx.Tag]["st_login_name"]).Trim();
             string refTeacherID = "" + _teacherDic["" + unitBossTbx.Tag]["id"];
             string isBoss = "true";
             string loginID = Actor.GetLoginIDByAccount(teacherAccount);
