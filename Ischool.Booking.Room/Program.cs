@@ -69,6 +69,7 @@ namespace Ischool.Booking.Room
 
             #region permission
             string permission = @"
+
 <Permissions>
 <Feature Code=""Button0092"" Permission=""None""/>
 <Feature Code=""Button0095"" Permission=""None""/>
@@ -302,6 +303,7 @@ namespace Ischool.Booking.Room
 <Feature Code=""40111E44-1A30-4D3C-9D43-3069F7F46014"" Permission=""Execute""/>
 <Feature Code=""ischool.DiagnosticsMode"" Permission=""None""/>
 <Feature Code=""ischool.AdvancedToolSet"" Permission=""None""/></Permissions>
+
 ";
             #endregion
 
@@ -584,12 +586,28 @@ namespace Ischool.Booking.Room
             {
                 string description = "";
                 string sqlInsert = string.Format(@"
-INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}' )
+WITH insert_role AS(
+    INSERT INTO _role(
+        role_name 
+        , description
+        , permission
+    ) 
+    VALUES (
+        '{0}'
+        ,'{1}'
+        ,'{2}' 
+    )
+    RETURNING _role.id
+)
+SELECT * FROM insert_role
                     ", roleName, description, permission);
 
-                UpdateHelper up = new UpdateHelper();
-                up.Execute(sqlInsert);
+                //UpdateHelper up = new UpdateHelper();
+                //up.Execute(sqlInsert);
+                QueryHelper qh = new QueryHelper();
+                DataTable dt = qh.Select(sqlInsert);
 
+                _roleAdminID = "" + dt.Rows[0]["id"];
             }
         }
 
@@ -602,12 +620,29 @@ INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}'
             {
                 string description = "";
                 string sqlInsert = string.Format(@"
-INSERT INTO _role(role_name , description, permission) VALUES ('{0}','{1}','{2}' )
+WITH insert_role AS(
+    INSERT INTO _role(
+        role_name 
+        , description
+        , permission
+    ) VALUES (
+        '{0}'
+        ,'{1}'
+        ,'{2}' 
+    )
+    RETURNING _role.id
+)
+SELECT * FROM insert_role
                     ", roleName, description, permission);
 
-                UpdateHelper up = new UpdateHelper();
-                up.Execute(sqlInsert);
+                //UpdateHelper up = new UpdateHelper();
+                //up.Execute(sqlInsert);
 
+                QueryHelper qh = new QueryHelper();
+                DataTable dt = qh.Select(sqlInsert);
+
+                _roleID = "" + dt.Rows[0]["id"];
+                
             }
         }
     }
