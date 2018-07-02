@@ -348,7 +348,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MsgBox.Show("此帳號沒有場地預約管理權限!");
+                    MsgBox.Show("此帳號沒有管理會議室權限!");
                 }
             };
 
@@ -393,7 +393,7 @@ namespace Ischool.Booking.Room
                 }
                 else
                 {
-                    MsgBox.Show("此帳號沒有設定場地管理單位權限");
+                    MsgBox.Show("此帳號沒有設定會議室管理單位權限");
                 }
 
             };
@@ -437,7 +437,7 @@ namespace Ischool.Booking.Room
             dataItem["匯出"]["會議室清單"].Enable = Permissions.匯出會議室清單權限;
             dataItem["匯出"]["會議室清單"].Click += delegate
             {
-                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitBoss())
+                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
                 {
                     ExportMeetingRoomForm form = new ExportMeetingRoomForm();
                     form.ShowDialog();
@@ -458,7 +458,7 @@ namespace Ischool.Booking.Room
             dataItem["匯入"]["會議室清單"].Enable = Permissions.匯入會議室清單權限;
             dataItem["匯入"]["會議室清單"].Click += delegate 
             {
-                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitBoss())
+                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
                 {
                     new ImportMeetingRoomData().Execute();
                 }
@@ -478,7 +478,7 @@ namespace Ischool.Booking.Room
             dataItem["報表"]["統計會議室使用狀況"].Enable = Permissions.統計會議室使用狀況權限;
             dataItem["報表"]["統計會議室使用狀況"].Click += delegate 
             {
-                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitBoss())
+                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
                 {
                     StatisticalReportForm form = new StatisticalReportForm();
                     form.ShowDialog();
@@ -502,14 +502,14 @@ namespace Ischool.Booking.Room
             assignment["審核作業"].Enable = Permissions.審核作業權限;
             assignment["審核作業"].Click += delegate
             {
-                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitBoss())
+                if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
                 {
                     ReviewForm form = new ReviewForm();
                     form.ShowDialog();
                 }
                 else
                 {
-                    MsgBox.Show("此帳號沒有場地預約管理權限!");
+                    MsgBox.Show("此帳號沒有使用權限!");
                 }
             };
 

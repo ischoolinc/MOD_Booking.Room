@@ -13,6 +13,7 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\K
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Aspose.Words.xml
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\IntelliSchool.DSA.ClientFramework.xml
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\K12.Presentation.xml
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.BookingRoomAdmin.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ExportMeetingRoomForm.resources
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.StatisticalReportForm.resources
@@ -33,4 +34,4 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\I
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.CoreCompileInputs.cache
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
-C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.BookingRoomAdmin.resources
+C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache

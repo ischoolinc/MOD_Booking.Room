@@ -24,7 +24,7 @@ namespace Ischool.Booking.Room.DAO
         /// </summary>
         public bool IsBoss { get; }
 
-        public UnitRoleInfo(string id, string name, bool isBoss, string teacherID)
+        public UnitRoleInfo(string id, string name, bool isBoss,string teacherID)
         {
             this.ID = id;
             this.Name = name;

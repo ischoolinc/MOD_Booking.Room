@@ -202,7 +202,8 @@ namespace Ischool.Booking.Room
 
             // Init 畫面
             this.decorator = new RoleUnitDecorator(this.lblSysAdminRole, this.cbxIdentity, this.cbxUnit ,true);
-            
+
         }
+
     }    
 }

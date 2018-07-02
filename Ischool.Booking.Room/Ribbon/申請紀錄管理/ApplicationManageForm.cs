@@ -288,7 +288,7 @@ WHERE
                     roomID = meetingroomDic[roomName];
                 }
 
-                string _unitName = "" + unitCbx.Items[unitCbx.SelectedIndex];
+                string _unitName = unitCbx.Text;
                 _unitID = unitDic[_unitName];
 
                 ReloadDataGridView(_unitID, roomID);

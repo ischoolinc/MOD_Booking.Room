@@ -36,11 +36,6 @@ namespace Ischool.Booking.Room
         }
 
         /// <summary>
-        /// 老師系統編號
-        /// </summary>
-        public static int RefTeacherID { get; set; }
-
-        /// <summary>
         /// 透過使用者登入帳號取得_loginID
         /// </summary>
         /// <returns></returns>
@@ -88,7 +83,10 @@ namespace Ischool.Booking.Room
         /// </summary>
         private List<DAO.UnitRoleInfo> _units;
 
-        //private List<UDT.MeetingRoomUnit> allUnits;
+        /// <summary>
+        /// 取得所有管理單位供會議室模組管理者用 
+        /// </summary>
+        private List<DAO.UnitRoleInfo> allUnits;
 
         public bool isSysAdmin()
         {
@@ -116,6 +114,7 @@ namespace Ischool.Booking.Room
         private Actor()
         {
             this._units = new List<DAO.UnitRoleInfo>();
+            this.allUnits = new List<DAO.UnitRoleInfo>();
             //1. 判斷是否是系統管理者
             checkIsAdmin();
 
@@ -127,8 +126,8 @@ namespace Ischool.Booking.Room
             List<UDT.MeetingRoomUnit> listUnit = access.Select<UDT.MeetingRoomUnit>();
             foreach (UDT.MeetingRoomUnit unit in listUnit)
             {
-                DAO.UnitRoleInfo unitRole = new DAO.UnitRoleInfo(unit.UID,unit.Name,false,"");
-                _units.Add(unitRole);
+                DAO.UnitRoleInfo unitRole = new DAO.UnitRoleInfo(unit.UID, unit.Name, false, "");
+                allUnits.Add(unitRole);
             }
 
         }
@@ -166,7 +165,7 @@ namespace Ischool.Booking.Room
                     this._isUnitAdmin = true;
                 }
 
-                
+                this._units.Add(unitRole);
             }
 
         }
@@ -195,6 +194,10 @@ namespace Ischool.Booking.Room
 
         }
 
+        public List<DAO.UnitRoleInfo> getSysAdminUnits()
+        {
+            return this.allUnits;
+        } 
 
         /// <summary>
         /// 取得是單位主管的管理單位

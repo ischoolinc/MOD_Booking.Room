@@ -34,15 +34,26 @@ namespace Ischool.Booking.Room
         {
             this.lbl.Visible = (Actor.Instance.isSysAdmin());
             this.cboRoles.Visible = !this.lbl.Visible;
-            cboRoles.Items.Add("單位主管");
-            cboRoles.Items.Add("單位管理員");
 
-            cboRoles.SelectedIndexChanged += delegate {
-                fillUnitItems();
-            };
-            
+            if (Actor.Instance.isUnitBoss())
+            {
+                this.cboRoles.Items.Add("單位主管");
+            }
+            if (Actor.Instance.isUnitAdmin())
+            {
+                this.cboRoles.Items.Add("單位管理員");
+            }
+            if (this.cboRoles.Items.Count > 0)
+            {
+                this.cboRoles.SelectedIndex = 0;
+            }
+                
             this.cboUnits.DisplayMember = "Name";
             this.cboUnits.ValueMember = "ID";
+            
+            this.cboRoles.SelectedIndexChanged += delegate {
+                fillUnitItems();
+            };
             
             fillUnitItems();
 
@@ -52,17 +63,18 @@ namespace Ischool.Booking.Room
 
         private void fillUnitItems()
         {
+
             List<UnitRoleInfo> items = new List<UnitRoleInfo>() ;
 
             if (Actor.Instance.isSysAdmin())
             {
-                items = Actor.Instance.getUnits();
+                items = Actor.Instance.getSysAdminUnits();
             }
-            else  if (Actor.Instance.isUnitBoss())
+            else  if (Actor.Instance.isUnitBoss() && this.cboRoles.Text == "單位主管")
             {
                 items = Actor.Instance.getBossUnits();
             }
-            else
+            else if(Actor.Instance.isUnitAdmin() && this.cboRoles.Text == "單位管理員" )
             {
                 items = Actor.Instance.getUnitAdminUnits();
             }
@@ -74,10 +86,13 @@ namespace Ischool.Booking.Room
                 this.cboUnits.Items.Add(urInfo);
             }
 
-            if (this.needUnAssignedItem)
+            if (this.needUnAssignedItem && this.cboUnits.Items.Count > 0)
             {
-                this.cboUnits.Items.Add(new UnitRoleInfo("", "--未指定--", false, ""));
+                this.cboUnits.Items.Add(new UnitRoleInfo("", "--未指定--", false,""));
             }
+
+            if (this.cboUnits.Items.Count > 0)
+                this.cboUnits.SelectedIndex = 0;
         }
     }
 }

@@ -37,6 +37,10 @@ namespace Ischool.Booking.Room
             _mode = mode;
             _unitID = unitID;
 
+        }
+
+        private void EditUnitForm_Load(object sender, EventArgs e)
+        {
             #region 讀取管理單位資料
             AccessHelper access = new AccessHelper();
             List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
@@ -52,23 +56,23 @@ namespace Ischool.Booking.Room
             #region 讀取教師資料
 
             string _sql = "SELECT * FROM teacher WHERE status = 1";
-            
+
             DataTable _dt = qh.Select(_sql);
 
             foreach (DataRow row in _dt.Rows)
             {
-                _teacherDic.Add("" + row["id"],row);
+                _teacherDic.Add("" + row["id"], row);
             }
 
             #endregion
 
-            if (mode == "新增")
+            if (_mode == "新增")
             {
                 dateLb.Text = "建立日期:   " + DateTime.Now.ToShortDateString();
 
                 ReloadDataGridview();
             }
-            else if (mode == "修改")
+            else if (_mode == "修改")
             {
                 string sql = string.Format(@"
 SELECT
@@ -85,7 +89,7 @@ FROM
         ON unit_admin.ref_teacher_id = teacher.id
 WHERE
     unit.uid = {0}
-                    ", unitID);
+                    ", _unitID);
                 DataTable dt = qh.Select(sql);
 
                 unitNameTbx.Text = "" + dt.Rows[0]["unit_name"];
@@ -95,13 +99,15 @@ WHERE
 
                 ReloadDataGridview();
             }
-            
         }
 
         public void ReloadDataGridview()
         {
-            // 取得未指定系統管理員的老師清單
-            string sql = string.Format(@"
+            // 取得未指定為會議室模組管理者以及尚未在這個管理單位擔任腳色之教師
+            string sql = "";
+            if (_unitID == "")
+            {
+                sql = string.Format(@"
 SELECT DISTINCT
     teacher.*
 FROM 
@@ -109,13 +115,35 @@ FROM
     LEFT OUTER JOIN _login
         ON teacher.st_login_name = _login.login_name
     LEFT OUTER JOIN _lr_belong
-        ON _login.id = _lr_belong._login_id
-            AND _lr_belong._role_id = {0}
+        ON _login.id = _lr_belong._login_id 
+        AND _lr_belong._role_id = {0}
 WHERE 
-     _lr_belong.id IS NULL
-    AND teacher.teacher_name IS NOT NULL
+    _lr_belong.id IS NULL
     AND teacher.status = 1
-            ",Program._roleAdminID);
+            ", Program._roleAdminID);
+            }
+            else
+            {
+                sql = string.Format(@"
+SELECT DISTINCT
+    teacher.*
+FROM 
+    teacher
+    LEFT OUTER JOIN _login
+        ON teacher.st_login_name = _login.login_name
+    LEFT OUTER JOIN _lr_belong
+        ON _login.id = _lr_belong._login_id 
+        AND _lr_belong._role_id = {0}
+    LEFT OUTER JOIN $ischool.booking.equip_unit_admin AS unit_admin
+        ON  teacher.id = unit_admin.ref_teacher_id
+        AND unit_admin.ref_unit_id = {1}
+WHERE 
+    _lr_belong.id IS NULL
+    AND unit_admin.uid IS NULL
+    AND teacher.status = 1
+            ", Program._roleAdminID,_unitID);
+            }
+            
 
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
@@ -600,5 +628,7 @@ SELECT
 
             return sql;
         }
+
+        
     }
 }

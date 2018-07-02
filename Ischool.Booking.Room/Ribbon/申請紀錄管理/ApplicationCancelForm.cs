@@ -32,7 +32,7 @@ namespace Ischool.Booking.Room
             applyDetailList = access.Select<UDT.MeetingRoomApplicationDetail>("ref_application_id =" + applicationID);
             roomList = access.Select<UDT.MeetingRoom>("uid =" + applyList[0].RefMeetingRoomID);
 
-            teacherR = Teacher.SelectByID("" + Actor.RefTeacherID);
+            teacherR = Teacher.SelectByID("" + actor.getTeacherID());
 
             #region Init
             cancelDateLb.Text = DateTime.Now.ToShortDateString();
@@ -99,7 +99,7 @@ SET
     , canceled_name = '{4}'
 WHERE
     uid = {5}
-                    ", trueCbx.Checked, DateTime.Parse(cancelDateLb.Text).ToShortDateString(), cancelReasonTbx.Text, Actor.RefTeacherID, teacherR.Name, _applicationID);
+                    ", trueCbx.Checked, DateTime.Parse(cancelDateLb.Text).ToShortDateString(), cancelReasonTbx.Text,actor.getTeacherID(), teacherR.Name, _applicationID);
 
                     UpdateHelper up = new UpdateHelper();
                     up.Execute(sql);
