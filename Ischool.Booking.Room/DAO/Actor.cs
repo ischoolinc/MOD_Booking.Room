@@ -185,21 +185,34 @@ namespace Ischool.Booking.Room
         private void checkIsAdmin()
         {
             QueryHelper qh = new QueryHelper();
-            string sql = string.Format(@"
-                                    SELECT 
-                                        teacher.id
-                                        , _login.login_name
-                                    FROM
-                                        _lr_belong
-                                        LEFT OUTER JOIN _login
-                                            ON _lr_belong._login_id = _login.id
-                                        LEFT OUTER JOIN teacher
-                                            ON _login.login_name = teacher.st_login_name
-                                    WHERE
-                                        _lr_belong._role_id = {0} 
-                                        AND _login.login_name='{1}'
-            ", Program._roleAdminID, Actor.Account);
-            DataTable dt = qh.Select(sql);
+            string SQL = string.Format(@"
+SELECT
+    teacher.*
+FROM
+    teacher
+    LEFT OUTER JOIN _login
+        ON teacher.st_login_name = _login.login_name
+    LEFT OUTER JOIN _lr_belong
+        ON _login.id = _lr_belong._login_id
+WHERE
+    teacher.st_login_name = '{0}'
+    AND _lr_belong._role_id = {1}
+                ", Actor.Account, Program._roleAdminID);
+            //string sql = string.Format(@"
+            //                        SELECT 
+            //                            teacher.id
+            //                            , _login.login_name
+            //                        FROM
+            //                            _lr_belong
+            //                            LEFT OUTER JOIN _login
+            //                                ON _lr_belong._login_id = _login.id
+            //                            LEFT OUTER JOIN teacher
+            //                                ON _login.login_name = teacher.st_login_name
+            //                        WHERE
+            //                            _lr_belong._role_id = {0} 
+            //                            AND _login.login_name='{1}'
+            //", Program._roleAdminID, Actor.Account);
+            DataTable dt = qh.Select(SQL);
 
             this._isSysAdmin = (dt.Rows.Count > 0);
             this._teacherID = (dt.Rows.Count > 0 ? dt.Rows[0]["id"].ToString() : "");
