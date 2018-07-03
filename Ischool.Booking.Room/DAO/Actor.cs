@@ -12,6 +12,18 @@ namespace Ischool.Booking.Room
     {
         private static Actor _actor;
 
+        /// <summary>
+        ///  資料重載
+        /// </summary>
+        public static Actor New
+        {
+            get
+            {
+                 _actor = new Actor();
+                return _actor;
+            }
+        }
+
         public static Actor Instance
         {
             get

@@ -15,6 +15,7 @@ namespace Ischool.Booking.Room
         private ComboBoxEx cboUnits;
         private bool needUnAssignedItem = false;
         private bool needUnitAdminRoleItem = true;
+        public Actor actor = Actor.New;
 
         public RoleUnitDecorator( LabelX lbl , ComboBoxEx cboRoles , ComboBoxEx cboUnits, bool needUnAssignedItem)
         {
@@ -44,14 +45,14 @@ namespace Ischool.Booking.Room
 
         private void initialize()
         {
-            this.lbl.Visible = (Actor.Instance.isSysAdmin());
+            this.lbl.Visible = (actor.isSysAdmin());
             this.cboRoles.Visible = !this.lbl.Visible;
 
-            if (Actor.Instance.isUnitBoss())
+            if (actor.isUnitBoss())
             {
                 this.cboRoles.Items.Add("單位主管");
             }
-            if (Actor.Instance.isUnitAdmin() && needUnitAdminRoleItem)
+            if (actor.isUnitAdmin() && needUnitAdminRoleItem)
             {
                 this.cboRoles.Items.Add("單位管理員");
             }
@@ -78,17 +79,17 @@ namespace Ischool.Booking.Room
 
             List<UnitRoleInfo> items = new List<UnitRoleInfo>() ;
 
-            if (Actor.Instance.isSysAdmin())
+            if (actor.isSysAdmin())
             {
-                items = Actor.Instance.getSysAdminUnits();
+                items = actor.getSysAdminUnits();
             }
-            else  if (Actor.Instance.isUnitBoss() && this.cboRoles.Text == "單位主管")
+            else  if (actor.isUnitBoss() && this.cboRoles.Text == "單位主管")
             {
-                items = Actor.Instance.getBossUnits();
+                items = actor.getBossUnits();
             }
-            else if(Actor.Instance.isUnitAdmin() && this.cboRoles.Text == "單位管理員" )
+            else if(actor.isUnitAdmin() && this.cboRoles.Text == "單位管理員" )
             {
-                items = Actor.Instance.getUnitAdminUnits();
+                items = actor.getUnitAdminUnits();
             }
 
             this.cboUnits.Items.Clear();

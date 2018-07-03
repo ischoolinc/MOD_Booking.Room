@@ -7,21 +7,21 @@ namespace Ischool.Booking.Room
 {
     class Permissions
     {
-        public static string 場地管理單位 { get { return "8EFBEC7D-D438-44EA-81E3-6AFA00862429"; } }
-        public static bool 設定場地管理單位權限
+        public static string 會議室管理單位 { get { return "8EFBEC7D-D438-44EA-81E3-6AFA00862429"; } }
+        public static bool 設定會議室管理單位權限
         {
             get
             {
-                return FISCA.Permission.UserAcl.Current[場地管理單位].Executable;
+                return FISCA.Permission.UserAcl.Current[會議室管理單位].Executable;
             }
         }
 
-        public static string 管理場地 { get { return "26751E07-00A0-4500-BC31-F2E57EE1C6F2"; } }
-        public static bool 管理場地權限
+        public static string 管理會議室 { get { return "26751E07-00A0-4500-BC31-F2E57EE1C6F2"; } }
+        public static bool 管理會議室權限
         {
             get
             {
-                return FISCA.Permission.UserAcl.Current[管理場地].Executable;
+                return FISCA.Permission.UserAcl.Current[管理會議室].Executable;
             }
         }
 

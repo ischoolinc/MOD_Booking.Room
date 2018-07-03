@@ -554,12 +554,19 @@ WHERE
         {
             if (this._identity == "會議室模組管理者")
             {
-                foreach (DAO.UnitRoleInfo unit in actor.getUnits())
+                int index = 0;
+                int n = 0;
+                foreach (DAO.UnitRoleInfo unit in actor.getSysAdminUnits())
                 {
+                    if (_unitID == unit.ID)
+                    {
+                        index = n;
+                    }
                     unitCbx.Items.Add(unit.Name);
+                    n++;
                 }
                 if (unitCbx.Items.Count > 0)
-                    unitCbx.SelectedIndex = 0;
+                    unitCbx.SelectedIndex = index;
             }
             else if (this._identity == "單位管理員")
             {

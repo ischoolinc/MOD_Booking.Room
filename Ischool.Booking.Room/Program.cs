@@ -340,7 +340,7 @@ namespace Ischool.Booking.Room
 
             #region 管理會議室
 
-            settingItem["管理"]["管理會議室"].Enable = Permissions.管理場地權限;
+            settingItem["管理"]["管理會議室"].Enable = Permissions.管理會議室權限;
             settingItem["管理"]["管理會議室"].Click += delegate
             {
                 if (actor.isSysAdmin() || actor.isUnitAdmin() || actor.isUnitBoss())
@@ -385,7 +385,7 @@ namespace Ischool.Booking.Room
 
             #region 設定場地管理單位
 
-            settingItem["設定"]["會議室管理單位"].Enable = Permissions.設定場地管理單位權限;
+            settingItem["設定"]["會議室管理單位"].Enable = Permissions.設定會議室管理單位權限;
             settingItem["設定"]["會議室管理單位"].Click += delegate
             {
                 if (actor.isSysAdmin())
@@ -520,8 +520,8 @@ namespace Ischool.Booking.Room
             #region 權限管理
             Catalog detail = new Catalog();
             detail = RoleAclSource.Instance["會議室預約"]["功能按鈕"];
-            detail.Add(new RibbonFeature(Permissions.場地管理單位, "設定會議室管理單位"));
-            detail.Add(new RibbonFeature(Permissions.管理場地, "管理會議室"));
+            detail.Add(new RibbonFeature(Permissions.會議室管理單位, "設定會議室管理單位"));
+            detail.Add(new RibbonFeature(Permissions.管理會議室, "管理會議室"));
             //detail.Add(new RibbonFeature(Permissions.系統管理員,"系統管理員")); ---已廢除此功能
             detail.Add(new RibbonFeature(Permissions.單位管理員, "設定單位管理員"));
             detail.Add(new RibbonFeature(Permissions.審核作業,"審核作業"));

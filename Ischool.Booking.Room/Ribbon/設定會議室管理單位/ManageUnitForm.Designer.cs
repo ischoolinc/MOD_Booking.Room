@@ -175,7 +175,7 @@
             this.Controls.Add(this.dataGridViewX1);
             this.DoubleBuffered = true;
             this.Name = "ManageUnitForm";
-            this.Text = "設定場地管理單位";
+            this.Text = "設定會議室管理單位";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
 

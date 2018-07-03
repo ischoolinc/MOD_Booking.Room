@@ -242,37 +242,37 @@
     <Compile Include="Ribbon\申請紀錄管理\ApplicationReviewForm.Designer.cs">
       <DependentUpon>ApplicationReviewForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon\管理場地\EditForm.cs">
+    <Compile Include="Ribbon\管理會議室\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ribbon\管理場地\EditForm.Designer.cs">
+    <Compile Include="Ribbon\管理會議室\EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon\管理場地\EquipmentForm.cs">
+    <Compile Include="Ribbon\管理會議室\EquipmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ribbon\管理場地\EquipmentForm.Designer.cs">
+    <Compile Include="Ribbon\管理會議室\EquipmentForm.Designer.cs">
       <DependentUpon>EquipmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon\管理場地\MeetingRoomManagement.cs">
+    <Compile Include="Ribbon\管理會議室\MeetingRoomManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ribbon\管理場地\MeetingRoomManagement.Designer.cs">
+    <Compile Include="Ribbon\管理會議室\MeetingRoomManagement.Designer.cs">
       <DependentUpon>MeetingRoomManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Permissions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ribbon\管理場地提供單位\EditUnitForm.cs">
+    <Compile Include="Ribbon\設定會議室管理單位\EditUnitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ribbon\管理場地提供單位\EditUnitForm.Designer.cs">
+    <Compile Include="Ribbon\設定會議室管理單位\EditUnitForm.Designer.cs">
       <DependentUpon>EditUnitForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ribbon\管理場地提供單位\ManageUnitForm.cs">
+    <Compile Include="Ribbon\設定會議室管理單位\ManageUnitForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Ribbon\管理場地提供單位\ManageUnitForm.Designer.cs">
+    <Compile Include="Ribbon\設定會議室管理單位\ManageUnitForm.Designer.cs">
       <DependentUpon>ManageUnitForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\設定單位管理員\AddUnitAdminForm.cs">
@@ -424,19 +424,19 @@
     <EmbeddedResource Include="Ribbon\申請紀錄管理\ApplicationReviewForm.resx">
       <DependentUpon>ApplicationReviewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\管理場地\EditForm.resx">
+    <EmbeddedResource Include="Ribbon\管理會議室\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\管理場地\EquipmentForm.resx">
+    <EmbeddedResource Include="Ribbon\管理會議室\EquipmentForm.resx">
       <DependentUpon>EquipmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\管理場地\MeetingRoomManagement.resx">
+    <EmbeddedResource Include="Ribbon\管理會議室\MeetingRoomManagement.resx">
       <DependentUpon>MeetingRoomManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\管理場地提供單位\EditUnitForm.resx">
+    <EmbeddedResource Include="Ribbon\設定會議室管理單位\EditUnitForm.resx">
       <DependentUpon>EditUnitForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Ribbon\管理場地提供單位\ManageUnitForm.resx">
+    <EmbeddedResource Include="Ribbon\設定會議室管理單位\ManageUnitForm.resx">
       <DependentUpon>ManageUnitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ribbon\設定單位管理員\AddUnitAdminForm.resx">

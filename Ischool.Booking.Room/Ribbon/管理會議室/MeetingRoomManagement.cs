@@ -92,49 +92,56 @@ namespace Ischool.Booking.Room
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            int row = dataGridViewX1.SelectedCells[0].RowIndex;
-            string roomID = "" + dataGridViewX1.Rows[row].Tag;
-            EditForm form;
-            if (actor.isSysAdmin())
+            if (dataGridViewX1.SelectedCells.Count > 0) // 避免使用者沒有選擇資料直接點擊按鈕
             {
-                form = new EditForm("修改", roomID, "會議室模組管理者");
-            }
-            else
-            {
-                form = new EditForm("修改", roomID, cbxIdentity.Text);
-            }
+                int row = dataGridViewX1.SelectedCells[0].RowIndex;
+                string roomID = "" + dataGridViewX1.Rows[row].Tag;
+                EditForm form;
+                if (actor.isSysAdmin())
+                {
+                    form = new EditForm("修改", roomID, "會議室模組管理者");
+                }
+                else
+                {
+                    form = new EditForm("修改", roomID, cbxIdentity.Text);
+                }
 
-            form.FormClosed += delegate {
-                ReloadDataGridView();
-            };
-            form.Text = "修改場地";
-            form.ShowDialog();
+                form.FormClosed += delegate {
+                    ReloadDataGridView();
+                };
+                form.Text = "修改場地";
+                form.ShowDialog();
+            }
+            
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            int row = dataGridViewX1.SelectedCells[0].RowIndex;
-            string roomName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
-            string roomID = "" + dataGridViewX1.Rows[row].Tag;
-
-            DialogResult result = MsgBox.Show("確定是否刪除"+ roomName + "此場地資料", "警告", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            if (dataGridViewX1.SelectedCells.Count > 0) // 避免使用者沒有選擇資料直接點擊按鈕
             {
-                string sql = string.Format("DELETE FROM $ischool.booking.meetingroom WHERE uid = {0}", roomID);
-                UpdateHelper up = new UpdateHelper();
-                try
-                {
-                    up.Execute(sql);
-                }
-                catch (Exception ex)
-                {
-                    MsgBox.Show(ex.Message);
-                    return;
-                }
+                int row = dataGridViewX1.SelectedCells[0].RowIndex;
+                string roomName = "" + dataGridViewX1.Rows[row].Cells[0].Value;
+                string roomID = "" + dataGridViewX1.Rows[row].Tag;
 
-                MsgBox.Show("資料刪除成功!");
-                ReloadDataGridView();
+                DialogResult result = MsgBox.Show("確定是否刪除" + roomName + "此場地資料", "警告", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    string sql = string.Format("DELETE FROM $ischool.booking.meetingroom WHERE uid = {0}", roomID);
+                    UpdateHelper up = new UpdateHelper();
+                    try
+                    {
+                        up.Execute(sql);
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgBox.Show(ex.Message);
+                        return;
+                    }
+
+                    MsgBox.Show("資料刪除成功!");
+                    ReloadDataGridView();
+                }
             }
         }
 
