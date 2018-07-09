@@ -21,17 +21,19 @@ namespace Ischool.Booking.Room
 
         Dictionary<string, string> _unitNameDic = new Dictionary<string, string>();
 
+        Dictionary<string, UDT.MeetingRoomUnit> dicUnit = new Dictionary<string, UDT.MeetingRoomUnit>();
+
         /// <summary>
         /// 使用者身分
         /// </summary>
         Actor actor = Actor.Instance;
 
-        // 新增傳 unitID ; 修改傳 roomID
-        public EditForm(string mode,string ID,string identity)
+        public EditForm(string mode,string unitID,string roomID,string identity)
         {
             InitializeComponent();
 
-            this._unitID = ID;
+            this._unitID = unitID;
+            this._roomID = roomID;
             this._mode = mode;
             this._identity = identity;
         }
@@ -100,7 +102,7 @@ SELECT
     ,'{6}'::TEXT AS picture
     ,'{7}'::TEXT AS created_by
     ,'{8}'::TEXT AS status
-                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID == "" ? "null" : _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account,cbxStatus.Text);
+                ", roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, _unitID == "" ? "null" : _unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text,Actor.Account,cbxStatus.SelectedItem == null ? "" : cbxStatus.SelectedItem.ToString());
 
 
                 List<string> equipmentDataList = new List<string>();
@@ -210,7 +212,7 @@ SELECT
     ,'{7}'::TEXT AS picture
     ,'{8}'::TEXT AS created_by
     ,'{9}'::TEXT AS status
-                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text, Actor.Account,cbxStatus.Text);
+                ",_roomID, roomNameTbx.Text, buildingTbx.Text, capacityTbx.Text, unitID, isSpecialCbx.Checked, DateTime.Now.ToShortDateString(),pictureURLTbx.Text, Actor.Account, cbxStatus.SelectedItem == null ? "" : cbxStatus.SelectedItem.ToString());
 
                 List<string> equipmentDataList = new List<string>();
 
@@ -484,22 +486,17 @@ WHERE
             foreach (UDT.MeetingRoomUnit unit in unitList)
             {
                 _unitNameDic.Add(unit.Name, unit.UID);
+
+                dicUnit.Add(unit.UID,unit);
             }
 
-            InitCbxUnit(this._mode);
-        }
-
-        public void InitCbxUnit(string mode)
-        {
-            AccessHelper access = new AccessHelper();
-            
             if (_mode == "新增")
             {
                 ReloadUnitCbx();
             }
             if (_mode == "修改")
             {
-                _roomID = _unitID;
+                //_roomID = _unitID;
 
                 ReloadUnitCbx();
 
@@ -566,25 +563,45 @@ WHERE
                     n++;
                 }
                 if (unitCbx.Items.Count > 0)
+                {
                     unitCbx.SelectedIndex = index;
+                }
             }
             else if (this._identity == "單位管理員")
             {
+                int index = 0;
+                int n = 0;
                 foreach (DAO.UnitRoleInfo unit in actor.getUnitAdminUnits())
                 {
+                    if (_unitID == unit.ID)
+                    {
+                        index = n;
+                    }
                     unitCbx.Items.Add(unit.Name);
+                    n++;
                 }
                 if (unitCbx.Items.Count > 0)
-                    unitCbx.SelectedIndex = 0;
+                {
+                    unitCbx.SelectedIndex = index;
+                }
             }
             else if (this._identity == "單位主管")
             {
+                int index = 0;
+                int n = 0;
                 foreach (DAO.UnitRoleInfo unit in actor.getBossUnits())
                 {
+                    if (_unitID == unit.ID)
+                    {
+                        index = n;
+                    }
                     unitCbx.Items.Add(unit.Name);
+                    n++;
                 }
                 if (unitCbx.Items.Count > 0)
+                {
                     unitCbx.SelectedIndex = 0;
+                }
             }
         }
     }

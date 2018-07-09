@@ -80,7 +80,7 @@ FROM
             DataTable dt = qh.Select(sql);
 
             Workbook report = new Workbook();
-            report.Worksheets[0].Name = "場地資料";
+            report.Worksheets[0].Name = "會議室資料";
             
             //填表頭
             for (int i = 0; i < exportFieldList.Count; i++)
@@ -159,8 +159,8 @@ FROM
             #region 儲存資料
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "匯出場地清單";
-            saveFileDialog.FileName = "匯出場地清單.xls";
+            saveFileDialog.Title = "匯出會議室清單";
+            saveFileDialog.FileName = "匯出會議室清單.xls";
             saveFileDialog.Filter = "Excel (*.xls)|*.xls|所有檔案 (*.*)|*.*";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)

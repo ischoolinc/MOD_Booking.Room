@@ -34,6 +34,7 @@ namespace Ischool.Booking.Room
         [MainMethod()]
         static public void Main()
         {
+            BookingRoomAdmin ba = new BookingRoomAdmin();
 
             #region Init UDT
 
@@ -383,7 +384,7 @@ namespace Ischool.Booking.Room
 
             #endregion
 
-            #region 設定場地管理單位
+            #region 設定會議室管理單位
 
             settingItem["設定"]["會議室管理單位"].Enable = Permissions.設定會議室管理單位權限;
             settingItem["設定"]["會議室管理單位"].Click += delegate

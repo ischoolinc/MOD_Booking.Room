@@ -162,7 +162,6 @@ namespace Ischool.Booking.Room
                 {
                     System.Console.WriteLine(ex.Message);
                 }
-
             }
         }
 

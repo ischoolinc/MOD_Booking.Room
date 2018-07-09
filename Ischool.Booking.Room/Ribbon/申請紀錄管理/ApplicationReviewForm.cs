@@ -42,7 +42,8 @@ namespace Ischool.Booking.Room
             applyStartTbx.Text = applyList[0].ApplyStarDate.ToShortDateString();
             RepeatEndTbx.Text = applyList[0].RepeatEndDate.ToShortDateString();
             applyReasonTbx.Text = applyList[0].ApplyReason;
-            repeatTbx.Text = ("" + applyList[0].IsRepeat) == "true" ? "是" : "否";
+            bool type = false;
+            repeatTbx.Text = bool.TryParse("" + applyList[0].IsRepeat,out type) ? "是" : "否";
             repeatTypeTbx.Text = ("" + applyList[0].RepeatType) == "null" ? "" : "" + applyList[0].RepeatType;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in applyDetailList)

@@ -34,7 +34,7 @@ namespace Ischool.Booking.Room
             List<UDT.MeetingRoom> MeetingRoomList = access.Select<UDT.MeetingRoom>();
             foreach (UDT.MeetingRoom each in MeetingRoomList)
             {
-                string roomKey = string.Format("{0}_{1}", each.Name , each.Building);
+                string roomKey = string.Format("{0}_{1}", each.Name, each.Building);
 
                 if (!this.MeetingRoomDic.ContainsKey(roomKey))
                 {
@@ -70,7 +70,7 @@ namespace Ischool.Booking.Room
             StringBuilder log = new StringBuilder();
             try
             {
-                
+
                 log.AppendLine(string.Format("場地名稱「{0}」所屬大樓「{1}」", each.Name, each.Building));
 
                 if (!string.IsNullOrEmpty(each.Picture))
@@ -120,7 +120,7 @@ namespace Ischool.Booking.Room
             {
                 System.Console.WriteLine(ex.Message);
             }
-            
+
 
             return log.ToString();
         }
@@ -154,14 +154,14 @@ namespace Ischool.Booking.Room
         {
             equip.Name = Row.GetValue("設備名稱");
             equip.Status = Row.GetValue("設備狀態");
-            equip.Count = Row.GetValue("設備數量") == "" ? 0 :int.Parse(Row.GetValue("設備數量"));
+            equip.Count = Row.GetValue("設備數量") == "" ? 0 : int.Parse(Row.GetValue("設備數量"));
         }
 
 
-            /// <summary>
-            /// 檢查管理單位名稱是否存在，回傳管理單位UID
-            /// </summary>
-            public string CheckUnitName(string name)
+        /// <summary>
+        /// 檢查管理單位名稱是否存在，回傳管理單位UID
+        /// </summary>
+        public string CheckUnitName(string name)
         {
             if (UnitNameDic.ContainsKey(name))
             {
@@ -225,36 +225,6 @@ namespace Ischool.Booking.Room
             }
         }
 
-        //public Dictionary<string, UDT.MeetingRoomUnit> GetUnitDic()
-        //{
-        //    if (this.UnitIDDic == null)
-        //    {
-        //        this.UnitIDDic = new Dictionary<string, UDT.MeetingRoomUnit>();
-        //        this.UnitNameDic = new Dictionary<string, UDT.MeetingRoomUnit>();
-                
-        //        AccessHelper access = new AccessHelper();
-        //        List<UDT.MeetingRoomUnit> UnitList = access.Select<UDT.MeetingRoomUnit>();
-        //        foreach (UDT.MeetingRoomUnit each in UnitList)
-        //        {
-        //            if (!this.UnitNameDic.ContainsKey(each.Name))
-        //            {
-        //                this.UnitNameDic.Add(each.Name, each);
-        //            }
-
-        //            if (!this.UnitIDDic.ContainsKey(each.UID))
-        //            {
-        //                this.UnitIDDic.Add(each.UID, each);
-        //            }
-        //        }
-        //        return dic;
-        //    }
-        //    else
-        //    {
-        //        return this.UnitIDDic;
-        //    }
-            
-        //}
-
         /// <summary>
         /// 傳入老師Record,回傳包含老師暱稱的名字
         /// </summary>
@@ -282,7 +252,7 @@ namespace Ischool.Booking.Room
         {
             //檢查與確認資料是否被修改
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("會議室名稱「{0}」 所屬大樓「{1}」", log.New_MeetingRoom.Name,log.New_MeetingRoom.Building));
+            sb.AppendLine(string.Format("會議室名稱「{0}」 所屬大樓「{1}」", log.New_MeetingRoom.Name, log.New_MeetingRoom.Building));
             if (log.lo_MeetingRoom.Name != log.New_MeetingRoom.Name)
                 sb.AppendLine(ByOne("會議室名稱", log.lo_MeetingRoom.Name, log.New_MeetingRoom.Name));
 
@@ -293,13 +263,13 @@ namespace Ischool.Booking.Room
                 sb.AppendLine(ByOne("所屬大樓名稱", log.lo_MeetingRoom.Building, log.New_MeetingRoom.Building));
 
             if (log.lo_MeetingRoom.Capacity != log.New_MeetingRoom.Capacity)
-                sb.AppendLine(ByOne("容納人數","" + log.lo_MeetingRoom.Capacity,"" + log.New_MeetingRoom.Capacity));
+                sb.AppendLine(ByOne("容納人數", "" + log.lo_MeetingRoom.Capacity, "" + log.New_MeetingRoom.Capacity));
 
             if (log.lo_MeetingRoom.Status != log.New_MeetingRoom.Status)
                 sb.AppendLine(ByOne("會議室目前狀態", log.lo_MeetingRoom.Status, log.New_MeetingRoom.Status));
 
             if (log.lo_MeetingRoom.RefUnitID != log.New_MeetingRoom.RefUnitID)
-                sb.AppendLine(ByOne("管理單位編號", ""+ log.lo_MeetingRoom.RefUnitID, "" + log.New_MeetingRoom.RefUnitID));
+                sb.AppendLine(ByOne("管理單位編號", "" + log.lo_MeetingRoom.RefUnitID, "" + log.New_MeetingRoom.RefUnitID));
 
             if (log.lo_MeetingRoom.IsSpecial != log.New_MeetingRoom.IsSpecial)
                 sb.AppendLine(ByOne("是否為特殊場地", "" + log.lo_MeetingRoom.IsSpecial, "" + log.New_MeetingRoom.IsSpecial));

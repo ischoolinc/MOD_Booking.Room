@@ -56,12 +56,19 @@ namespace Ischool.Booking.Room
                 datarow.Cells[index++].Value = dataDic[roomID].IsSpecial == "true" ? "是" : "否";
                 datarow.Cells[index++].Value = dataDic[roomID].CreatedName;
                 List<string> equipment = new List<string>();
-                int height = 15;
+                int height = 25;
                 foreach (MeetingRoomEqipmentRecord ep in dataDic[roomID].EquipmentList)
                 {
-                    string data = string.Format("名稱: {0}， 數量: {1}， 狀態: {2}",ep.Name,ep.Count,ep.Status);
-                    equipment.Add(data);
-                    height += 15;
+                    if (ep.Name == "" && ep.Count == "" && ep.Status == "")
+                    {
+
+                    }
+                    else
+                    {
+                        string data = string.Format("名稱: {0}， 數量: {1}， 狀態: {2}", ep.Name, ep.Count, ep.Status);
+                        equipment.Add(data);
+                        height += 15;
+                    }
                 }
                 datarow.Cells[index++].Value = string.Join(Environment.NewLine, equipment);
                 datarow.Tag = dataDic[roomID].UID;
@@ -78,11 +85,11 @@ namespace Ischool.Booking.Room
             EditForm form;
             if (actor.isSysAdmin())
             {
-                form = new EditForm("新增", unitID,"會議室模組管理者");
+                form = new EditForm("新增", unitID,"","會議室模組管理者");
             }
             else
             {
-                form = new EditForm("新增", unitID,cbxIdentity.Text);
+                form = new EditForm("新增", unitID,"",cbxIdentity.Text);
             }
             form.FormClosed += delegate {
                 ReloadDataGridView();
@@ -95,15 +102,16 @@ namespace Ischool.Booking.Room
             if (dataGridViewX1.SelectedCells.Count > 0) // 避免使用者沒有選擇資料直接點擊按鈕
             {
                 int row = dataGridViewX1.SelectedCells[0].RowIndex;
+                string unitID = unitDic[cbxUnit.Text];
                 string roomID = "" + dataGridViewX1.Rows[row].Tag;
                 EditForm form;
                 if (actor.isSysAdmin())
                 {
-                    form = new EditForm("修改", roomID, "會議室模組管理者");
+                    form = new EditForm("修改", unitID, roomID, "會議室模組管理者");
                 }
                 else
                 {
-                    form = new EditForm("修改", roomID, cbxIdentity.Text);
+                    form = new EditForm("修改", unitID, roomID, cbxIdentity.Text);
                 }
 
                 form.FormClosed += delegate {

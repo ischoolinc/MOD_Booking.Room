@@ -362,7 +362,7 @@ WHERE
         {
             if (e.ColumnIndex == 5)
             {
-                if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == "進行審核")
+                if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == "進行審核" && "" + dataGridViewX1.Rows[e.RowIndex].Cells[7].Value == "待審核")
                 {
                     string applicationID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
                     ApplicationReviewForm form = new ApplicationReviewForm(applicationID);

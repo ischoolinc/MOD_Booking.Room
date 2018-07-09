@@ -309,8 +309,8 @@ WHERE
         {
             // 根據模式調整SQL內容
             #region SQL
-
-            string unitName = unitNameTbx.Text;
+            // 避免管理單位名稱中有空白的問題
+            string unitName = unitNameTbx.Text.Trim();
             string createTime = DateTime.Now.ToShortDateString();
             string createdBy = Actor.Account;
             // 避免帳號中有空白的問題

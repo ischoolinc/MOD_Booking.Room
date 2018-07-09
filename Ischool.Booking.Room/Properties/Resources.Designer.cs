@@ -128,13 +128,14 @@ namespace Ischool.Booking.Room.Properties {
         ///    &lt;Detector Name=&quot;PrimaryKey&quot;&gt;
         ///      &lt;Field Name=&quot;會議室名稱&quot;/&gt;
         ///      &lt;Field Name=&quot;所屬大樓名稱&quot;/&gt;
+        ///      &lt;Field Name=&quot;設備名稱&quot;/&gt;
         ///    &lt;/Detector&gt;
         ///  &lt;/DuplicateDetection&gt;
         ///  &lt;FieldList&gt;
         ///    &lt;Field Required=&quot;True&quot; Name=&quot;會議室名稱&quot; Description=&quot;會議室名稱/所屬大樓名稱為鍵值必填&quot;&gt;
         ///      &lt;Validate AutoCorrect=&quot;False&quot; Description=&quot;「會議室名稱」不允許空白。&quot; ErrorType=&quot;Error&quot; Validator=&quot;不可空白&quot; When=&quot;&quot;/&gt;
         ///    &lt;/Field&gt;
-        ///    &lt;Field Required=&quot;True&quot; N [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
+        /// [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
         /// </summary>
         internal static string MeetingRoomValidate {
             get {

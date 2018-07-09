@@ -107,7 +107,7 @@ WHERE
                 if (col == 5)
                 {
                     string name = "" + dataGridViewX1.Rows[e.RowIndex].Cells[0].Value;
-                    string text = string.Format("確認是否將' {0} '設定為系統管理員?", name);
+                    string text = string.Format("確認是否將' {0} '設定為單位管理員?", name);
 
                     DialogResult result = MsgBox.Show(text, "確認", MessageBoxButtons.YesNo);
 

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Cells">
@@ -181,6 +183,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -315,6 +318,9 @@
     <Content Include="Library\Campus.DocumentValidator.xml" />
     <Content Include="Library\Campus.Import.dll" />
     <Content Include="Library\Campus.Import.xml" />
+    <Content Include="Library\CefSharp.Core.dll" />
+    <Content Include="Library\CefSharp.dll" />
+    <Content Include="Library\CefSharp.WinForms.dll" />
     <Content Include="Library\Customization.Tagging.dll" />
     <Content Include="Library\Customization.Tagging.pdb" />
     <Content Include="Library\DevComponents.DotNetBar2.dll" />
