@@ -76,20 +76,23 @@ namespace Ischool.Booking.Room
                 string roomName = Row.GetValue("會議室名稱");
                 string equipName = Row.GetValue("設備名稱");
                 string keyRoom = string.Format("{0}_{1}", roomName, building); // 會議室key
-                if (importBot.GetMeetingRoomDic().ContainsKey(keyRoom)) //更新
+                if (importBot.GetMeetingRoomDic().ContainsKey(keyRoom) ) //更新
                 {
-                    UDT.MeetingRoom room = importBot.GetMeetingRoomDic()[keyRoom];
-
-                    // ????
-                    if (!Log_Dic.ContainsKey(room.UID))
+                    if (importBot.GetMeetingRoomDic()[keyRoom].UID != "") // 確保資料有系統編號 在做更新
                     {
-                        ImputLog i_n = new ImputLog();
-                        i_n.lo_MeetingRoom = room.CopyExtension();
-                        Log_Dic.Add(room.UID, i_n);
-                    }
+                        UDT.MeetingRoom room = importBot.GetMeetingRoomDic()[keyRoom];
 
-                    importBot.FillMeetingRoomData(Row, room);
-                    listRoomUpdate.Add(room);
+                        // ????
+                        if (!Log_Dic.ContainsKey(room.UID))
+                        {
+                            ImputLog i_n = new ImputLog();
+                            i_n.lo_MeetingRoom = room.CopyExtension();
+                            Log_Dic.Add(room.UID, i_n);
+                        }
+
+                        importBot.FillMeetingRoomData(Row, room);
+                        listRoomUpdate.Add(room);
+                    }
                 }
                 else
                 {
@@ -99,6 +102,10 @@ namespace Ischool.Booking.Room
                     room.Building = building;
 
                     importBot.FillMeetingRoomData(Row, room);
+
+                    // 將新增的會議室加入Dic 避免重複新增
+                    importBot.GetMeetingRoomDic().Add(keyRoom, room);
+                    
                     listRoomInsert.Add(room);
                 }
 
@@ -183,7 +190,10 @@ namespace Ischool.Booking.Room
             foreach (UDT.MeetingRoom room in listRoom)
             {
                 string key = string.Format("{0}_{1}",room.Name,room.Building);
-                dicRoom.Add(key,room.UID);
+                if (!dicRoom.ContainsKey(key))
+                {
+                    dicRoom.Add(key, room.UID);
+                }
             }
 
             //2.對於dicEquipmentInRoom 中的每個key 

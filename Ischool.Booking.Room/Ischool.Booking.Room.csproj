@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ischool.Booking.Room</RootNamespace>
     <AssemblyName>Ischool.Booking.Room</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -64,6 +64,21 @@
     </Reference>
     <Reference Include="Campus.Windows">
       <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Campus.Windows.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp, Version=57.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\CefSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp.Core, Version=57.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\CefSharp.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp.WinForms, Version=57.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\CefSharp.WinForms.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Customization.Tagging, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
@@ -197,6 +212,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DAO\UnitRoleInfo.cs" />
+    <Compile Include="HandlerLife.cs" />
+    <Compile Include="HandlerNe.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -319,6 +336,7 @@
     <Content Include="Library\Campus.Import.dll" />
     <Content Include="Library\Campus.Import.xml" />
     <Content Include="Library\CefSharp.Core.dll" />
+    <Content Include="Library\CefSharp.Core.pdb" />
     <Content Include="Library\CefSharp.dll" />
     <Content Include="Library\CefSharp.WinForms.dll" />
     <Content Include="Library\Customization.Tagging.dll" />

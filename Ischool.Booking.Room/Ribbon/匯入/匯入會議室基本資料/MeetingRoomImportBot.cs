@@ -245,6 +245,7 @@ namespace Ischool.Booking.Room
         /// </summary>
         public Dictionary<string, UDT.MeetingRoom> GetMeetingRoomDic()
         {
+            //getMeetingRooms();
             return this.MeetingRoomDic;
         }
 

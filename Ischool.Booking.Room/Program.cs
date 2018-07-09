@@ -35,6 +35,7 @@ namespace Ischool.Booking.Room
         static public void Main()
         {
             BookingRoomAdmin ba = new BookingRoomAdmin();
+            MotherForm.AddPanel(BookingRoomAdmin.Instance);
 
             #region Init UDT
 
@@ -329,8 +330,6 @@ namespace Ischool.Booking.Room
             // 取得登入帳號身分
             Actor actor = Actor.Instance ;
             //string identity = Actor.Identity;
-
-            MotherForm.AddPanel(BookingRoomAdmin.Instance);
 
             RibbonBarItem settingItem = FISCA.Presentation.MotherForm.RibbonBarItems["會議室預約", "基本設定"];
 

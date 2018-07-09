@@ -4,19 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FISCA.Presentation;
-//using CefSharp;
-//using CefSharp.WinForms;
+using CefSharp;
+using CefSharp.WinForms;
 
 namespace Ischool.Booking.Room
 {
     public partial class BookingRoomAdmin : BlankPanel
     {
-        //public CefSharp.WinForms.ChromiumWebBrowser browser;
+        public CefSharp.WinForms.ChromiumWebBrowser browser;
 
         public BookingRoomAdmin()
         {
+            InitializeComponent();
+
             Group = "會議室預約";
-            
+
+            browser = new ChromiumWebBrowser("https://sites.google.com/ischool.com.tw/facilities-service/%E9%A6%96%E9%A0%81");
+            browser.Dock = DockStyle.Fill;
+            ContentPanePanel.Controls.Add(browser);
+
+            //改寫
+            browser.RequestHandler = new HandlerNe(); //Parse URL
+            browser.LifeSpanHandler = new HandlerLife(); //關閉 OnBeforePopup
+
         }
         private static BookingRoomAdmin _BookingRoomAdmin;
 
@@ -46,13 +56,6 @@ namespace Ischool.Booking.Room
             this.Name = "BookingRoomAdmin";
             this.ResumeLayout(false);
 
-            //browser = new ChromiumWebBrowser("https://sites.google.com/s/19ixzf9DKQ3OoHr_7qFimE0pQ6AlLNC22/p/1s7l-qi70-XFCc_o1PohmK5MGkobn2RM-/edit");
-            //browser.Dock = DockStyle.Fill;
-            //ContentPanePanel.Controls.Add(browser);
-
-            ////改寫
-            //browser.RequestHandler = new HandlerNe(); //Parse URL
-            //browser.LifeSpanHandler = new HandlerLife(); //關閉 OnBeforePopup
         }
     }
 }
