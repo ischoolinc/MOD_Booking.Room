@@ -104,7 +104,9 @@ WITH data_row AS(
 		AND app.uid IS NOT NULL
 		AND app.is_canceled = false
 		AND app.is_approved = true
-        AND unit.uid = {0}
+        AND unit.uid = {2}
+        AND app_detail.start_time >= '{0}'
+        AND app_detail.start_time <= '{1}'
 ) 
 SELECT
 	unit_name
@@ -116,7 +118,7 @@ FROM
 GROUP BY
 	unit_name
 	,room_name
-                    ", unitID);
+                    ",startTime.Value.ToShortDateString(), endTime.Value.ToShortDateString(), unitID);
             }
             #endregion
 
@@ -148,7 +150,8 @@ GROUP BY
                 sheet.Cells[rowIndex, colIndex].PutValue("" + row["使用次數"]);
                 sheet.Cells[rowIndex, colIndex++].Style = style;
 
-                sheet.Cells[rowIndex, colIndex].PutValue(DateTime.Parse("" + row["使用時數"]).ToString("hh"));
+                string[] times = ("" + row["使用時數"]).Split(':');
+                sheet.Cells[rowIndex, colIndex].PutValue(times[0]/*DateTime.Parse("" + row["使用時數"]).ToString("hh")*/);
                 sheet.Cells[rowIndex, colIndex++].Style = style;
 
             }
