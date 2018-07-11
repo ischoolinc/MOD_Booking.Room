@@ -148,9 +148,6 @@
   <data name="統計會議室報表樣板" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\統計會議室報表樣板.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="format" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\format.xsl;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="MeetingRoomValidate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\meetingroomvalidate.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

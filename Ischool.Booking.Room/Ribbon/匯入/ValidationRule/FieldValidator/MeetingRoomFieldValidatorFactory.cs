@@ -16,10 +16,12 @@ namespace Ischool.Booking.Room
         {
             switch (typeName.ToUpper())
             {
-                case "CHECKACCOUNTINISCHOOL":
-                    return new CheckAccountInIschool();
                 case "CHECKUNITINISCHOOL":
                     return new CheckUnitInIschool();
+                case "INTPARSE":
+                    return new CheckInt();
+                case "CHECKSTRING":
+                    return new CheckString();
                 default:
                     return null;
             }

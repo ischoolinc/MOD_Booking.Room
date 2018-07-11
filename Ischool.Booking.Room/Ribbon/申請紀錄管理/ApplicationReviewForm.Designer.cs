@@ -554,6 +554,7 @@
             this.DoubleBuffered = true;
             this.Name = "ApplicationReviewForm";
             this.Text = "申請紀錄審核";
+            this.Load += new System.EventHandler(this.ApplicationReviewForm_Load);
             this.groupPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);

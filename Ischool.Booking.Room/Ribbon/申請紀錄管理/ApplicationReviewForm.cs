@@ -19,19 +19,23 @@ namespace Ischool.Booking.Room
         List<UDT.MeetingRoom> roomList = new List<UDT.MeetingRoom>();
         TeacherRecord teacherR = new TeacherRecord();
         Actor actor = Actor.Instance;
-        string _applicationID;
+        private string _applicationID;
 
         public ApplicationReviewForm(string applicationID)
         {
             InitializeComponent();
 
             _applicationID = applicationID;
+        }
+
+        private void ApplicationReviewForm_Load(object sender, EventArgs e)
+        {
             AccessHelper access = new AccessHelper();
             // 取得資料
-            applyList = access.Select<UDT.MeetingRoomApplication>("uid ="+ applicationID);
-            applyDetailList = access.Select<UDT.MeetingRoomApplicationDetail>("ref_application_id ="+ applicationID);
-            roomList = access.Select<UDT.MeetingRoom>("uid ="+ applyList[0].RefMeetingRoomID);
-            
+            applyList = access.Select<UDT.MeetingRoomApplication>(string.Format("uid = {0}", _applicationID));
+            applyDetailList = access.Select<UDT.MeetingRoomApplicationDetail>(string.Format("ref_application_id = {0}", _applicationID));
+            roomList = access.Select<UDT.MeetingRoom>(string.Format("uid = {0}", applyList[0].RefMeetingRoomID));
+
             teacherR = Teacher.SelectByID("" + actor.getTeacherID());
 
             #region Init
@@ -42,8 +46,7 @@ namespace Ischool.Booking.Room
             applyStartTbx.Text = applyList[0].ApplyStarDate.ToShortDateString();
             RepeatEndTbx.Text = applyList[0].RepeatEndDate.ToShortDateString();
             applyReasonTbx.Text = applyList[0].ApplyReason;
-            bool type = false;
-            repeatTbx.Text = bool.TryParse("" + applyList[0].IsRepeat,out type) ? "是" : "否";
+            repeatTbx.Text = applyList[0].IsRepeat ? "是" : "否";
             repeatTypeTbx.Text = ("" + applyList[0].RepeatType) == "null" ? "" : "" + applyList[0].RepeatType;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in applyDetailList)
@@ -144,5 +147,7 @@ WHERE
                 errorText.Visible = false;
             }
         }
+
+        
     }
 }

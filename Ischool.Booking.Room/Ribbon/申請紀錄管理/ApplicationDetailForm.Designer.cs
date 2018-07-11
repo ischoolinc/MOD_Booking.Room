@@ -772,6 +772,7 @@
             this.DoubleBuffered = true;
             this.Name = "ApplicationDetailForm";
             this.Text = "申請紀錄";
+            this.Load += new System.EventHandler(this.ApplicationDetailForm_Load);
             this.groupPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.groupPanel2.ResumeLayout(false);

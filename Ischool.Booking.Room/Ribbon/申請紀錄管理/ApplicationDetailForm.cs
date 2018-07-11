@@ -13,10 +13,17 @@ namespace Ischool.Booking.Room
 {
     public partial class ApplicationDetailForm : BaseForm
     {
+        private string _applicationID;
+
         public ApplicationDetailForm(string applicationID)
         {
             InitializeComponent();
 
+            _applicationID = applicationID;
+        }
+
+        private void ApplicationDetailForm_Load(object sender, EventArgs e)
+        {
             #region 取得資料
             string sql = string.Format(@"
 SELECT 
@@ -38,7 +45,7 @@ FROM(
 		ON app.ref_meetingroom_id = room.uid
 	LEFT OUTER JOIN $ischool.booking.meetingroom_application_detail AS app_detail
 		ON app.uid = app_detail.ref_application_id
-            ", applicationID);
+            ", _applicationID);
             QueryHelper qh = new QueryHelper();
             DataTable dt = qh.Select(sql);
             #endregion
@@ -126,7 +133,7 @@ FROM(
             reviewDateTbx.Text = appR.ReviewedDate;
             isApproveTbx.Text = appR.IsApproved;
             rejectReasonTbx.Text = appR.RejectReason;
-            repeatTbx.Text = ("" + appR.IsRepeat) == "true" ? "是" : "否";
+            repeatTbx.Text = appR.IsRepeat ? "是" : "否";
             repeatTypeTbx.Text = ("" + appR.RepeatType) == "null" ? "" : "" + appR.RepeatType;
             // (特殊場地、審核通過、未取消) ， (一般場地、未取消)  
             if ((appR.IsSpecial && appR.IsApproved == "是" && appR.IsCanceled == "否") || (!appR.IsSpecial && appR.IsCanceled == "否"))
@@ -169,6 +176,7 @@ FROM(
         {
             this.Close();
         }
+        
     }
 
     public class ApplicationRecord

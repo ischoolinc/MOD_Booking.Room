@@ -81,26 +81,6 @@ namespace Ischool.Booking.Room.Properties {
         }
         
         /// <summary>
-        ///   查詢類似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-        ///&lt;xsl:stylesheet version=&quot;1.0&quot; xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot;&gt;
-        ///&lt;xsl:template match=&quot;/&quot;&gt;
-        ///&lt;xsl:variable name=&quot;error&quot;&gt;Error&lt;/xsl:variable&gt;
-        ///&lt;xsl:variable name=&quot;warning&quot;&gt;Warning&lt;/xsl:variable&gt;
-        ///&lt;xsl:variable name=&quot;true&quot;&gt;TRUE&lt;/xsl:variable&gt;
-        ///&lt;xsl:variable name=&quot;false&quot;&gt;FALSE&lt;/xsl:variable&gt;
-        ///&lt;xsl:variable name=&quot;smallcase&quot; select=&quot;&apos;abcdefghijklmnopqrstuvwxyz&apos;&quot; /&gt;
-        ///&lt;xsl:variable name=&quot;uppercase&quot; select=&quot;&apos;ABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;&quot; /&gt;
-        ///&lt;html&gt;
-        ///	&lt;head&gt;
-        ///	&lt;s [字串的其餘部分已遭截斷]&quot;; 的當地語系化字串。
-        /// </summary>
-        internal static string format {
-            get {
-                return ResourceManager.GetString("format", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
         internal static System.Drawing.Bitmap Import_Image {

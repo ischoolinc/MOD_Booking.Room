@@ -6,10 +6,11 @@ using FISCA.Data;
 using System.Threading.Tasks;
 using Campus.DocumentValidator;
 using System.Data;
+using FISCA.UDT;
 
 namespace Ischool.Booking.Room
 {
-    class CheckUnitInIschool : IFieldValidator
+    public class CheckUnitInIschool : IFieldValidator
     {
         private List<string> unitNames;
         private Task mTask;
@@ -18,20 +19,23 @@ namespace Ischool.Booking.Room
         {
             unitNames = new List<string>();
 
-            QueryHelper Helper = new QueryHelper();
-
-            string sql = @"SELECT name FROM $ischool.booking.meetingroom_unit";
-
-            DataTable Table = Helper.Select(sql);
-                
-            foreach (DataRow Row in Table.Rows)
+            mTask = Task.Factory.StartNew
+            (() =>
             {
-                string unitName = Row.Field<string>("name");
-                string unitKey = unitName;
+                AccessHelper access = new AccessHelper();
+                List<UDT.MeetingRoomUnit> listUnits = access.Select<UDT.MeetingRoomUnit>();
 
-                if (!unitNames.Contains(unitKey))
-                    unitNames.Add(unitKey);
+                foreach (UDT.MeetingRoomUnit unit in listUnits)
+                {
+                    string unitName = unit.Name.Trim();
+                    unitNames.Add(unitName);
+                    //if (!unitNames.Contains(unitName))
+                    //{
+                    //    unitNames.Add(unitName);
+                    //}
+                }
             }
+            );
         }
 
         #region IFieldValidator 成員
@@ -63,6 +67,7 @@ namespace Ischool.Booking.Room
         /// <returns></returns>
         public bool Validate(string Value)
         {
+            mTask.Wait();
 
             return unitNames.Contains(Value);
         }

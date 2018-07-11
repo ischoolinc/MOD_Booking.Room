@@ -97,6 +97,11 @@ FROM
         ON room.created_by = teacher.st_login_name
 WHERE
 	room.ref_unit_id = {0}
+ORDER BY
+    room.building
+    , room.status
+    , room.capacity
+    , room.is_special
                 ", unitID);
             }
 

@@ -220,6 +220,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckAccountInIschool.cs" />
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckInt.cs" />
+    <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckString.cs" />
     <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\CheckUnitInIschool.cs" />
     <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\MeetingRoomFieldValidatorFactory.cs" />
     <Compile Include="Ribbon\匯入\ValidationRule\FieldValidator\MeetingRoomRowValidatorFactory.cs" />

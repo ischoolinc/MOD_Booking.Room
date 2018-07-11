@@ -478,7 +478,6 @@ WHERE
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            cbxStatus.SelectedIndex = 0;
             // 整理所有管理單位 名稱與編號 供 unitCbx 使用
             AccessHelper access = new AccessHelper();
             List<UDT.MeetingRoomUnit> unitList = access.Select<UDT.MeetingRoomUnit>();
@@ -492,6 +491,7 @@ WHERE
 
             if (_mode == "新增")
             {
+                cbxStatus.SelectedIndex = 0;
                 ReloadUnitCbx();
             }
             if (_mode == "修改")
@@ -508,6 +508,7 @@ WHERE
                 roomNameTbx.Text = roomList[0].Name;
                 buildingTbx.Text = roomList[0].Building;
                 capacityTbx.Text = "" + roomList[0].Capacity;
+                cbxStatus.SelectedIndex = ("" + roomList[0].Status) == "開放" ? 0 : 1;
                 isSpecialCbx.Checked = roomList[0].IsSpecial;
                 _unitID = "" + roomList[0].RefUnitID;
                 pictureBox1.ImageLocation = "" + roomList[0].Picture;
