@@ -23,8 +23,8 @@
     <Field Required="True" Name="會議室目前狀態" EmptyAlsoValidate="True" Description="會議室是否對外開放">
       <Validate AutoCorrect="False" Description="「會議室目前狀態」只允許「開放」與「不開放」。" ErrorType="Error" Validator="狀態列舉" When=""/>
     </Field>
-    <Field Required="True" Name="管理單位名稱" EmptyAlsoValidate="True" Description="會議室管理單位名稱">
-      <Validate AutoCorrect="False" Description="「管理單位名稱」不存在系統" ErrorType="Error" Validator="管理單位是否存在系統" When="" />
+    <Field Required="True" Name="管理單位名稱" EmptyAlsoValidate="False" Description="會議室管理單位名稱">
+      <Validate AutoCorrect="False" Description="「管理單位名稱」不存在系統" ErrorType="Error" Validator="ManageUnitExisted" When="" />
     </Field>
     <Field Required="True" Name="是否為特殊場地" EmptyAlsoValidate="True" Description="會議室是否為特殊場地">
       <Validate AutoCorrect="False" Description="「是否為特殊場地」只允許「是」與「否」" ErrorType="Error" Validator="布林列舉" When="" />
@@ -40,7 +40,7 @@
     </Field>
   </FieldList>
   <ValidatorList>
-    <FieldValidator Name="管理單位是否存在系統" Type="CHECKUNITINISCHOOL"/>
+    <FieldValidator Name="ManageUnitExisted" Type="MEETINGROOM_CHECKUNITINISCHOOL"/>
     <FieldValidator Name="IntParse" Type="INTPARSE"/>
     <FieldValidator Name="不可空白" Type="CHECKSTRING"/>
     <FieldValidator Name="學期列舉" Type="Enumeration">

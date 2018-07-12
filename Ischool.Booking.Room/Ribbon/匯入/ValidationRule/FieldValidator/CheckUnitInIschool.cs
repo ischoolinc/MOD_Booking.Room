@@ -28,11 +28,11 @@ namespace Ischool.Booking.Room
                 foreach (UDT.MeetingRoomUnit unit in listUnits)
                 {
                     string unitName = unit.Name.Trim();
-                    unitNames.Add(unitName);
-                    //if (!unitNames.Contains(unitName))
-                    //{
-                    //    unitNames.Add(unitName);
-                    //}
+                    //unitNames.Add(unitName);
+                    if (!unitNames.Contains(unitName))
+                    {
+                        unitNames.Add(unitName);
+                    }
                 }
             }
             );

@@ -16,7 +16,7 @@ namespace Ischool.Booking.Room
         {
             switch (typeName.ToUpper())
             {
-                case "CHECKUNITINISCHOOL":
+                case "MEETINGROOM_CHECKUNITINISCHOOL":
                     return new CheckUnitInIschool();
                 case "INTPARSE":
                     return new CheckInt();
