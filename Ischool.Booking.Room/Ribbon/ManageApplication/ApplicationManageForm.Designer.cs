@@ -29,11 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbxUnit = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.actorLb = new DevComponents.DotNetBar.LabelX();
+            this.lbSysAdmin = new DevComponents.DotNetBar.LabelX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.cbxRoom = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -47,14 +55,6 @@
             this.ckbxSelectAll = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.cbxIdentity = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new DevComponents.DotNetBar.Controls.DataGridViewButtonXColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.starTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.endTime)).BeginInit();
@@ -81,14 +81,14 @@
             this.Column4,
             this.Column7,
             this.Column8});
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
             this.dataGridViewX1.Location = new System.Drawing.Point(12, 92);
             this.dataGridViewX1.MultiSelect = false;
@@ -101,6 +101,63 @@
             this.dataGridViewX1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellClick);
             this.dataGridViewX1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellDoubleClick);
             this.dataGridViewX1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridViewX1_MouseDown);
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "申請時間";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "會議室名稱";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
+            // Column2
+            // 
+            this.Column2.FillWeight = 80F;
+            this.Column2.HeaderText = "申請人";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Width = 80;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "申請開始日期";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 110;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "申請結束日期";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 110;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "審核狀態";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column4.Text = null;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "審核結果";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "申請單狀態";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
             // 
             // cbxUnit
             // 
@@ -130,21 +187,21 @@
             this.labelX3.TabIndex = 2;
             this.labelX3.Text = "管理單位";
             // 
-            // actorLb
+            // lbSysAdmin
             // 
-            this.actorLb.BackColor = System.Drawing.Color.Transparent;
+            this.lbSysAdmin.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.actorLb.BackgroundStyle.Class = "";
-            this.actorLb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.actorLb.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.actorLb.Location = new System.Drawing.Point(71, 12);
-            this.actorLb.Name = "actorLb";
-            this.actorLb.Size = new System.Drawing.Size(120, 23);
-            this.actorLb.TabIndex = 1;
-            this.actorLb.Text = "會議室模組管理者";
-            this.actorLb.Visible = false;
+            this.lbSysAdmin.BackgroundStyle.Class = "";
+            this.lbSysAdmin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lbSysAdmin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbSysAdmin.Location = new System.Drawing.Point(71, 12);
+            this.lbSysAdmin.Name = "lbSysAdmin";
+            this.lbSysAdmin.Size = new System.Drawing.Size(120, 23);
+            this.lbSysAdmin.TabIndex = 1;
+            this.lbSysAdmin.Text = "會議室模組管理者";
+            this.lbSysAdmin.Visible = false;
             // 
             // labelX1
             // 
@@ -395,67 +452,10 @@
             this.cbxIdentity.ItemHeight = 19;
             this.cbxIdentity.Location = new System.Drawing.Point(78, 11);
             this.cbxIdentity.Name = "cbxIdentity";
-            this.cbxIdentity.Size = new System.Drawing.Size(100, 25);
+            this.cbxIdentity.Size = new System.Drawing.Size(102, 25);
             this.cbxIdentity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cbxIdentity.TabIndex = 17;
             this.cbxIdentity.Visible = false;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "申請時間";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "會議室名稱";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.FillWeight = 80F;
-            this.Column2.HeaderText = "申請人";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Width = 80;
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "申請開始日期";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Width = 110;
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "申請結束日期";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            this.Column6.Width = 110;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "審核狀態";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column4.Text = null;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "審核結果";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "申請單狀態";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
             // 
             // ReviewForm
             // 
@@ -475,8 +475,8 @@
             this.Controls.Add(this.labelX6);
             this.Controls.Add(this.dataGridViewX1);
             this.Controls.Add(this.labelX1);
-            this.Controls.Add(this.actorLb);
             this.Controls.Add(this.cbxIdentity);
+            this.Controls.Add(this.lbSysAdmin);
             this.DoubleBuffered = true;
             this.Name = "ReviewForm";
             this.Text = "審核作業";
@@ -493,7 +493,7 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxUnit;
         private DevComponents.DotNetBar.LabelX labelX3;
-        private DevComponents.DotNetBar.LabelX actorLb;
+        private DevComponents.DotNetBar.LabelX lbSysAdmin;
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.LabelX labelX6;
         private DevComponents.DotNetBar.Controls.ComboBoxEx cbxRoom;

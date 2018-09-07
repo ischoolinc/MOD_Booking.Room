@@ -21,12 +21,14 @@ namespace Ischool.Booking.Room
         private Actor actor = Actor.Instance;
         private AccessHelper _access = new AccessHelper();
         private string _applicationID;
+        private string _identity;
 
-        public ApplicationReviewForm(string applicationID)
+        public ApplicationReviewForm(string applicationID,string identity)
         {
             InitializeComponent();
 
-            _applicationID = applicationID;
+            this._applicationID = applicationID;
+            this._identity = identity;
         }
 
         private void ApplicationReviewForm_Load(object sender, EventArgs e)
@@ -39,14 +41,14 @@ namespace Ischool.Booking.Room
 
             #region Init
             lbReviewDate.Text = DateTime.Now.ToString("yyyy/MM/dd");
-            applicantTbx.Text = listApplication[0].ApplicantName;
-            hostTbx.Text = listApplication[0].TeacherName;
-            roomNameTbx.Text = listRoom[0].Name;
-            applyStartTbx.Text = listApplication[0].ApplyStarDate.ToShortDateString();
-            RepeatEndTbx.Text = listApplication[0].RepeatEndDate.ToShortDateString();
-            applyReasonTbx.Text = listApplication[0].ApplyReason;
-            repeatTbx.Text = listApplication[0].IsRepeat ? "是" : "否";
-            repeatTypeTbx.Text = ("" + listApplication[0].RepeatType) == "null" ? "" : "" + listApplication[0].RepeatType;
+            tbxApplicant.Text = listApplication[0].ApplicantName;
+            tbxHost.Text = listApplication[0].TeacherName;
+            tbxRoomName.Text = listRoom[0].Name;
+            tbxStartDate.Text = listApplication[0].ApplyStarDate.ToShortDateString();
+            tbxEndDate.Text = listApplication[0].RepeatEndDate.ToShortDateString();
+            tbxApplyReason.Text = listApplication[0].ApplyReason;
+            tbxIsRepeat.Text = listApplication[0].IsRepeat ? "是" : "否";
+            tbxRepeatType.Text = ("" + listApplication[0].RepeatType) == "null" ? "" : "" + listApplication[0].RepeatType;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in listApplicationDetail)
             {
@@ -73,7 +75,9 @@ namespace Ischool.Booking.Room
                 {
                     try
                     {
+                        StringBuilder logs = GetLog();
                         DAO.Application.UpdateApplicationByReview("" + ckbxTrue.Checked, tbxCancelReason.Text.Trim(), actor.getTeacherID(), teacherR.Name, this._applicationID);
+                        FISCA.LogAgent.ApplicationLog.Log("會議室預約", "審核申請紀錄", logs.ToString());
                         MsgBox.Show("儲存成功!");
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
@@ -82,10 +86,27 @@ namespace Ischool.Booking.Room
                     {
                         MsgBox.Show(ex.Message);
                     }
-
                 }
             }
+        }
 
+        private StringBuilder GetLog()
+        {
+            string teacherName = Teacher.SelectByID(Actor.Instance.getTeacherID()).Name;
+
+            StringBuilder logs = new StringBuilder(string.Format(
+                    @"{0}「{1}」審核「{2}」申請「{3}」「{4}」~「{5}」的申請紀錄: "
+                    , this._identity, teacherName,tbxApplicant.Text,tbxRoomName.Text,tbxStartDate.Text,tbxEndDate.Text));
+            if (ckbxTrue.Checked)
+            {
+                logs.AppendLine(string.Format("\n 審核時間「{0}」審核結果「{1}」",DateTime.Now.ToString("yyyy/MM/dd HH:mm"),"核准"));
+            }
+            else
+            {
+                logs.AppendLine(string.Format("\n 審核時間「{0}」審核結果「{1}」未核准原因「{2}」", DateTime.Now.ToString("yyyy/MM/dd HH:mm"), "未核准",tbxCancelReason.Text.Trim()));
+            }
+
+            return logs;
         }
 
         private bool reviewResult_Validate()

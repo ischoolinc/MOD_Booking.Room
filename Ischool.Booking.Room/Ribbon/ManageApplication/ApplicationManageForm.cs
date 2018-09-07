@@ -17,6 +17,7 @@ namespace Ischool.Booking.Room
     {
         private Dictionary<string, string> _dicUnitIDByName = new Dictionary<string, string>();
         private Dictionary<string, string> _dicRoomIDByName = new Dictionary<string, string>();
+        private Dictionary<string, UserIdentity> _dicIdentityByDescription = new Dictionary<string, UserIdentity>();
         private string _unitID;
         private bool _initFinish = false;
 
@@ -42,7 +43,11 @@ namespace Ischool.Booking.Room
             endTime.Text = DateTime.Now.AddDays(7).ToShortDateString(); 
             #endregion
 
-            this.decorator = new RoleUnitDecorator(actorLb, cbxIdentity, cbxUnit);
+            this.decorator = new RoleUnitDecorator(lbSysAdmin, cbxIdentity, cbxUnit);
+
+            this._dicIdentityByDescription.Add(EnumDescription.GetIdentityDescription(typeof(UserIdentity),UserIdentity.ModuleAdmin.ToString()), UserIdentity.ModuleAdmin);
+            this._dicIdentityByDescription.Add(EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitAdmin.ToString()), UserIdentity.UnitAdmin);
+            this._dicIdentityByDescription.Add(EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitBoss.ToString()), UserIdentity.UnitBoss);
 
             _initFinish = true;
         }
@@ -258,8 +263,9 @@ namespace Ischool.Booking.Room
                 // 審核狀態-進行審核 、申請單狀態-待審核
                 if ("" + dataGridViewX1.Rows[e.RowIndex].Cells[5].Value == EnumDescription.GetIdentityDescription(typeof(ReviewStats),ReviewStats.Reviewing.ToString()) && "" + dataGridViewX1.Rows[e.RowIndex].Cells[7].Value == EnumDescription.GetIdentityDescription(typeof(ApplicationStats),ApplicationStats.WaitReview.ToString())) 
                 {
+                    string identity = lbSysAdmin.Visible ? EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.ModuleAdmin.ToString()) : EnumDescription.GetIdentityDescription(typeof(UserIdentity), this._dicIdentityByDescription[cbxIdentity.SelectedItem.ToString()].ToString());
                     string applicationID = "" + dataGridViewX1.Rows[e.RowIndex].Tag;
-                    ApplicationReviewForm form = new ApplicationReviewForm(applicationID);
+                    ApplicationReviewForm form = new ApplicationReviewForm(applicationID, identity);
                     form.FormClosed += delegate 
                     {
                         if (form.DialogResult == DialogResult.Yes)
@@ -292,7 +298,8 @@ namespace Ischool.Booking.Room
             if ("" + dataGridViewX1.SelectedCells[7].Value == EnumDescription.GetIdentityDescription(typeof(ApplicationStats),ApplicationStats.Pass.ToString())) // 申請單狀態-通過
             {
                 string application = "" + dataGridViewX1.SelectedRows[0].Tag;
-                ApplicationCancelForm form = new ApplicationCancelForm(application);
+                string identity = lbSysAdmin.Visible ? EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.ModuleAdmin.ToString()) : EnumDescription.GetIdentityDescription(typeof(UserIdentity), this._dicIdentityByDescription[cbxIdentity.SelectedItem.ToString()].ToString());
+                ApplicationCancelForm form = new ApplicationCancelForm(application, identity);
                 form.FormClosed += delegate 
                 {
                     if (form.DialogResult == DialogResult.Yes)

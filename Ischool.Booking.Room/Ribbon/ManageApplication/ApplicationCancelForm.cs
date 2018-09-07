@@ -21,31 +21,36 @@ namespace Ischool.Booking.Room
         private Actor actor =  Actor.Instance;
         private AccessHelper _access = new AccessHelper();
         private string _applicationID;
+        private string _identity;
 
-        public ApplicationCancelForm(string applicationID)
+        public ApplicationCancelForm(string applicationID,string identity)
         {
             InitializeComponent();
 
             this._applicationID = applicationID;
+            this._identity = identity;
+        }
+
+        private void ApplicationCancelForm_Load(object sender, EventArgs e)
+        {
             // 取得資料
-            this._listApplication = this._access.Select<UDT.MeetingRoomApplication>(string.Format("uid = {0}",applicationID));
-            this._listApplicationDetail = this._access.Select<UDT.MeetingRoomApplicationDetail>(string.Format("ref_application_id = {0}",applicationID));
-            this._listRoom = this._access.Select<UDT.MeetingRoom>(string.Format("uid = {0}",_listApplication[0].RefMeetingRoomID));
+            this._listApplication = this._access.Select<UDT.MeetingRoomApplication>(string.Format("uid = {0}", this._applicationID));
+            this._listApplicationDetail = this._access.Select<UDT.MeetingRoomApplicationDetail>(string.Format("ref_application_id = {0}", this._applicationID));
+            this._listRoom = this._access.Select<UDT.MeetingRoom>(string.Format("uid = {0}", _listApplication[0].RefMeetingRoomID));
 
             this._teacherR = Teacher.SelectByID("" + actor.getTeacherID());
 
             #region Init
             cancelDateLb.Text = DateTime.Now.ToShortDateString();
-            applicantTbx.Text = _listApplication[0].ApplicantName;
-            hostTbx.Text = _listApplication[0].TeacherName;
-            roomNameTbx.Text = _listRoom[0].Name;
-            applyStartTbx.Text = _listApplication[0].ApplyStarDate.ToShortDateString();
-            RepeatEndTbx.Text = _listApplication[0].RepeatEndDate.ToShortDateString();
-            applyReasonTbx.Text = _listApplication[0].ApplyReason;
+            tbxApplicant.Text = _listApplication[0].ApplicantName;
+            tbxHost.Text = _listApplication[0].TeacherName;
+            tbxRoomName.Text = _listRoom[0].Name;
+            tbxStartDate.Text = _listApplication[0].ApplyStarDate.ToShortDateString();
+            tbxEndDate.Text = _listApplication[0].RepeatEndDate.ToShortDateString();
+            tbxApplyReason.Text = _listApplication[0].ApplyReason;
             bool type = false;
-            //bool.TryParse(("" + applyList[0].IsRepeat),out type)
-            repeatTbx.Text = bool.TryParse(("" + _listApplication[0].IsRepeat), out type) ? "是" : "否";
-            repeatTypeTbx.Text = ("" + _listApplication[0].RepeatType) == "null" ? "" : "" + _listApplication[0].RepeatType;
+            tbxRepeat.Text = bool.TryParse(("" + _listApplication[0].IsRepeat), out type) ? "是" : "否";
+            tbxRepeatType.Text = ("" + _listApplication[0].RepeatType) == "null" ? "" : "" + _listApplication[0].RepeatType;
 
             foreach (UDT.MeetingRoomApplicationDetail ad in _listApplicationDetail)
             {
@@ -72,7 +77,9 @@ namespace Ischool.Booking.Room
                 {
                     try
                     {
+                        StringBuilder logs = GetLog();
                         DAO.Application.UpdateApplicationByCancel("" + ckbxTrue.Checked, tbxCancelReason.Text.Trim(), actor.getTeacherID(), _teacherR.Name, this._applicationID);
+                        FISCA.LogAgent.ApplicationLog.Log("會議室預約", "取消申請紀錄", logs.ToString());
                         MsgBox.Show("儲存成功!");
                         this.DialogResult = DialogResult.Yes;
                         this.Close();
@@ -83,6 +90,25 @@ namespace Ischool.Booking.Room
                     }
                 }
             }
+        }
+
+        private StringBuilder GetLog()
+        {
+            string teacherName = Teacher.SelectByID(Actor.Instance.getTeacherID()).Name;
+
+            StringBuilder logs = new StringBuilder(string.Format(
+                    @"{0}「{1}」取消「{2}」申請「{3}」「{4}」~「{5}」的申請紀錄: "
+                    , this._identity, teacherName, tbxApplicant.Text, tbxRoomName.Text, tbxStartDate.Text, tbxEndDate.Text));
+            if (!ckbxTrue.Checked)
+            {
+                logs.AppendLine(string.Format("\n 作業時間「{0}」是否取消「{1}」", DateTime.Now.ToString("yyyy/MM/dd HH:mm"), "否"));
+            }
+            else
+            {
+                logs.AppendLine(string.Format("\n 作業時間「{0}」是否取消「{1}」取消原因「{2}」", DateTime.Now.ToString("yyyy/MM/dd HH:mm"), "是", tbxCancelReason.Text.Trim()));
+            }
+
+            return logs;
         }
 
         private bool cancelResult_Validate()
@@ -132,18 +158,17 @@ namespace Ischool.Booking.Room
         private void ckbxTrue_Click(object sender, EventArgs e)
         {
             ckbxFalse.Checked = false;
-            //ckbxTrue.Checked = true;
         }
 
         private void ckbxFalse_Click(object sender, EventArgs e)
         {
             ckbxTrue.Checked = false;
-            //ckbxFalse.Checked = true;
         }
 
         private void leaveBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
     }
 }
