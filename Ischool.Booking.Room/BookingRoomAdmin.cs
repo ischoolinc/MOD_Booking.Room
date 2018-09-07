@@ -24,8 +24,8 @@ namespace Ischool.Booking.Room
             ContentPanePanel.Controls.Add(browser);
 
             //改寫
-            browser.RequestHandler = new HandlerNe(); //Parse URL
-            browser.LifeSpanHandler = new HandlerLife(); //關閉 OnBeforePopup
+            //browser.RequestHandler = new HandlerNe(); //Parse URL
+            //browser.LifeSpanHandler = new HandlerLife(); //關閉 OnBeforePopup
 
         }
         private static BookingRoomAdmin _BookingRoomAdmin;

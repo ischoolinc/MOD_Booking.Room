@@ -63,6 +63,36 @@ namespace Ischool.Booking.Room.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap architecture_config_64 {
+            get {
+                object obj = ResourceManager.GetObject("architecture_config_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap architecture_fav_64 {
+            get {
+                object obj = ResourceManager.GetObject("architecture_fav_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap architecture_ok_64 {
+            get {
+                object obj = ResourceManager.GetObject("architecture_ok_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap architecture_zoom_64 {
             get {
                 object obj = ResourceManager.GetObject("architecture_zoom_64", resourceCulture);
@@ -73,9 +103,29 @@ namespace Ischool.Booking.Room.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap document_ok_64 {
+            get {
+                object obj = ResourceManager.GetObject("document_ok_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap Export_Image {
             get {
                 object obj = ResourceManager.GetObject("Export_Image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap foreign_language_config_64 {
+            get {
+                object obj = ResourceManager.GetObject("foreign_language_config_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +146,16 @@ namespace Ischool.Booking.Room.Properties {
         internal static System.Drawing.Bitmap marker_fav_64 {
             get {
                 object obj = ResourceManager.GetObject("marker_fav_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap meeting_config_64 {
+            get {
+                object obj = ResourceManager.GetObject("meeting_config_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

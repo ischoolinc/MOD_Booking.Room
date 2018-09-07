@@ -3,6 +3,7 @@ using DevComponents.DotNetBar.Controls;
 using Ischool.Booking.Room.DAO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -50,11 +51,11 @@ namespace Ischool.Booking.Room
 
             if (actor.isUnitBoss())
             {
-                this.cboRoles.Items.Add("單位主管");
+                this.cboRoles.Items.Add(EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitBoss.ToString()));
             }
             if (actor.isUnitAdmin() && needUnitAdminRoleItem)
             {
-                this.cboRoles.Items.Add("單位管理員");
+                this.cboRoles.Items.Add(EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitAdmin.ToString()));
             }
             if (this.cboRoles.Items.Count > 0)
             {
@@ -76,18 +77,17 @@ namespace Ischool.Booking.Room
 
         private void fillUnitItems()
         {
-
             List<UnitRoleInfo> items = new List<UnitRoleInfo>() ;
 
             if (actor.isSysAdmin())
             {
                 items = actor.getSysAdminUnits();
             }
-            else  if (actor.isUnitBoss() && this.cboRoles.Text == "單位主管")
+            else  if (actor.isUnitBoss() && this.cboRoles.Text == EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitBoss.ToString()))
             {
                 items = actor.getBossUnits();
             }
-            else if(actor.isUnitAdmin() && this.cboRoles.Text == "單位管理員" )
+            else if(actor.isUnitAdmin() && this.cboRoles.Text == EnumDescription.GetIdentityDescription(typeof(UserIdentity), UserIdentity.UnitAdmin.ToString()))
             {
                 items = actor.getUnitAdminUnits();
             }
