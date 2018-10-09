@@ -57,3 +57,4 @@ D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\o
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.CoreCompileInputs.cache
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
+D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache

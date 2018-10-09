@@ -36,6 +36,8 @@ namespace Ischool.Booking.Room
             }
         }
 
+        private QueryHelper _qh = new QueryHelper();
+
         /// <summary>
         /// 登入帳號
         /// </summary>
@@ -130,6 +132,9 @@ namespace Ischool.Booking.Room
             //1. 判斷是否是系統管理者
             checkIsAdmin();
 
+            //1.1 取得使用者教師編號
+            GetTeacherIDByAccount();
+
             //2. 判斷在各單位的角色
             findUnits();
 
@@ -182,41 +187,38 @@ namespace Ischool.Booking.Room
 
         }
 
-        private void checkIsAdmin()
+        private void GetTeacherIDByAccount()
         {
-            QueryHelper qh = new QueryHelper();
-            string SQL = string.Format(@"
+            string sql = string.Format(@"
 SELECT
-    teacher.*
+    *
 FROM
     teacher
-    LEFT OUTER JOIN _login
-        ON teacher.st_login_name = _login.login_name
+WHERE
+    st_login_name = '{0}'
+            ",Account);
+
+            DataTable dt = this._qh.Select(sql);
+
+            this._teacherID = (dt.Rows.Count > 0 ? dt.Rows[0]["id"].ToString() : "");
+        }
+
+        private void checkIsAdmin()
+        {
+            string SQL = string.Format(@"
+SELECT
+    _login.*
+FROM
+     _login
     LEFT OUTER JOIN _lr_belong
         ON _login.id = _lr_belong._login_id
 WHERE
-    teacher.st_login_name = '{0}'
+    _login.login_name = '{0}'
     AND _lr_belong._role_id = {1}
                 ", Actor.Account, Program._roleAdminID);
-            //string sql = string.Format(@"
-            //                        SELECT 
-            //                            teacher.id
-            //                            , _login.login_name
-            //                        FROM
-            //                            _lr_belong
-            //                            LEFT OUTER JOIN _login
-            //                                ON _lr_belong._login_id = _login.id
-            //                            LEFT OUTER JOIN teacher
-            //                                ON _login.login_name = teacher.st_login_name
-            //                        WHERE
-            //                            _lr_belong._role_id = {0} 
-            //                            AND _login.login_name='{1}'
-            //", Program._roleAdminID, Actor.Account);
-            DataTable dt = qh.Select(SQL);
+            DataTable dt = this._qh.Select(SQL);
 
             this._isSysAdmin = (dt.Rows.Count > 0);
-            this._teacherID = (dt.Rows.Count > 0 ? dt.Rows[0]["id"].ToString() : "");
-
         }
 
         public List<DAO.UnitRoleInfo> getSysAdminUnits()
@@ -271,7 +273,6 @@ WHERE
         public List<DAO.UnitRoleInfo> getUnits()
         {
             return this._units;
-
         }
     }
 }
