@@ -37,9 +37,6 @@
       <HintPath>Library\Aspose.Cells.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Aspose.Words">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Aspose.Words.dll</HintPath>
-    </Reference>
     <Reference Include="Campus.Configuration">
       <HintPath>Library\Campus.Configuration.dll</HintPath>
       <Private>False</Private>
@@ -56,14 +53,6 @@
     </Reference>
     <Reference Include="Campus.IRewrite.Interface">
       <HintPath>Library\Campus.IRewrite.Interface.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Campus.Report">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Campus.Report.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Campus.Windows">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Campus.Windows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CefSharp, Version=57.0.0.0, Culture=neutral, PublicKeyToken=40c4b6fc221f4138, processorArchitecture=x86">
@@ -161,19 +150,10 @@
       <HintPath>Library\FISCA.UDT.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Framework">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="IntelliSchool.DSA.ClientFramework">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\IntelliSchool.DSA.ClientFramework.dll</HintPath>
-    </Reference>
     <Reference Include="K12.Data, Version=2.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\K12.Data.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="K12.Presentation">
-      <HintPath>D:\Users\小金\Documents\github_ischool\K12TheCadre\K12.Behavior.TheCadre\Library\K12.Presentation.dll</HintPath>
     </Reference>
     <Reference Include="SmartSchool.API.PlugIn, Version=0.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

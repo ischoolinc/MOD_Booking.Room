@@ -37,13 +37,6 @@ C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\I
 C:\Users\User\Documents\GitHub\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.dll
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Ischool.Booking.Room.pdb
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Aspose.Words.dll
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Framework.dll
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\IntelliSchool.DSA.ClientFramework.dll
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\K12.Presentation.dll
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\Aspose.Words.xml
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\IntelliSchool.DSA.ClientFramework.xml
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\bin\Debug\K12.Presentation.xml
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.BookingRoomAdmin.resources
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.Properties.Resources.resources
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.ExportMeetingRoomForm.resources
@@ -64,4 +57,3 @@ D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\o
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csproj.CoreCompileInputs.cache
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.dll
 D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.pdb
-D:\Users\小金\Documents\github_ischool\MOD_Booking.Room\Ischool.Booking.Room\obj\Debug\Ischool.Booking.Room.csprojResolveAssemblyReference.cache

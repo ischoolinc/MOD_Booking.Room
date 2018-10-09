@@ -195,7 +195,7 @@ SELECT
     , {4}
 FROM 
     insert_login
-                        ", teacherAccount, teacherID, time, actor, Program._roleID);
+                        ", teacherAccount, teacherID, time, actor, Program._roleUnitAdminID);
             }
             else
             {
@@ -225,7 +225,7 @@ INSERT INTO _lr_belong(
 SELECT 
     {4} 
     , {5}
-                        ", teacherAccount, teacherID, time, actor, loginID, Program._roleID);
+                        ", teacherAccount, teacherID, time, actor, loginID, Program._roleUnitAdminID);
             }
             return sql;
         }

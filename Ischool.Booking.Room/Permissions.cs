@@ -25,15 +25,6 @@ namespace Ischool.Booking.Room
             }
         }
 
-        public static string 系統管理員 { get { return "74E0D4FA-F698-400D-B8A8-60F4DF304BBA"; } }
-        public static bool 設定系統管理員權限
-        {
-            get
-            {
-                return FISCA.Permission.UserAcl.Current[系統管理員].Executable;
-            }
-        }
-
         public static string 單位管理員 { get { return "24821EBA-426E-4811-95B8-DBF8D9AEEFA2"; } }
         public static bool 設定單位管理員權限
         {

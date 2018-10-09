@@ -114,7 +114,7 @@ SELECT
 FROM 
     insert_login
 
-                        ", teacherAccount, teacherID, _unitID, time, actor, Program._roleID); 
+                        ", teacherAccount, teacherID, _unitID, time, actor, Program._roleUnitAdminID); 
                 #endregion
             }
             else // 新增unit_admin、新增 lr_belong
@@ -147,7 +147,7 @@ INSERT INTO _lr_belong(
 SELECT 
     {5}
     , {6}
-                        ", teacherAccount, teacherID, _unitID, time, actor, loginID, Program._roleID); 
+                        ", teacherAccount, teacherID, _unitID, time, actor, loginID, Program._roleUnitAdminID); 
                 #endregion
             }
 

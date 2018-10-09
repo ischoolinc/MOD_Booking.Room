@@ -22,26 +22,40 @@ namespace Ischool.Booking.Room
     public class Program
     {
         /// <summary>
-        /// 會議室預約管理員角色名稱
+        /// 會議室預約管理員角色
         /// </summary>
-        public static string _roleName = "會議室預約模組專用";
+        public static string _roleUnitAdminName = "會議室預約單位管理員";
+        public static string _roleUnitAdminID;
+        public static string _unitAdminPermission = @"
+<Permissions>
+<Feature Code=""26751E07-00A0-4500-BC31-F2E57EE1C6F2"" Permission=""Execute""/>
+<Feature Code=""AB164E2A-516E-4427-ADB0-79D27F1685CA"" Permission=""Execute""/>
+<Feature Code=""1B4FE9E3-E763-4E2D-9F5D-92979A18CEC1"" Permission=""Execute""/>
+<Feature Code=""0CB5F779-97B7-4950-877F-DE8731F4F63C"" Permission=""Execute""/>
+<Feature Code=""40111E44-1A30-4D3C-9D43-3069F7F46014"" Permission=""Execute""/>
+</Permissions>
+";
         /// <summary>
-        /// 會議室預約模組專用角色ID
+        /// 會議室預約單位主管角色
         /// </summary>
-        public static string _roleID;
+        public static string _roleUnitBossName = "會議室預約單位主管";
+        public static string _roleUnitBossID;
+        public static string _unitBossPermission = @"
+<Permissions>
+<Feature Code=""26751E07-00A0-4500-BC31-F2E57EE1C6F2"" Permission=""Execute""/>
+<Feature Code=""24821EBA-426E-4811-95B8-DBF8D9AEEFA2"" Permission=""Execute""/>
+<Feature Code=""AB164E2A-516E-4427-ADB0-79D27F1685CA"" Permission=""Execute""/>
+<Feature Code=""1B4FE9E3-E763-4E2D-9F5D-92979A18CEC1"" Permission=""Execute""/>
+<Feature Code=""0CB5F779-97B7-4950-877F-DE8731F4F63C"" Permission=""Execute""/>
+<Feature Code=""40111E44-1A30-4D3C-9D43-3069F7F46014"" Permission=""Execute""/>
+</Permissions>
+";
 
         /// <summary>
-        /// 會議室預約管理者角色名稱
+        /// 會議室預約管理者角色
         /// </summary>
-        public static string _roleAdminName = "會議室預約管理者";
-        /// <summary>
-        /// 會議室預約管理者專用角色ID
-        /// </summary>
+        public static string _roleAdminName = "會議室預約管理員";
         public static string _roleAdminID;
-
-        /// <summary>
-        /// 會議室預約模組角色功能權限
-        /// </summary>
         public static string _permission = @"
 <Permissions>
 <Feature Code=""8EFBEC7D-D438-44EA-81E3-6AFA00862429"" Permission=""Execute""/>
@@ -95,26 +109,37 @@ namespace Ischool.Booking.Room
 
             #region Init Role
             {
-                #region 建立會議室預約模組管理者專用角色
-                if (!DAO.Role.CheckRoleIsExist(_roleAdminName))
+                #region 建立會議室預約單位管理員角色
+                if (!DAO.Role.CheckRoleIsExist(_roleUnitAdminName))
                 {
-                    _roleAdminID = DAO.Role.InsertRole(_roleAdminName); // 建立角色
+                    _roleUnitAdminID = DAO.Role.InsertRole(_roleUnitAdminName, _unitAdminPermission); // 建立角色
                 }
                 else
                 {
-                    DAO.Role.UpdateRole(_roleAdminID); // 更新角色
+                    DAO.Role.UpdateRole(_roleUnitAdminID, _unitAdminPermission); // 更新角色
                 }
 
                 #endregion
 
-                #region 建立會議室預約專用角色
-                if (!DAO.Role.CheckRoleIsExist(_roleName))
+                #region 建立會議室預約單位主管角色
+                if (!DAO.Role.CheckRoleIsExist(_roleUnitBossName))
                 {
-                    _roleID = DAO.Role.InsertRole(_roleName); // 建立角色
+                    _roleUnitBossID = DAO.Role.InsertRole(_roleUnitBossName, _unitBossPermission); // 建立角色
                 }
                 else
                 {
-                    DAO.Role.UpdateRole(_roleID);  // 更新角色
+                    DAO.Role.UpdateRole(_roleUnitBossID, _unitBossPermission);  // 更新角色
+                }
+                #endregion
+
+                #region 建立會議室預約管理員角色
+                if (!DAO.Role.CheckRoleIsExist(_roleAdminName))
+                {
+                    _roleAdminID = DAO.Role.InsertRole(_roleAdminName, _permission); // 建立角色
+                }
+                else
+                {
+                    DAO.Role.UpdateRole(_roleAdminID, _permission);  // 更新角色
                 }
                 #endregion
             }
@@ -152,15 +177,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["會議室管理"].Enable = Permissions.管理會議室權限;
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["會議室管理"].Click += delegate
                     {
-                        if (actor.isSysAdmin() || actor.isUnitAdmin() || actor.isUnitBoss())
-                        {
-                            MeetingRoomManagement form = new MeetingRoomManagement();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有管理會議室權限!");
-                        }
+                        MeetingRoomManagement form = new MeetingRoomManagement();
+                        form.ShowDialog();
                     };
                 }
                 #endregion
@@ -170,15 +188,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["設定管理單位"].Enable = Permissions.設定會議室管理單位權限;
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["設定管理單位"].Click += delegate
                     {
-                        if (actor.isSysAdmin())
-                        {
-                            ManageUnitForm form = new ManageUnitForm();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有設定會議室管理單位權限");
-                        }
+                        ManageUnitForm form = new ManageUnitForm();
+                        form.ShowDialog();
                     };
                 }
                 #endregion
@@ -188,20 +199,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["設定單位管理員"].Enable = Permissions.設定單位管理員權限;
                     MotherForm.RibbonBarItems["會議室預約", "基本設定"]["設定單位管理員"].Click += delegate
                     {
-                        if (actor.isSysAdmin())
-                        {
-                            ManageUnitAdminForm form = new ManageUnitAdminForm();
-                            form.ShowDialog();
-                        }
-                        else if (actor.isUnitBoss())
-                        {
-                            ManageUnitAdminForm form = new ManageUnitAdminForm();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有設定單位管理員權限");
-                        }
+                        ManageUnitAdminForm form = new ManageUnitAdminForm();
+                        form.ShowDialog();
                     };
                 }
                 #endregion
@@ -211,15 +210,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["匯出"]["會議室清單"].Enable = Permissions.匯出會議室清單權限;
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["匯出"]["會議室清單"].Click += delegate
                     {
-                        if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
-                        {
-                            ExportMeetingRoomForm form = new ExportMeetingRoomForm();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有使用權限!");
-                        }
+                        ExportMeetingRoomForm form = new ExportMeetingRoomForm();
+                        form.ShowDialog();
                     };
                 }
                 #endregion
@@ -229,14 +221,7 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["匯入"]["會議室清單"].Enable = Permissions.匯入會議室清單權限;
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["匯入"]["會議室清單"].Click += delegate
                     {
-                        if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
-                        {
-                            new ImportMeetingRoomData().Execute();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有使用權限!");
-                        }
+                        new ImportMeetingRoomData().Execute();
                     };
                 }
                 #endregion
@@ -246,16 +231,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["報表"]["統計會議室使用狀況"].Enable = Permissions.統計會議室使用狀況權限;
                     MotherForm.RibbonBarItems["會議室預約", "資料統計"]["報表"]["統計會議室使用狀況"].Click += delegate
                     {
-                        if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
-                        {
-                            StatisticalReportForm form = new StatisticalReportForm();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有使用權限!");
-                        }
-
+                        StatisticalReportForm form = new StatisticalReportForm();
+                        form.ShowDialog();
                     };
                 }
                 #endregion
@@ -265,15 +242,8 @@ namespace Ischool.Booking.Room
                     MotherForm.RibbonBarItems["會議室預約", "會議室預約作業"]["審核預約紀錄"].Enable = Permissions.審核作業權限;
                     MotherForm.RibbonBarItems["會議室預約", "會議室預約作業"]["審核預約紀錄"].Click += delegate
                     {
-                        if (actor.isSysAdmin() || actor.isUnitBoss() || actor.isUnitAdmin())
-                        {
-                            ReviewForm form = new ReviewForm();
-                            form.ShowDialog();
-                        }
-                        else
-                        {
-                            MsgBox.Show("此帳號沒有使用權限!");
-                        }
+                        ReviewForm form = new ReviewForm();
+                        form.ShowDialog();
                     };
                 }
                 #endregion

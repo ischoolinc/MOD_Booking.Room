@@ -149,7 +149,7 @@ SELECT
     , {6}
 FROM 
     insert_login
-                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, Program._roleID);
+                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, Program._roleUnitAdminID);
             }
             else
             {
@@ -204,7 +204,7 @@ INSERT INTO _lr_belong(
 SELECT 
     {6} 
     , {7}
-                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, loginID, Program._roleID);
+                ", unitName, createTime, createdBy, teacherAccount, refTeacherID, isBoss, loginID, Program._roleUnitAdminID);
             }
             #endregion
 
@@ -313,7 +313,7 @@ SELECT
     , {7}
 FROM 
     insert_login
-                    ", unitName, unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, Program._roleID);
+                    ", unitName, unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, Program._roleUnitAdminID);
             }
             // 修改場地管理單位 、 刪除舊單位主管 、刪除lr_belong、新增單位主管 、新增lr_belong
             else
@@ -386,7 +386,7 @@ INSERT INTO _lr_belong(
 SELECT 
     {7} 
     , {8}
-                    ", unitName, unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, loginID, Program._roleID);
+                    ", unitName, unitID, createdBy, teacherAccount, refTeacherID, isBoss, createTime, loginID, Program._roleUnitAdminID);
             }
 
             #endregion
