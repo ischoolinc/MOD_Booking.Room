@@ -40,15 +40,20 @@ namespace Ischool.Booking.Room
             foreach (UDT.MeetingRoomUnit unit in unitList)
             {
                 _dicUnitIDByName.Add(unit.Name, unit.UID);
+
+                if (!this._dicRoomNameByUnitID.ContainsKey("" + unit.UID))
+                {
+                    this._dicRoomNameByUnitID.Add("" + unit.UID, new List<string>());
+                }
             }
 
             List<UDT.MeetingRoom> listRoom = this._access.Select<UDT.MeetingRoom>();
             foreach (UDT.MeetingRoom data in listRoom)
             {
-                if (!this._dicRoomNameByUnitID.ContainsKey("" + data.RefUnitID))
-                {
-                    this._dicRoomNameByUnitID.Add("" + data.RefUnitID,new List<string>());
-                }
+                //if (!this._dicRoomNameByUnitID.ContainsKey("" + data.RefUnitID))
+                //{
+                //    this._dicRoomNameByUnitID.Add("" + data.RefUnitID,new List<string>());
+                //}
                 this._dicRoomNameByUnitID["" + data.RefUnitID].Add(data.Name);
             }
 
