@@ -50,11 +50,13 @@ namespace Ischool.Booking.Room
             List<UDT.MeetingRoom> listRoom = this._access.Select<UDT.MeetingRoom>();
             foreach (UDT.MeetingRoom data in listRoom)
             {
-                //if (!this._dicRoomNameByUnitID.ContainsKey("" + data.RefUnitID))
-                //{
-                //    this._dicRoomNameByUnitID.Add("" + data.RefUnitID,new List<string>());
-                //}
-                this._dicRoomNameByUnitID["" + data.RefUnitID].Add(data.Name);
+                string unitID = ("" + data.RefUnitID) == "0" ? "" : ("" + data.RefUnitID); // 由於data.RefUnitID把null值轉換為0 所以這邊做轉換
+
+                if (!this._dicRoomNameByUnitID.ContainsKey(unitID)) // 部分會議室沒有所屬單位，所以這邊會在記錄一次無歸屬單位
+                {
+                    this._dicRoomNameByUnitID.Add(unitID, new List<string>()); 
+                }
+                this._dicRoomNameByUnitID[unitID].Add(data.Name);
             }
 
             if (this._mode == FormMode.Add)
