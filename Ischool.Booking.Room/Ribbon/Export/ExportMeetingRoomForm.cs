@@ -40,11 +40,6 @@ namespace Ischool.Booking.Room
 
         }
 
-        private void ExportMeetingRoomForm_Load(object sender, EventArgs e)
-        {
-            XmlDocument doc = new XmlDocument();
-        }
-
         private void wizard1_FinishButtonClick(object sender, CancelEventArgs e)
         {
             List<string> exportFieldList = new List<string>();

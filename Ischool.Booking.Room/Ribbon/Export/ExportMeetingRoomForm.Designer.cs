@@ -231,7 +231,6 @@
             this.MinimumSize = new System.Drawing.Size(556, 472);
             this.Name = "ExportMeetingRoomForm";
             this.Text = "匯出會議室清單";
-            this.Load += new System.EventHandler(this.ExportMeetingRoomForm_Load);
             this.wizard1.ResumeLayout(false);
             this.wizardPage1.ResumeLayout(false);
             this.wizardPage1.PerformLayout();
