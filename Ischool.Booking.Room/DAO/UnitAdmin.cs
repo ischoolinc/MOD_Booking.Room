@@ -39,7 +39,7 @@ WHERE
         }
 
         /// <summary>
-        /// 刪除單位管理員
+        /// 刪除單位管理員:刪除單位管理員紀錄、刪除角色關聯
         /// </summary>
         /// <param name="adminID"></param>
         /// <param name="loginID"></param>
@@ -58,7 +58,8 @@ FROM
     _lr_belong
 WHERE
     _login_id = {1}
-                    ", adminID, loginID);
+    AND _role_id = {2}
+                    ", adminID, loginID , Program._roleUnitAdminID);
 
             UpdateHelper up = new UpdateHelper();
             up.Execute(sql);

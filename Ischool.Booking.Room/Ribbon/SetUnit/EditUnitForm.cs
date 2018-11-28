@@ -219,7 +219,7 @@ namespace Ischool.Booking.Room
                     
                     MsgBox.Show("儲存成功!");
                     this.DialogResult = DialogResult.Yes;
-                    this.Close();
+                    //this.Close();
                 }
                 catch (Exception ex)
                 {

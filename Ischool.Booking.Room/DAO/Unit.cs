@@ -289,6 +289,7 @@ WITH data_row AS(
             WHERE
                 delete_unit_admin.account IS NOT NULL
         )
+        AND _role_id = {7}
 ) ,insert_login AS(
     INSERT INTO _login(
         login_name
@@ -378,6 +379,7 @@ WITH data_row AS(
             WHERE
                 delete_unit_admin.account IS NOT NULL
         )
+        AND _role_id = {8}
 ) 
 INSERT INTO _lr_belong(
     _login_id
@@ -395,6 +397,9 @@ SELECT
             up.Execute(sql);
         }
 
+        /// <summary>
+        /// 刪除管理單位紀錄、刪除單位主管紀錄、刪除單位管理員紀錄、刪除角色關聯、更新會議室為未歸屬單位
+        /// </summary>
         public static void DeleteUnitData(string unitID,string loginIDs)
         {
             string sql = string.Format(@"
@@ -416,6 +421,8 @@ WITH delete_unit AS(
         _lr_belong
     WHERE
         _login_id IN( {1} )
+        AND _role_id = {2} 
+        OR _role_id = {3}
 )
 UPDATE
     $ischool.booking.meetingroom
@@ -423,7 +430,7 @@ SET
     ref_unit_id = null
 WHERE
     ref_unit_id = {0}
-                ", unitID, loginIDs);
+                ", unitID, loginIDs , Program._roleUnitAdminID , Program._roleUnitBossID);
 
             UpdateHelper up = new UpdateHelper();
             up.Execute(sql);

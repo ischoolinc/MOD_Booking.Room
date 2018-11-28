@@ -75,10 +75,13 @@ namespace Ischool.Booking.Room
 
                 EditUnitForm form = new EditUnitForm(FormMode.Update, unitID);
                 form.Text = "修改管理單位";
-                if (form.DialogResult == DialogResult.Yes)
+                form.FormClosed += delegate
                 {
-                    ReloadDataGridView();
-                }
+                    if (form.DialogResult == DialogResult.Yes)
+                    {
+                        ReloadDataGridView();
+                    }
+                };
                 form.ShowDialog();
             }
         }

@@ -53,7 +53,7 @@ SELECT DISTINCT
     teacher.*
 FROM
     teacher
-    LEFT OUTER JOIN $ischool.booking.equip_unit_admin AS unit_admin
+    LEFT OUTER JOIN $ischool.booking.meetingroom_unit_admin AS unit_admin
         ON unit_admin.ref_teacher_id = teacher.id
         AND unit_admin.ref_unit_id = {0}
 WHERE
