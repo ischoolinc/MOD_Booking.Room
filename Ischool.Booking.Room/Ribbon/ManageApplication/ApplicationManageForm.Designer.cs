@@ -96,7 +96,7 @@
             this.dataGridViewX1.ReadOnly = true;
             this.dataGridViewX1.RowTemplate.Height = 24;
             this.dataGridViewX1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewX1.Size = new System.Drawing.Size(847, 413);
+            this.dataGridViewX1.Size = new System.Drawing.Size(845, 413);
             this.dataGridViewX1.TabIndex = 11;
             this.dataGridViewX1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellClick);
             this.dataGridViewX1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewX1_CellDoubleClick);
@@ -226,7 +226,7 @@
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(641, 12);
+            this.labelX6.Location = new System.Drawing.Point(639, 12);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(54, 23);
             this.labelX6.TabIndex = 0;
@@ -240,7 +240,7 @@
             this.cbxRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxRoom.FormattingEnabled = true;
             this.cbxRoom.ItemHeight = 19;
-            this.cbxRoom.Location = new System.Drawing.Point(701, 11);
+            this.cbxRoom.Location = new System.Drawing.Point(699, 11);
             this.cbxRoom.Name = "cbxRoom";
             this.cbxRoom.Size = new System.Drawing.Size(158, 25);
             this.cbxRoom.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -253,7 +253,7 @@
             this.leaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.leaveBtn.BackColor = System.Drawing.Color.Transparent;
             this.leaveBtn.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.leaveBtn.Location = new System.Drawing.Point(784, 521);
+            this.leaveBtn.Location = new System.Drawing.Point(782, 521);
             this.leaveBtn.Name = "leaveBtn";
             this.leaveBtn.Size = new System.Drawing.Size(75, 23);
             this.leaveBtn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -270,7 +270,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(415, 60);
+            this.labelX5.Location = new System.Drawing.Point(413, 60);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(139, 23);
             this.labelX5.TabIndex = 1;
@@ -288,7 +288,7 @@
             this.starTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.starTime.ButtonDropDown.Visible = true;
             this.starTime.IsPopupCalendarOpen = false;
-            this.starTime.Location = new System.Drawing.Point(560, 59);
+            this.starTime.Location = new System.Drawing.Point(558, 59);
             // 
             // 
             // 
@@ -342,7 +342,7 @@
             this.endTime.ButtonDropDown.Shortcut = DevComponents.DotNetBar.eShortcut.AltDown;
             this.endTime.ButtonDropDown.Visible = true;
             this.endTime.IsPopupCalendarOpen = false;
-            this.endTime.Location = new System.Drawing.Point(724, 59);
+            this.endTime.Location = new System.Drawing.Point(722, 59);
             // 
             // 
             // 
@@ -393,7 +393,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(701, 60);
+            this.labelX2.Location = new System.Drawing.Point(699, 60);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(17, 23);
             this.labelX2.TabIndex = 13;
@@ -448,6 +448,7 @@
             // 
             this.cbxIdentity.DisplayMember = "Text";
             this.cbxIdentity.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbxIdentity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxIdentity.FormattingEnabled = true;
             this.cbxIdentity.ItemHeight = 19;
             this.cbxIdentity.Location = new System.Drawing.Point(78, 11);
@@ -461,7 +462,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(871, 556);
+            this.ClientSize = new System.Drawing.Size(869, 556);
             this.Controls.Add(this.labelX4);
             this.Controls.Add(this.labelX3);
             this.Controls.Add(this.ckbxSelectAll);
@@ -478,6 +479,7 @@
             this.Controls.Add(this.lbSysAdmin);
             this.Controls.Add(this.cbxIdentity);
             this.DoubleBuffered = true;
+            this.MinimumSize = new System.Drawing.Size(885, 595);
             this.Name = "ReviewForm";
             this.Text = "審核作業";
             this.Load += new System.EventHandler(this.ReviewForm_Load);
