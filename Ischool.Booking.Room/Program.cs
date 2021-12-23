@@ -72,8 +72,8 @@ namespace Ischool.Booking.Room
         static public void Main()
         {
             // Init 會議室預約模組Panel
-            BookingRoomAdmin ba = new BookingRoomAdmin();
-            MotherForm.AddPanel(BookingRoomAdmin.Instance);
+            //BookingRoomAdmin ba = new BookingRoomAdmin();
+            //MotherForm.AddPanel(BookingRoomAdmin.Instance);
 
             #region Init UDT
 
@@ -157,6 +157,17 @@ namespace Ischool.Booking.Room
                 // 取得登入帳號身分
                 Actor actor = Actor.Instance;
 
+                //2021-12-15 Cynthia 因原先操作指南無法在x64版本上作為背景載入，故參考俊威的意見，將操作指南另外用一個button點擊開啟。
+                MotherForm.RibbonBarItems["會議室預約", "使用說明"]["操作指南"].Image = Properties.Resources._03;
+                MotherForm.RibbonBarItems["會議室預約", "使用說明"]["操作指南"].Size = RibbonBarButton.MenuButtonSize.Large;
+                #region 操作指南
+                {
+                    MotherForm.RibbonBarItems["會議室預約", "使用說明"]["操作指南"].Click += delegate
+                    {
+                        System.Diagnostics.Process.Start("https://sites.google.com/ischool.com.tw/facilities-service/%E9%A6%96%E9%A0%81");
+                    };
+                }
+                #endregion
                 MotherForm.RibbonBarItems["會議室預約", "基本設定"]["會議室管理"].Size = RibbonBarButton.MenuButtonSize.Large;
                 MotherForm.RibbonBarItems["會議室預約", "基本設定"]["會議室管理"].Image = Properties.Resources.architecture_config_64;
                 MotherForm.RibbonBarItems["會議室預約", "基本設定"]["設定管理單位"].Size = RibbonBarButton.MenuButtonSize.Medium;

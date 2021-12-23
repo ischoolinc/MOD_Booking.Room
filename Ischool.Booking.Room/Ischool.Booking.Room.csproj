@@ -374,6 +374,7 @@
     <Content Include="Library\SmartSchool.Customization.Data.dll" />
     <Content Include="Library\SmartSchool.Customization.PlugIn.dll" />
     <Content Include="Library\SmartSchool.ErrorReporting.dll" />
+    <Content Include="Resources\03.png" />
     <Content Include="Resources\admissions_ok_64.png" />
     <None Include="Resources\architecture_ok_64.png" />
     <None Include="Resources\architecture_fav_64.png" />
